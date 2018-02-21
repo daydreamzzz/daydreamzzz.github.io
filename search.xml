@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[分类]]></title>
+    <title><![CDATA[第二篇日志]]></title>
     <url>%2F2018%2F02%2F21%2F%E6%96%B0%E6%96%87%E6%A1%A3%2F</url>
     <content type="text"></content>
+      <categories>
+        <category>测试分类</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[标签测试文章]]></title>
