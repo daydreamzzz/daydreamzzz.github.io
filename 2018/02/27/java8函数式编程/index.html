@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -86,17 +86,21 @@
 
 
 
-<meta name="description" content="随便写写 记录生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta name="description" content="FunctionalInterface注解 接口默认方法 Lambda表达式 方法引用  @FunctionalInterface注解Java8提供了函数式编程接口的概念。函数式接口：是只定义了单一抽象方法的接口，用作Lambda表达式的类型。如Runnable接口，就是一个典型的Functional Interface @FunctionalInterface public interface">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java8函数式编程">
+<meta property="og:url" content="http://yoursite.com/2018/02/27/java8函数式编程/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="随便写写 记录生活">
+<meta property="og:description" content="FunctionalInterface注解 接口默认方法 Lambda表达式 方法引用  @FunctionalInterface注解Java8提供了函数式编程接口的概念。函数式接口：是只定义了单一抽象方法的接口，用作Lambda表达式的类型。如Runnable接口，就是一个典型的Functional Interface @FunctionalInterface public interface">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-20T17:50:12.400Z">
+<meta property="og:image" content="https://i.imgur.com/VvioxPf.png">
+<meta property="og:image" content="https://i.imgur.com/wZGKya3.png">
+<meta property="og:updated_time" content="2018-02-27T15:07:02.774Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
-<meta name="twitter:description" content="随便写写 记录生活">
+<meta name="twitter:title" content="java8函数式编程">
+<meta name="twitter:description" content="FunctionalInterface注解 接口默认方法 Lambda表达式 方法引用  @FunctionalInterface注解Java8提供了函数式编程接口的概念。函数式接口：是只定义了单一抽象方法的接口，用作Lambda表达式的类型。如Runnable接口，就是一个典型的Functional Interface @FunctionalInterface public interface">
+<meta name="twitter:image" content="https://i.imgur.com/VvioxPf.png">
 
 
 
@@ -126,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/27/java8函数式编程/"/>
 
 
 
 
 
-  <title>分类 | 自言自语</title>
+  <title>java8函数式编程 | 自言自语</title>
   
 
 
@@ -291,40 +295,286 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/27/java8函数式编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="满子z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自言自语">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">分类</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 2 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/">杂谈</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">java8函数式编程</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-27T23:06:04+08:00">
+                2018-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <ol>
+<li>FunctionalInterface注解</li>
+<li>接口默认方法</li>
+<li>Lambda表达式</li>
+<li>方法引用</li>
+</ol>
+<h2 id="FunctionalInterface注解"><a href="#FunctionalInterface注解" class="headerlink" title="@FunctionalInterface注解"></a>@FunctionalInterface注解</h2><p>Java8提供了函数式编程接口的概念。函数式接口：是只定义了<strong>单一抽象方法</strong>的接口，用作Lambda表达式的类型。如Runnable接口，就是一个典型的Functional Interface</p>
+<pre><code>@FunctionalInterface
+public interface Runnable {
+
+    public abstract void run();
+}
+</code></pre><p>理解FunctionalInterface（函数式接口）是学习Java8 Lambda表达式的关键所在。函数式接口<strong>能且仅有一个抽象方法</strong>，而不是只能有一个方法。</p>
+<h2 id="接口默认方法"><a href="#接口默认方法" class="headerlink" title="接口默认方法"></a>接口默认方法</h2><p>Java8之前版本接口只能包含抽象方法，Java8新增了接口的默认方法，接口也可以包含若干个实例方法。在Java8中，使用default关键字，可以在接口内定义实例方法，这个方法并非抽象方法，而是拥有特定逻辑的具体实例方法。</p>
+<p>举个例子，鸟都会飞，定义接口Bird，包含一个默认方法fly()</p>
+<pre><code>public interface Bird{
+
+    void eat();
+
+    default void fly() {
+        System.out.println(&quot;bird can fly...&quot;);
+    }
+}
+</code></pre><p>定义一个Crow类实现接口Bird。</p>
+<pre><code>public class Crow implements Bird {
+
+    @Override
+    public void eat() {
+        System.out.println(&quot;crow can eat&quot;);
+    }
+}
+</code></pre><p>测试：</p>
+<pre><code>public class Test {
+    public static void main(String[] args) {
+
+        Crow crow = new Crow();
+
+        crow.fly();
+        crow.eat();
+    }
+}
+</code></pre><p>输出结果：</p>
+<p><img src="https://i.imgur.com/VvioxPf.png" alt=""></p>
+<p>具体的类里面不是必须重写默认方法，这一改进使得Java8拥有了类似多继承的能力</p>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>Lambda表达式是函数式编程的核心。Lambda表达式即匿名函数，它是一段没有函数名的函数体，可以作为参数直接传递给相关的调用者。</p>
+<p>还是拿Runnable为例：</p>
+<pre><code>Runnable r = new Runnable() {
+    public void run() {
+        System.out.println(&quot;Hello World!&quot;);
+    }
+};
+new Thread(r).start();
+</code></pre><p>使用Lanbda表达式可以大大简化代码写法：</p>
+<pre><code>new Thread(() -&gt; System.out.println(&quot;Hello World&quot;)).start();
+</code></pre><p>输出结果：</p>
+<p><img src="https://i.imgur.com/wZGKya3.png" alt="">    </p>
+<p>Lambda表达式语法：</p>
+<ul>
+<li><p>无参无返回值：</p>
+<pre><code>() -&gt; { //..... };
+
+如： Runnable r = () -&gt; {}
+</code></pre></li>
+<li><p>无参有返回值：</p>
+<pre><code>() -&gt; {return something};
+
+// 定义接口
+@FunctionalInterface
+public interface Bird {
+
+    String eat();
+}
+
+// Lambda表达式可写为：
+
+Bird bir = () -&gt; {return &quot;Hello World&quot;;};
+</code></pre></li>
+<li><p>有参有返回值：</p>
+<pre><code>(param1,param2..paramN) -&gt; {return something};
+
+如：
+// 定义接口
+@FunctionalInterface
+public interface Bird {
+    String eat(String str1,String str2);
+}
+
+Bird bird = (String apple,String orange) -&gt; {return &quot;吃饱了&quot;;};
+
+如：
+(int x, int y) -&gt; x + y
+(int x, int y) -&gt; {return x + y;}
+</code></pre></li>
+<li><p>当lambda表达式只包含一条语句时，甚至可以省略大括号{}。</p>
+<pre><code>param1 -&gt; statment
+</code></pre></li>
+</ul>
+<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>方法引用是Java8中提出的用来简化Lambda表达式的一种手段，它通过类名和方法名来定位一个静态方法或者实例方法。方法引用使用”::”定义，”::”的前半部分表示类名或者实例名，后半部分表示方法名称，如果是构造器函数，则使用new表示。</p>
+<ul>
+<li><p>静态方法引用：ClassName::methodName</p>
+<pre><code>List&lt;String&gt; strs = Arrays.asList(&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;);
+strs.forEach(System.out::println);    
+</code></pre></li>
+<li><p>实例方法引用：instanceRefence::methodName</p>
+<pre><code>// 待更新...
+</code></pre></li>
+</ul>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div>
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/21/写在前面/" rel="next" title="写在前面">
+                <i class="fa fa-chevron-left"></i> 写在前面
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -364,8 +614,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -445,6 +704,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FunctionalInterface注解"><span class="nav-number">1.</span> <span class="nav-text">@FunctionalInterface注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口默认方法"><span class="nav-number">2.</span> <span class="nav-text">接口默认方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambda表达式"><span class="nav-number">3.</span> <span class="nav-text">Lambda表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法引用"><span class="nav-number">4.</span> <span class="nav-text">方法引用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

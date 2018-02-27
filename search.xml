@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[java8函数式编程]]></title>
+    <url>%2F2018%2F02%2F27%2Fjava8%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[FunctionalInterface注解 接口默认方法 Lambda表达式 方法引用 @FunctionalInterface注解Java8提供了函数式编程接口的概念。函数式接口：是只定义了单一抽象方法的接口，用作Lambda表达式的类型。如Runnable接口，就是一个典型的Functional Interface @FunctionalInterface public interface Runnable { public abstract void run(); } 理解FunctionalInterface（函数式接口）是学习Java8 Lambda表达式的关键所在。函数式接口能且仅有一个抽象方法，而不是只能有一个方法。 接口默认方法Java8之前版本接口只能包含抽象方法，Java8新增了接口的默认方法，接口也可以包含若干个实例方法。在Java8中，使用default关键字，可以在接口内定义实例方法，这个方法并非抽象方法，而是拥有特定逻辑的具体实例方法。 举个例子，鸟都会飞，定义接口Bird，包含一个默认方法fly() public interface Bird{ void eat(); default void fly() { System.out.println(&quot;bird can fly...&quot;); } } 定义一个Crow类实现接口Bird。 public class Crow implements Bird { @Override public void eat() { System.out.println(&quot;crow can eat&quot;); } } 测试： public class Test { public static void main(String[] args) { Crow crow = new Crow(); crow.fly(); crow.eat(); } } 输出结果： 具体的类里面不是必须重写默认方法，这一改进使得Java8拥有了类似多继承的能力 Lambda表达式Lambda表达式是函数式编程的核心。Lambda表达式即匿名函数，它是一段没有函数名的函数体，可以作为参数直接传递给相关的调用者。 还是拿Runnable为例： Runnable r = new Runnable() { public void run() { System.out.println(&quot;Hello World!&quot;); } }; new Thread(r).start(); 使用Lanbda表达式可以大大简化代码写法： new Thread(() -&gt; System.out.println(&quot;Hello World&quot;)).start(); 输出结果： Lambda表达式语法： 无参无返回值： () -&gt; { //..... }; 如： Runnable r = () -&gt; {} 无参有返回值： () -&gt; {return something}; // 定义接口 @FunctionalInterface public interface Bird { String eat(); } // Lambda表达式可写为： Bird bir = () -&gt; {return &quot;Hello World&quot;;}; 有参有返回值： (param1,param2..paramN) -&gt; {return something}; 如： // 定义接口 @FunctionalInterface public interface Bird { String eat(String str1,String str2); } Bird bird = (String apple,String orange) -&gt; {return &quot;吃饱了&quot;;}; 如： (int x, int y) -&gt; x + y (int x, int y) -&gt; {return x + y;} 当lambda表达式只包含一条语句时，甚至可以省略大括号{}。 param1 -&gt; statment 方法引用方法引用是Java8中提出的用来简化Lambda表达式的一种手段，它通过类名和方法名来定位一个静态方法或者实例方法。方法引用使用”::”定义，”::”的前半部分表示类名或者实例名，后半部分表示方法名称，如果是构造器函数，则使用new表示。 静态方法引用：ClassName::methodName List&lt;String&gt; strs = Arrays.asList(&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;); strs.forEach(System.out::println); 实例方法引用：instanceRefence::methodName // 待更新...]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[写在前面]]></title>
     <url>%2F2018%2F02%2F21%2F%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2%2F</url>
     <content type="text"><![CDATA[很久以前就有一个想法要写一个博客了，今天终于开始有了属于自己的地盘了。 这里以后就是我的秘密基地，不单是记录平常工作中遇到的问题与学习笔记，跟会成为自己一个人发牢骚的地方。 2017不易，2018继续努力，朝着自己的目标奔跑. 2018，给自己定了三个目标 英语：英语成绩从L4要升到L8，这个level分级是在英孚报名时，英孚的分级。 复习：把java从头到尾复习一遍，还有其他的如spring，jquery，springmvc等方面的内容。虽然这个已经有很多人在做了，但是自己复习的还是自己的，不过结果怎么样，自己还是会去做这件事情 减肥：很久没有称量自己的体重了，最近买了个称称了一下才知道自己已经快180斤了，每天上班坐在那里，一坐就是一天，随便走一点路，都感觉有点气喘吁吁了。这个趋势下去有点不对啊，今年的目标是到150斤吧，我一定要坚持完成。少吃多动少吃多动少吃多动。 Everything is gonna be ok]]></content>
