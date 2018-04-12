@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[随便写写]]></title>
+    <url>%2F2018%2F04%2F10%2F%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99%2F</url>
+    <content type="text"><![CDATA[随便写写 又有很久没写日志了，感觉有点烦，最近人变的有点懒散。 清明假期 清明假期三天感觉过的飞快，就像小品里说的那样，一睁一闭，就有了，我好想这几天什么事情也没做。浑浑噩噩恍恍惚惚。 第一天小成同志在深圳，一起在欢乐谷逛了一下，虽然嘴上说不怕不怕，但是只要坐上那种在空中翻滚的项目都会有点心慌，说不出话来，强行抿嘴保持冷静；第二天，在家躺尸了一天；第三天睡了半天，然后去以前的钟柔印刷看了一下，请他们吃了个饭； 然后，又要上班了。。。 关于友情 小成同志这次来深圳，回去说瘦了3斤，有点感觉没招待好。这种他乡遇故知的感觉真的很好，可是我搞砸了。其实我一直把她当成我最好的几个朋友之一，我自己本身是个闷葫芦，对任何事都没什么兴趣，好像每天都活的很艰难，看不到乐趣的样子，不过她是个天生的乐天派，有时候她会无形的感染着我。当然，我并任何其他的想法。 想想现在，一起长大的小伙伴还有几个在联系呢，一起读书的同学，朋友，还有多少在联系呢？虽然话可能有点俗套，但是我确实经常还是会做白日梦，幻想这一切都是一个很遥远的梦，成长，工作都是浮云。我还是出现在那个朦胧的午后，在教室里，睡眼惺忪的睁开眼，周围都是熟悉的面孔，大家开开心心的。我也有机会改正自己，不再犯之后的一系列错误，好好读书，然后上大学，走上另一条道路。 加班无止境 最近做直饮水沁园项目，感觉很累，每天都在加班，看了一下自己的工作记录表，基本上工作日都在加班，周末也最起码加了一天，怕是要猝死了。其实如果大家一起加班的话，我觉得我都没什么，还是能坚持的，也不会有什么怨言，但是基本上是我一个人在加班，我觉得既然是一个团队的，要加班肯定是一起加班吧。而且最关键的一点，我加班改的bug还是由他们产生的，这就让我有点不爽了。不过想了一下，还是再坚持一下吧，做完这段时间反正也不想继续在这里呆着了。 关于离职 在过年的时候还没有任何离职的想法，可能对这个公司有一些看法和意见，但是并没有让我下定决心的地步。真正让我下定决心离职的一是听说老大也不想做了，项目组一个关系还不错的同事也不想做了，再一个有公司主动找上我了。综合在一起，加上最近加班，及其他一些心里积压已久的想法，还是决定要辞职了。虽然那边给我说的条件都还不错，但是从心里上来说还是不太想去的，现在的话，先忙过这一段时间，把工作交接好，以后就算不去那边继续面试找工作也可以的。不管怎么样，就算要走事情也还是得做好的。]]></content>
+      <tags>
+        <tag>杂项</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用iframe下载文件]]></title>
     <url>%2F2018%2F03%2F08%2F%E4%BD%BF%E7%94%A8iframe%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[使用iframe下载文件 记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作 例： &lt;a href=&quot;/images/20180305.jpg&quot; download=&quot;1&quot;&gt; 其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称 但是download属性只支持 Firefox 和 Chrome，所以只能选择其他的方式解决。改成了使用iframe可以进行文件下载 例： // 定义html标签 &lt;a href=&quot;#&quot; onclick=&quot;downloadPicture(url)&quot;&gt;imageName&lt;/a&gt;&apos; // 在body中添加一个隐藏的iframe进行文件下载 &lt;script type=&quot;text/javascript&quot;&gt; function downloadPicture(url){ $(&quot;#temp_iframe&quot;).remove(); $(&quot;body&quot;).append(&quot;&lt;iframe id=&apos;temp_iframe&apos; style=&apos;display:none&apos;&gt;&lt;/iframe&gt;&quot;); document.getElementById(&apos;temp_iframe&apos;).src = contextPath+url); } &lt;/script&gt; 之前在这里还遇到了一个坑，项目使用的是struts2基于注解的方式进行下载的，页面写完js下载之后每次下载都是一个xxx.html的文件，后来发现原因，在struts注解下载中要特别注意指定filename，以下贴一大概的样例： /** * 文件下载 * * @return * @throws Exception */ @Action(value = &quot;showWaterPicture&quot;, results = { @Result(name = SUCCESS, type = &quot;stream&quot;, params = { &quot;contentType&quot;,&quot;application/image/jpeg&quot;, &quot;inputName&quot;, &quot;inputStream&quot;, &quot;bufferSize&quot;, &quot;4096&quot;, &quot;contentDisposition&quot;,&quot;attachment;filename=${fileName}&quot;, &quot;contentCharSet&quot;, &quot;utf-8&quot; }) }) public String showWaterPicture() throws IOException { // 相关业务逻辑... }]]></content>
