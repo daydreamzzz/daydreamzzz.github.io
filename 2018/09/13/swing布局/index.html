@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JAVA,SWING," />
 
 
 
@@ -86,16 +86,21 @@
 
 
 
-<meta name="description" content="随便写写 记录生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="自言自语">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容 BorderLayout一种非常简单常用的布局策略, 也是某些容器">
+<meta name="keywords" content="JAVA,SWING">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swing布局">
+<meta property="og:url" content="http://yoursite.com/2018/09/13/swing布局/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="随便写写 记录生活">
+<meta property="og:description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容 BorderLayout一种非常简单常用的布局策略, 也是某些容器">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.imgur.com/CUsBZWk.png">
+<meta property="og:image" content="https://i.imgur.com/RLaXSX1.png">
+<meta property="og:updated_time" content="2018-09-13T14:41:55.678Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自言自语">
-<meta name="twitter:description" content="随便写写 记录生活">
+<meta name="twitter:title" content="Swing布局">
+<meta name="twitter:description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容 BorderLayout一种非常简单常用的布局策略, 也是某些容器">
+<meta name="twitter:image" content="https://i.imgur.com/CUsBZWk.png">
 
 
 
@@ -125,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/13/swing布局/"/>
 
 
 
 
 
-  <title>自言自语</title>
+  <title>Swing布局 | 自言自语</title>
   
 
 
@@ -150,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -288,9 +292,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -320,9 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/13/swing布局/" itemprop="url">Swing布局</a></h1>
+          <h1 class="post-title" itemprop="name headline">Swing布局</h1>
         
 
         <div class="post-meta">
@@ -394,18 +396,219 @@
       
 
       
-        
-          
-          前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/13/swing布局/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容</p>
+<h2 id="BorderLayout"><a href="#BorderLayout" class="headerlink" title="BorderLayout"></a>BorderLayout</h2><p>一种非常简单常用的布局策略, 也是某些容器组件的默认布局管理器,即RootPaneContainer(JInternalFrame、JDialog、JFrame、JWindow),它将容器分为NORTH, SOUTH,CENTER，WEST，EAST五个区域, 每个区域最多只能有一个组件. East和West的组件在垂直方向上拉升，North和South的组件在水平方向上拉升,Center的组件可同时在水平和垂直方向上拉升，填满所有剩余空间.</p>
+<p>使用方式：</p>
+<pre><code>Container.add（component, BorderLayout.EAST）;
+</code></pre><p>例：</p>
+<pre><code>    JFrame testFrame = new JFrame();
+    testFrame.setSize(600, 600);
+    testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    JPanel contentPane = new JPanel();
+    testFrame.setContentPane(contentPane);
+    JButton button1 = new JButton(&quot;北&quot;);
+    JButton button2 = new JButton(&quot;南&quot;);
+    JButton button3 = new JButton(&quot;东&quot;);
+    JButton button4 = new JButton(&quot;西&quot;);
+    JButton button5 = new JButton(&quot;中央&quot;);
+    testFrame.setLayout(new BorderLayout());
+    contentPane.add(button1, &quot;North&quot;);
+    contentPane.add(button2, &quot;South&quot;);
+    contentPane.add(button3, &quot;East&quot;);
+    contentPane.add(button4, &quot;West&quot;);
+    contentPane.add(button5, &quot;Center&quot;);
+    testFrame.setVisible(true);
+
+// 具体可通过鼠标拖动窗体伸缩查看效果
+</code></pre><p>显示:</p>
+<p><img src="https://i.imgur.com/CUsBZWk.png" alt=""></p>
+<p>若不指定第二个参数,则默认在BorderLayout.CENTER区域显示<br>如果对同一个区域添加了多个组件，那么只显示最后添加的组件。</p>
+<h2 id="FlowLayout"><a href="#FlowLayout" class="headerlink" title="FlowLayout"></a>FlowLayout</h2><p>该布局是从左到右或从右到左方式排列，一行放不下就换到另外一行。因此它一行能放置多少组件取决于窗口的宽度。如果剩余空间小于组件，那么组件将在新行显示。注意它默认组件是居中对齐，可以通过FlowLayout(intalign)函数来指定对齐方式。是JPanel的默认的布局管理器</p>
+<pre><code>import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Test01 {
+
+    public static void main(String[] args) {
+        JFrame testFrame = new JFrame();
+        testFrame.setSize(600, 600);
+        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        testFrame.setContentPane(panel);
+        FlowLayout layout = new FlowLayout();
+        testFrame.setLayout(layout);
+        JButton button1 = new JButton(&quot;button1&quot;);
+        JButton button2 = new JButton(&quot;button2&quot;);
+        JButton button3 = new JButton(&quot;button3&quot;);
+        JButton button4 = new JButton(&quot;button4&quot;);
+        JButton button5 = new JButton(&quot;button5&quot;);
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+        panel.add(button4);
+        panel.add(button5);
+        testFrame.setVisible(true);
+    }
+}
+
+// 具体可通过鼠标拖动窗体伸缩查看效果
+
+注:
+    // 设置组件之间的距离
+    setVgap(int vgap) 设置组件之间以及组件与 Container 的边之间的垂直间隙。
+
+    setHgap(int hgap) 设置组件之间以及组件与 Container 的边之间的水平间隙。
+</code></pre><h2 id="GridLayout"><a href="#GridLayout" class="headerlink" title="GridLayout"></a>GridLayout</h2><p>网格式的布局,将整个容器划分成一定的行和一定的列，可以指定控件放在某行某列上,窗口改变的时候，组件的大小也会随之改变。每个单元格的大小一样，而且放置组件时，只能从左到右、由上到下的顺序填充，用户不能任意放置组件，比较的“死板”。 </p>
+<p>简单一点来说, GridLayout就类似于一个标准的表格,但是最麻烦的是,这种布局不能跨行和跨列,所以感觉应该很少能用到这个布局方式。虽然可以在子组件中设置不同的布局方式进行搭配,使展示效果达到跨行跨列的效果,但是这已经与GridLayout没什么关系了</p>
+<pre><code>GridLayout有三个构造方法
+
+GridLayout() // 创建具有默认值的网格布局，即每个组件占据一行一列。
+GridLayout(int rows, int cols) // 创建具有指定行数和列数的网格布局。
+GridLayout(int rows, int cols, int hgap, int vgap) // 创建具有指定行数和列数的网格布局。
+
+// 以GridLayout(int rows, int cols)为例：
+
+    public static void main(String[] args) {
+        JFrame testFrame = new JFrame();
+        testFrame.setSize(600, 600);
+        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        testFrame.setContentPane(panel);
+        GridLayout layout = new GridLayout(3,2);
+        testFrame.setLayout(layout);
+        JButton button1 = new JButton(&quot;button1&quot;);
+        JButton button2 = new JButton(&quot;button2&quot;);
+        JButton button3 = new JButton(&quot;button3&quot;);
+        JButton button4 = new JButton(&quot;button4&quot;);
+        JButton button5 = new JButton(&quot;button5&quot;);
+        JButton button6 = new JButton(&quot;button6&quot;);
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+        panel.add(button4);
+        panel.add(button5);
+        panel.add(button6);
+        testFrame.setVisible(true);
+    }
+</code></pre><p>显示：</p>
+<p><img src="https://i.imgur.com/RLaXSX1.png" alt=""></p>
+<h2 id="GridBagLayout"><a href="#GridBagLayout" class="headerlink" title="GridBagLayout"></a>GridBagLayout</h2><p>上面说GridLayout无法跨行和跨列,那么使用GridBagLayout就可以达到跨行跨列的效果,我想,在正式环境中应该使用GridBagLayout的情况反而更多。</p>
+<p>GridBagLayout比较复杂,需要通过GridBagConstraints类进行约束。</p>
+<p>GridBagConstraints常用方法：</p>
+<pre><code>fill ：指定填充方向，可以向水平，垂直或水平+垂直方向充满整个容器
+gridx(), gridy() 指定组件在容器单元格内的行索引与列索引，如最左上的那个单元格式，其gridx为0，gridy为0。
+gridwidth(), gridheight() ：指定单元格的跨行与跨列数
+insets ：指定组件的外部填充，相当于单元格间距
+weightx, weighty ：指定容器大小变动时，向x或y方向的伸缩率。
+Anchor：当组件的大小小于可用显示区域时使用，指定组件在显示区域中的位置。 请见下图：
+
+    -------------------------------------------------
+   |FIRST_LINE_START   PAGE_START     FIRST_LINE_END|
+   |                                                |
+   |                                                |
+   |LINE_START           CENTER             LINE_END|
+   |                                                |
+   |                                                |
+   |LAST_LINE_START     PAGE_END       LAST_LINE_END|
+   ------------------------------------------------- 
+</code></pre><p>以下给出一个GridBagLayout的例子：</p>
+<pre><code>import java.awt.Button;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JFrame;
+
+public class GridBagLayoutTest {
+
+    // 新建了一块场地
+    private JFrame f = new JFrame(&quot;小区&quot;);
+    // 聘请了一位资深的园艺设计师
+    private GridBagLayout gb = new GridBagLayout();
+    // 要设计，就要有一张空白的设计图纸
+    private GridBagConstraints gbc = new GridBagConstraints();
+    // 订购了十棵树
+    private Button[] bs = new Button[11];
+
+    public void init() {
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.setSize(1000, 1000);
+        // 指定设计师要设计的地盘
+        f.setLayout(gb);
+        // 把十棵树先准备好
+        for (int i = 0; i &lt; bs.length; i++) {
+            bs[i] = new Button(&quot;树&quot; + i);
+        }
+        // 启用组件横向、纵向上扩展的功能
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // 设置组件横向上扩展的比例，在一行上有多个组件时有用
+        gbc.weightx = 1;
+
+        // 中第一棵树
+        addButton(bs[0]);
+        // 中第二棵树
+        addButton(bs[1]);
+        addButton(bs[2]);
+
+        // 中的第四棵树是这一行的最后一棵树
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        addButton(bs[3]);
+
+        // 中的第五课树会从第二行开始,这棵树也是该行最后一棵树，增加纵向长度
+        gbc.ipady = 20;
+        addButton(bs[4]);
+
+        // 从第三行开始种，横向占了两棵树的位置
+        gbc.ipady = 0;
+        gbc.gridwidth = 2;
+        addButton(bs[5]);
+
+        // 第三行的最后一棵树，自然横向占两棵树的位置
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        addButton(bs[6]);
+
+        // 第四行第一棵树恢复横向占一棵树的位置
+        gbc.gridwidth = 1;
+        // 纵向跨越两个网格
+        gbc.gridheight = 2;
+        addButton(bs[7]);
+
+        // 种第四行最后一棵树，自然横向跨越三棵树的位置
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        // 恢复纵向跨越一个网格
+        gbc.gridheight = 1;
+        addButton(bs[8]);
+        // 接在第八棵树后面，但在第九棵树的下一行，真正实现了让第八棵树纵跨两行
+        addButton(bs[9]);
+        // 第十一课树会出现在第五行，因为没有给gridwidth重新赋值，它就是第五行最后一棵树
+        // 将其设为纵向扩展，由于第十一棵树要纵向扩展，它会在上下两个方向不断膨胀，结果把它上面的组件都挤到
+        // 最上面去了
+        gbc.weighty = 1;
+        addButton(bs[10]);
+        // 使得场地的大小刚好容得下目前已种的树
+//        f.pack();
+        // 把设计好的场地展现出来
+        f.setVisible(true);
+    }
+
+    // 将当前的树如何植入小区，植入小区哪边的方法
+    private void addButton(Button button) {
+        // 先要确保设计师手上有设计图纸和材料
+        gb.setConstraints(button, gbc);
+        // 将树植入
+        f.add(button);
+    }
+
+    public static void main(String[] args) {
+        new GridBagLayoutTest().init();
+    }
+}
+</code></pre><p>// 以上这个例子是我在网上找资料的时候在一个论坛上看到的,感觉可以很好说明GridBagLayout.具体链接地址在哪里忘记了,惭愧。不过感谢那位仁兄对我的帮助</p>
+<h2 id="CardLayout"><a href="#CardLayout" class="headerlink" title="CardLayout"></a>CardLayout</h2><h2 id="GridLayout-1"><a href="#GridLayout-1" class="headerlink" title="GridLayout"></a>GridLayout</h2><h2 id="BoxLayout"><a href="#BoxLayout" class="headerlink" title="BoxLayout"></a>BoxLayout</h2><h2 id="SpringLayout"><a href="#SpringLayout" class="headerlink" title="SpringLayout"></a>SpringLayout</h2><h2 id="TableLayout"><a href="#TableLayout" class="headerlink" title="TableLayout"></a>TableLayout</h2><p>// 待更新</p>
+
       
     </div>
     
@@ -420,458 +623,52 @@
 	
 	<div>
 	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
+		<div>
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/28/dream/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="满子z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自言自语">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/28/dream/" itemprop="url">Dream</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T22:43:35+08:00">
-                2018-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
         </div>
-      </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          I don’t know what that dream is that you have. I don’t care how disappointing it might have been, as you’ve been working toward that dream.
-That dream
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/28/dream/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
+</div>
 	  
 	</div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/我不爱我家/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="满子z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自言自语">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/07/我不爱我家/" itemprop="url">我不爱我家</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T03:35:47+08:00">
-                2018-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/JAVA/" rel="tag"><i class="fa fa-tag"></i> JAVA</a>
           
-
+            <a href="/tags/SWING/" rel="tag"><i class="fa fa-tag"></i> SWING</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          我不爱我家当我接到叔叔打过来的电话，说我爸中风了现在躺在医院里，我还有点迷，到底是个什么情况，是不是真的，现在在医院？还有，中风是什么，虽然听过很多新闻，说中风怎么样怎么样，不都是发生在老年人，七八十岁以上的人身上吗。然后我上网搜了一下，“中风的症状及后果”，影响智力，半身不遂，瘫痪?细想了一下，脑
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/07/我不爱我家/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/28/dream/" rel="next" title="Dream">
+                <i class="fa fa-chevron-left"></i> Dream
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-	
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/随便写写/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="满子z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自言自语">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/10/随便写写/" itemprop="url">随便写写</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T14:18:53+08:00">
-                2018-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-             随便写写
-   又有很久没写日志了，感觉有点烦，最近人变的有点懒散。
-
-清明假期
-  清明假期三天感觉过的飞快，就像小品里说的那样，一睁一闭，就有了，我好想这几天什么事情也没做。浑浑噩噩恍恍惚惚。
-  第一天小成同志在深圳，一起在欢乐谷逛了一下，虽然嘴上说不怕不怕，但是只要坐上那种在空中翻滚的
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/10/随便写写/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -881,621 +678,26 @@ That dream
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/使用iframe下载文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="满子z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自言自语">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/08/使用iframe下载文件/" itemprop="url">使用iframe下载文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T21:35:18+08:00">
-                2018-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          使用iframe下载文件   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作
-   例：
-&lt;a href=&quot;/images/20180305.jpg&quot; download=&quot;1&quot;&gt;
-   其中a标签的href对应
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/08/使用iframe下载文件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/27/java8函数式编程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="满子z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自言自语">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/27/java8函数式编程/" itemprop="url">java8函数式编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-27T23:06:04+08:00">
-                2018-02-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-FunctionalInterface注解
-接口默认方法
-Lambda表达式
-方法引用
-
-@FunctionalInterface注解Java8提供了函数式编程接口的概念。函数式接口：是只定义了单一抽象方法的接口，用作Lambda表达式的类型。如Runnable接口，就是一个典型的Function
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/27/java8函数式编程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDI4NC8xMDgyMQ=="></div>
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/21/写在前面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="满子z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自言自语">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/21/写在前面/" itemprop="url">写在前面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T12:39:04+08:00">
-                2018-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          很久以前就有一个想法要写一个博客了，今天终于开始有了属于自己的地盘了。
-这里以后就是我的秘密基地，不单是记录平常工作中遇到的问题与学习笔记，跟会成为自己一个人发牢骚的地方。
-2017不易，2018继续努力，朝着自己的目标奔跑.
-2018，给自己定了三个目标
-
-英语：英语成绩从L4要升到L8，这个le
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/21/写在前面/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/article-title/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="满子z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自言自语">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/20/article-title/" itemprop="url">标签测试文章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-20T01:12:56+08:00">
-                2018-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          未命名 !!!欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123
-欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123
-欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123
-欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123
-欢迎来到我的博客，这是我第一次创建博客，请多多
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/20/article-title/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	
-	<div>
-	  
-	</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-
-
-          </div>
-          
-
-
-          
 
 
 
@@ -1519,8 +721,17 @@ Lambda表达式
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1606,6 +817,22 @@ Lambda表达式
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BorderLayout"><span class="nav-number">2.</span> <span class="nav-text">BorderLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FlowLayout"><span class="nav-number">3.</span> <span class="nav-text">FlowLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GridLayout"><span class="nav-number">4.</span> <span class="nav-text">GridLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GridBagLayout"><span class="nav-number">5.</span> <span class="nav-text">GridBagLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CardLayout"><span class="nav-number">6.</span> <span class="nav-text">CardLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GridLayout-1"><span class="nav-number">7.</span> <span class="nav-text">GridLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BoxLayout"><span class="nav-number">8.</span> <span class="nav-text">BoxLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringLayout"><span class="nav-number">9.</span> <span class="nav-text">SpringLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TableLayout"><span class="nav-number">10.</span> <span class="nav-text">TableLayout</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1740,6 +967,10 @@ Lambda表达式
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1768,6 +999,17 @@ Lambda表达式
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
