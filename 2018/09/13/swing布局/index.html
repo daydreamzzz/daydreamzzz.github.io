@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.imgur.com/CUsBZWk.png">
 <meta property="og:image" content="https://i.imgur.com/RLaXSX1.png">
-<meta property="og:updated_time" content="2018-09-13T14:41:55.678Z">
+<meta property="og:updated_time" content="2018-09-15T13:31:45.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swing布局">
 <meta name="twitter:description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容 BorderLayout一种非常简单常用的布局策略, 也是某些容器">
@@ -396,8 +396,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容</p>
-<h2 id="BorderLayout"><a href="#BorderLayout" class="headerlink" title="BorderLayout"></a>BorderLayout</h2><p>一种非常简单常用的布局策略, 也是某些容器组件的默认布局管理器,即RootPaneContainer(JInternalFrame、JDialog、JFrame、JWindow),它将容器分为NORTH, SOUTH,CENTER，WEST，EAST五个区域, 每个区域最多只能有一个组件. East和West的组件在垂直方向上拉升，North和South的组件在水平方向上拉升,Center的组件可同时在水平和垂直方向上拉升，填满所有剩余空间.</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容</p>
+<h1 id="BorderLayout"><a href="#BorderLayout" class="headerlink" title="BorderLayout"></a>BorderLayout</h1><p>一种非常简单常用的布局策略, 也是某些容器组件的默认布局管理器,即RootPaneContainer(JInternalFrame、JDialog、JFrame、JWindow),它将容器分为NORTH, SOUTH,CENTER，WEST，EAST五个区域, 每个区域最多只能有一个组件. East和West的组件在垂直方向上拉升，North和South的组件在水平方向上拉升,Center的组件可同时在水平和垂直方向上拉升，填满所有剩余空间.</p>
 <p>使用方式：</p>
 <pre><code>Container.add（component, BorderLayout.EAST）;
 </code></pre><p>例：</p>
@@ -423,7 +423,7 @@
 </code></pre><p>显示:</p>
 <p><img src="https://i.imgur.com/CUsBZWk.png" alt=""></p>
 <p>若不指定第二个参数,则默认在BorderLayout.CENTER区域显示<br>如果对同一个区域添加了多个组件，那么只显示最后添加的组件。</p>
-<h2 id="FlowLayout"><a href="#FlowLayout" class="headerlink" title="FlowLayout"></a>FlowLayout</h2><p>该布局是从左到右或从右到左方式排列，一行放不下就换到另外一行。因此它一行能放置多少组件取决于窗口的宽度。如果剩余空间小于组件，那么组件将在新行显示。注意它默认组件是居中对齐，可以通过FlowLayout(intalign)函数来指定对齐方式。是JPanel的默认的布局管理器</p>
+<h1 id="FlowLayout"><a href="#FlowLayout" class="headerlink" title="FlowLayout"></a>FlowLayout</h1><p>该布局是从左到右或从右到左方式排列，一行放不下就换到另外一行。因此它一行能放置多少组件取决于窗口的宽度。如果剩余空间小于组件，那么组件将在新行显示。注意它默认组件是居中对齐，可以通过FlowLayout(intalign)函数来指定对齐方式。是JPanel的默认的布局管理器</p>
 <pre><code>import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -461,7 +461,7 @@ public class Test01 {
     setVgap(int vgap) 设置组件之间以及组件与 Container 的边之间的垂直间隙。
 
     setHgap(int hgap) 设置组件之间以及组件与 Container 的边之间的水平间隙。
-</code></pre><h2 id="GridLayout"><a href="#GridLayout" class="headerlink" title="GridLayout"></a>GridLayout</h2><p>网格式的布局,将整个容器划分成一定的行和一定的列，可以指定控件放在某行某列上,窗口改变的时候，组件的大小也会随之改变。每个单元格的大小一样，而且放置组件时，只能从左到右、由上到下的顺序填充，用户不能任意放置组件，比较的“死板”。 </p>
+</code></pre><h1 id="GridLayout"><a href="#GridLayout" class="headerlink" title="GridLayout"></a>GridLayout</h1><p>网格式的布局,将整个容器划分成一定的行和一定的列，可以指定控件放在某行某列上,窗口改变的时候，组件的大小也会随之改变。每个单元格的大小一样，而且放置组件时，只能从左到右、由上到下的顺序填充，用户不能任意放置组件，比较的“死板”。 </p>
 <p>简单一点来说, GridLayout就类似于一个标准的表格,但是最麻烦的是,这种布局不能跨行和跨列,所以感觉应该很少能用到这个布局方式。虽然可以在子组件中设置不同的布局方式进行搭配,使展示效果达到跨行跨列的效果,但是这已经与GridLayout没什么关系了</p>
 <pre><code>GridLayout有三个构造方法
 
@@ -495,7 +495,7 @@ GridLayout(int rows, int cols, int hgap, int vgap) // 创建具有指定行数�
     }
 </code></pre><p>显示：</p>
 <p><img src="https://i.imgur.com/RLaXSX1.png" alt=""></p>
-<h2 id="GridBagLayout"><a href="#GridBagLayout" class="headerlink" title="GridBagLayout"></a>GridBagLayout</h2><p>上面说GridLayout无法跨行和跨列,那么使用GridBagLayout就可以达到跨行跨列的效果,我想,在正式环境中应该使用GridBagLayout的情况反而更多。</p>
+<h1 id="GridBagLayout"><a href="#GridBagLayout" class="headerlink" title="GridBagLayout"></a>GridBagLayout</h1><p>上面说GridLayout无法跨行和跨列,那么使用GridBagLayout就可以达到跨行跨列的效果,我想,在正式环境中应该使用GridBagLayout的情况反而更多。</p>
 <p>GridBagLayout比较复杂,需要通过GridBagConstraints类进行约束。</p>
 <p>GridBagConstraints常用方法：</p>
 <pre><code>fill ：指定填充方向，可以向水平，垂直或水平+垂直方向充满整个容器
@@ -607,7 +607,375 @@ public class GridBagLayoutTest {
     }
 }
 </code></pre><p>// 以上这个例子是我在网上找资料的时候在一个论坛上看到的,感觉可以很好说明GridBagLayout.具体链接地址在哪里忘记了,惭愧。不过感谢那位仁兄对我的帮助</p>
-<h2 id="CardLayout"><a href="#CardLayout" class="headerlink" title="CardLayout"></a>CardLayout</h2><h2 id="GridLayout-1"><a href="#GridLayout-1" class="headerlink" title="GridLayout"></a>GridLayout</h2><h2 id="BoxLayout"><a href="#BoxLayout" class="headerlink" title="BoxLayout"></a>BoxLayout</h2><h2 id="SpringLayout"><a href="#SpringLayout" class="headerlink" title="SpringLayout"></a>SpringLayout</h2><h2 id="TableLayout"><a href="#TableLayout" class="headerlink" title="TableLayout"></a>TableLayout</h2><p>// 待更新</p>
+<h1 id="CardLayout"><a href="#CardLayout" class="headerlink" title="CardLayout"></a>CardLayout</h1><p>CardLayout 对象是容器的布局管理器。它将容器中的每个组件看作一张卡片。一次只能看到一张卡片，容器则充当卡片的堆栈。当容器第一次显示时，第一个添加到 CardLayout 对象的组件为可见组件</p>
+<p>CardLayout的布局感觉有点像之前我记单词时用的单词卡一样,还有在有些APP中点击切切换页面可能也会使用到CardLayout. 其实个人感觉来说,这个布局就像是常用的Tab页,如JTabbedPane,去除头部标题那一部分的效果</p>
+<h1 id="GroupLayout"><a href="#GroupLayout" class="headerlink" title="GroupLayout"></a>GroupLayout</h1><p>GroupLayout是一个非常复杂的Layout,此布局有一个轴的概念. 水平轴与垂直抽. 这个布局我很少接触,贴一些引用,待需要用到时再查找</p>
+<ul>
+<li><a href="https://blog.csdn.net/xietansheng/article/details/72862660" target="_blank" rel="noopener">JavaSwing_1.5: GroupLayout（分组布局）</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/group.html" target="_blank" rel="noopener">How to use GroupLayout</a></li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/javax/swing/GroupLayout.html" target="_blank" rel="noopener">GroupLayout API</a></li>
+</ul>
+<p>例：</p>
+<pre><code>public static void main(String[] args) {
+    JFrame jf = new JFrame(&quot;测试窗口&quot;);
+    jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    // 创建内容面板容器
+    JPanel panel = new JPanel();
+    // 创建分组布局，并关联容器
+    GroupLayout layout = new GroupLayout(panel);
+    // 设置容器的布局
+    panel.setLayout(layout);
+
+    // 创建组件
+    JButton btn01 = new JButton(&quot;Button01&quot;);
+    JButton btn02 = new JButton(&quot;Button02&quot;);
+    JButton btn03 = new JButton(&quot;Button03&quot;);
+    JButton btn04 = new JButton(&quot;Button04&quot;);
+    JButton btn05 = new JButton(&quot;Button05&quot;);
+
+    // 自动创建组件之间的间隙
+    layout.setAutoCreateGaps(true);
+    // 自动创建容器与触到容器边框的组件之间的间隙
+    layout.setAutoCreateContainerGaps(true);
+
+    /*
+     * 水平组（仅确定 X 轴方向的坐标/排列方式）
+     *
+     * 水平串行: 水平排列（左右排列）
+     * 水平并行: 垂直排列（上下排列）
+     */
+    // 水平并行（上下） btn01 和 btn02
+    GroupLayout.ParallelGroup hParalGroup01 = layout.createParallelGroup().addComponent(btn01).addComponent(btn02);
+
+    // 水平并行（上下）btn03 和 btn04
+    GroupLayout.ParallelGroup hParalGroup02 = layout.createParallelGroup().addComponent(btn03).addComponent(btn04);
+
+    // 水平串行（左右）hParalGroup01 和 hParalGroup02
+    GroupLayout.SequentialGroup hSeqGroup = layout.createSequentialGroup().addGroup(hParalGroup01).addGroup(hParalGroup02);
+
+    // 水平并行（上下）hSeqGroup 和 btn05
+    GroupLayout.ParallelGroup hParalGroup = layout.createParallelGroup().addGroup(hSeqGroup).addComponent(btn05, GroupLayout.Alignment.CENTER);
+
+    layout.setHorizontalGroup(hParalGroup);  // 指定布局的 水平组（水平坐标）
+
+    /*
+     * 垂直组（仅确定 Y 轴方向的坐标/排列方式）
+     *
+     * 垂直串行: 垂直排列（上下排列）
+     * 垂直并行: 水平排列（左右排列）
+     */
+    // 垂直并行（左右）btn01 和 btn03
+    GroupLayout.ParallelGroup vParalGroup01 = layout.createParallelGroup().addComponent(btn01).addComponent(btn03);
+
+    // 垂直并行（左右）btn02 和 btn04
+    GroupLayout.ParallelGroup vParalGroup02 = layout.createParallelGroup().addComponent(btn02).addComponent(btn04);
+
+    // 垂直串行（上下）vParalGroup01, vParalGroup02 和 btn05
+    GroupLayout.SequentialGroup vSeqGroup = layout.createSequentialGroup().addGroup(vParalGroup01).addGroup(vParalGroup02).addComponent(btn05);
+
+    layout.setVerticalGroup(vSeqGroup);    // 指定布局的 垂直组（垂直坐标）
+
+    jf.setContentPane(panel);
+    jf.pack();
+    jf.setLocationRelativeTo(null);
+    jf.setVisible(true);
+}
+</code></pre><h1 id="BoxLayout"><a href="#BoxLayout" class="headerlink" title="BoxLayout"></a>BoxLayout</h1><p>BoxLayout也是一个比较强大的布局管理器, 它既可以设置横向排列页可以设置纵向排列。</p>
+<p>主要排列方式包括</p>
+<pre><code>X_AXIS：从左到右水平布置组件。
+
+Y_AXIS：从上到下垂直布置组件。
+
+LINE_AXIS：根据容器的ComponentOrientation属性，按照行的方式排列，可以从左到右也可以从右到左
+
+PAGE_AXIS：根据容器的ComponentOrientation,以页面的方式进行排列
+</code></pre><p>关于BoxLayout通常与Box容器进行搭配使用，Box可以创建一些影响布局的组件提高显示效果。glue、struts 和 rigid 区域。 比如有时候我们希望不同的组件之间留一些间隔，空白区域，我们就可以在不同的组件之间利用Box创建一些隐藏不可见的组件。</p>
+<p>Box类常用方法：</p>
+<pre><code>createHorizontalBox() // 创建一个从左到右显示其组件的 Box。
+
+createVerticalBox() // 创建一个从上到下显示其组件的 Box。
+
+createHorizontalGlue() // 创建一个横向 glue 组件。
+
+createVerticalGlue() // 创建一个纵向 glue 组件。
+</code></pre><p>关于Boxlayout在网上看到很多写的很好的博客，这里抛砖引入，使用其中一个例子：</p>
+<pre><code>package boxlayout.test;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+
+public class BoxLayoutTest {
+
+    static JPanel topPanel;
+    static JPanel bottomPanel;
+    static JPanel middlePanel;
+
+    static void createTopPanel() {
+        topPanel = new JPanel();
+        String[] columnName = { &quot;姓名&quot;, &quot;性别&quot;, &quot;单位&quot;, &quot;参加项目&quot;, &quot;备注&quot; };
+        String[][] rowData = { { &quot;张三&quot;, &quot;男&quot;, &quot;计算机系&quot;, &quot;100 米 ,200 米&quot;, &quot;&quot; }, { &quot;李四&quot;, &quot;男&quot;, &quot;化学系&quot;, &quot;100 米,铅球&quot;, &quot;&quot; }, };
+        // 创建表格
+        JTable table = new JTable(new DefaultTableModel(rowData, columnName));
+        // 创建包含表格的滚动窗格
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        // 定义 topPanel 的布局为 BoxLayout,BoxLayout 为垂直排列
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+        // 先加入一个不可见的 Strut,从而使 topPanel 对顶部留出一定的空间
+        topPanel.add(Box.createVerticalStrut(10));
+        // 加入包含表格的滚动窗格
+        topPanel.add(scrollPane);
+        // 再加入一个不可见的 Strut,从而使 topPanel 和 middlePanel 之间留出一定的空间
+        topPanel.add(Box.createVerticalStrut(10));
+    }
+
+    @SuppressWarnings({ &quot;rawtypes&quot;, &quot;unchecked&quot; })
+    static void createMiddlePanel() {
+        // 创建 middlePanel
+        middlePanel = new JPanel();
+        // 采用水平布局
+        middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.X_AXIS));
+        // 创建标签运动会项目
+        JLabel sourceLabel = new JLabel(&quot;运动会项目：&quot;);
+        sourceLabel.setAlignmentY(Component.TOP_ALIGNMENT);
+        sourceLabel.setBorder(BorderFactory.createEmptyBorder(4, 5, 0, 5));
+        // 创建列表运动会项目
+        DefaultListModel listModel = new DefaultListModel();
+        listModel.addElement(&quot;100 米&quot;);
+        listModel.addElement(&quot;200 米&quot;);
+        listModel.addElement(&quot;400 米&quot;);
+        listModel.addElement(&quot;跳远&quot;);
+        listModel.addElement(&quot;跳高&quot;);
+        listModel.addElement(&quot;铅球&quot;);
+        JList sourceList = new JList(listModel);
+        sourceList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        sourceList.setVisibleRowCount(5);
+        JScrollPane sourceListScroller = new JScrollPane(sourceList);
+        sourceListScroller.setPreferredSize(new Dimension(120, 80));
+        sourceListScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        sourceListScroller.setAlignmentY(Component.TOP_ALIGNMENT);
+        // 创建最左边的 Panel
+        JPanel sourceListPanel = new JPanel();
+        // 最左边的 Panel 采用水平布局
+        sourceListPanel.setLayout(new BoxLayout(sourceListPanel, BoxLayout.X_AXIS));
+        // 加入标签到最左边的 Panel
+        sourceListPanel.add(sourceLabel);
+        // 加入列表运动会项目到最左边的 Panel
+        sourceListPanel.add(sourceListScroller);
+        sourceListPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        sourceListPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 30));
+        // 将最左边的 Panel 加入到 middlePanel
+        middlePanel.add(sourceListPanel);
+        // 定义中间的两个按钮
+        JButton toTargetButton = new JButton(&quot;&gt;&gt;&quot;);
+        JButton toSourceButton = new JButton(&quot;&lt;&lt;&quot;);
+        // 定义中间的 Panel
+        JPanel buttonPanel = new JPanel();
+        // 中间的 Panel 采用水平布局
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        // 将按钮 &gt;&gt; 加入到中间的 Panel
+        buttonPanel.add(toTargetButton);
+
+        // 两个按钮之间加入一个不可见的 rigidArea
+        buttonPanel.add(Box.createRigidArea(new Dimension(15, 15)));
+        // 将按钮 &lt;&lt; 加入到中间的 Panel
+        buttonPanel.add(toSourceButton);
+        buttonPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(15, 5, 15, 5));
+        // 将中间的 Panel 加入到 middlePanel
+        middlePanel.add(buttonPanel);
+        // 创建标签查询项目
+        JLabel targetLabel = new JLabel(&quot;查询项目：&quot;);
+        targetLabel.setAlignmentY(Component.TOP_ALIGNMENT);
+        targetLabel.setBorder(BorderFactory.createEmptyBorder(4, 5, 0, 5));
+
+        // 创建列表查询项目
+        DefaultListModel targetListModel = new DefaultListModel();
+        targetListModel.addElement(&quot;100 米&quot;);
+        JList targetList = new JList(targetListModel);
+        targetList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        targetList.setVisibleRowCount(5);
+        JScrollPane targetListScroller = new JScrollPane(targetList);
+        targetListScroller.setPreferredSize(new Dimension(120, 80));
+        targetListScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        targetListScroller.setAlignmentY(Component.TOP_ALIGNMENT);
+        // 创建最右边的 Panel
+        JPanel targetListPanel = new JPanel();
+        // 设置最右边的 Panel 为水平布局
+        targetListPanel.setLayout(new BoxLayout(targetListPanel, BoxLayout.X_AXIS));
+        // 将标签查询项目加到最右边的 Panel
+        targetListPanel.add(targetLabel);
+        // 将列表查询项目加到最右边的 Panel
+        targetListPanel.add(targetListScroller);
+        targetListPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        targetListPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
+        // 最后将最右边的 Panel 加入到 middlePanel
+        middlePanel.add(targetListPanel);
+    }
+
+    static void createBottomPanel() {
+        // 创建查询按钮
+        JButton actionButton = new JButton(&quot;查询&quot;);
+        // 创建退出按钮
+        JButton closeButton = new JButton(&quot;退出&quot;);
+        // 创建 bottomPanel
+        bottomPanel = new JPanel();
+        // 设置 bottomPanel 为垂直布局
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+        // 创建包含两个按钮的 buttonPanel
+        JPanel buttonPanel = new JPanel();
+        // 设置 bottomPanel 为水平布局
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        // 将查询按钮加入到 buttonPanel
+        buttonPanel.add(actionButton);
+
+        // 加入一个 glue, glue 会挤占两个按钮之间的空间
+        buttonPanel.add(Box.createHorizontalGlue());
+        // 将退出按钮加入到 buttonPanel
+        buttonPanel.add(closeButton);
+        // 加入一个 Strut,从而使 bottomPanel 和 middlePanel 上下之间留出距离
+        bottomPanel.add(Box.createVerticalStrut(10));
+        // 加入 buttonPanel
+        bottomPanel.add(buttonPanel);
+        // 加入一个 Strut,从而使 bottomPanel 和底部之间留出距离
+        bottomPanel.add(Box.createVerticalStrut(10));
+    }
+
+    public static void main(String[] args) {
+        // 创建 topPanel
+        createTopPanel();
+        // 创建 middlePanel
+        createMiddlePanel();
+        // 创建 bottomPanel
+        createBottomPanel();
+        // 创建包含 topPanel,middlePanel 和 bottomPanel 的 panelContainer
+        JPanel panelContainer = new JPanel();
+        // panelContainer 的布局为 GridBagLayout
+        panelContainer.setLayout(new GridBagLayout());
+
+        GridBagConstraints c1 = new GridBagConstraints();
+        c1.gridx = 0;
+        c1.gridy = 0;
+        c1.weightx = 1.0;
+        c1.weighty = 1.0;
+        c1.fill = GridBagConstraints.BOTH;
+        // 加入 topPanel
+        panelContainer.add(topPanel, c1);
+
+        GridBagConstraints c2 = new GridBagConstraints();
+        c2.gridx = 0;
+        c2.gridy = 1;
+        c2.weightx = 1.0;
+        c2.weighty = 0;
+        c2.fill = GridBagConstraints.HORIZONTAL;
+        // 加入 middlePanel
+        panelContainer.add(middlePanel, c2);
+
+        GridBagConstraints c3 = new GridBagConstraints();
+        c3.gridx = 0;
+        c3.gridy = 2;
+        c3.weightx = 1.0;
+        c3.weighty = 0;
+        c3.fill = GridBagConstraints.HORIZONTAL;
+        // 加入 bottomPanel
+        panelContainer.add(bottomPanel, c3);
+
+        // 创建窗体
+        JFrame frame = new JFrame(&quot;Boxlayout 演示&quot;);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panelContainer.setOpaque(true);
+        frame.setSize(new Dimension(480, 320));
+        frame.setContentPane(panelContainer);
+        frame.setVisible(true);
+    }
+}
+</code></pre><p>参考：</p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-boxlayout/" target="_blank" rel="noopener">运用 BoxLayout 进行 Swing 控件布局</a></p>
+<p><a href="https://www.xuebuyuan.com/833030.html" target="_blank" rel="noopener">Swing框式布局（BoxLayout，Box）应用详解</a></p>
+<h1 id="TableLayout"><a href="#TableLayout" class="headerlink" title="TableLayout"></a>TableLayout</h1><p>TableLayout不是JDK自带的布局管理器，使用TableLayout需要首先引入它的jar包， 如果是maven项目，可以在maven中央仓库找到这个jar包</p>
+<p><a href="http://www.clearthought.info/sun/products/jfc/tsc/articles/tablelayout/javadoc/layout/TableLayout.html" target="_blank" rel="noopener">TabLayout API</a></p>
+<p><a href="http://www.clearthought.info/sun/products/jfc/tsc/articles/tablelayout/index.html#WhatIs" target="_blank" rel="noopener">TableLayout官方使用说明</a></p>
+<p>如果有需要还是去官方文档去查看好了，里面有很多小demo可供参考。</p>
+<p>对于官方文档中，行和列的大小设置，在此添加一点说明。 Tablelayout设定行和列，需要先定义一个二维数组，举例如下：</p>
+<pre><code>double size [] [] =
+        {{100, 0.50,0.20，TableLayout.FILL，200，TableLayout.FILL}，
+         {TableLayout.FILL}; 
+</code></pre><p>其中size[0]设置的时列的宽度，size[1]设置的时列的高度。在宽度中有几个概念需要说明：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总宽度</td>
+<td>顾名思义，即容器的总宽度 </td>
+</tr>
+<tr>
+<td>绝对宽度</td>
+<td>分配绝对像素大小的所有列的宽度成为绝对宽度 </td>
+</tr>
+<tr>
+<td>可缩放宽度</td>
+<td>可缩放宽度=总宽度-绝对宽度</td>
+</tr>
+<tr>
+<td>绝对列</td>
+<td>使用绝对宽度指定的列是绝对列 </td>
+</tr>
+<tr>
+<td>可伸缩列</td>
+<td>使用百分比指定的列称为可伸缩列</td>
+</tr>
+<tr>
+<td>填充列</td>
+<td>使用TableLayout.FILL指定</td>
+</tr>
+<tr>
+<td>首选列</td>
+<td>使用TableLayout.PREFERRED指定</td>
+</tr>
+</tbody>
+</table>
+<p>关于宽度的分配原则为：</p>
+<p><strong>先将总宽度分配给绝对列和首选列，然后将剩余宽度（可伸缩宽度）分配给可伸缩列，如果可伸缩列的总和小于100％，则会留下一些可扩展的宽度。然后，在所有填充列中均等地划分该可缩放宽度</strong></p>
+<p>还是照着上面的例子来看，上面使用了一个二维数组size[][]来定义当前容器的列。</p>
+<ul>
+<li>第0列： 100px (绝对宽度)</li>
+<li>第1列： (500-100-200)*0.5 = 100px;</li>
+<li>第2列： (500-100-200)*0.2 = 40px;</li>
+<li>第3列： (500-100-200)*0.3/2 = 30px;</li>
+<li>第4列： 200px(绝对宽度)</li>
+<li>第5列： 同3列 30px;</li>
+</ul>
+<p>关于这个宽度计算，我之前看文档的时候被绕了一段事件才搞明白。写在这里以作参考</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>关于swing的布局策略，我的看法是，没有最好的layout，只有最适合当前业务场景的。能对不同的情况灵活选择，才是最好的。以上对一些常用的布局管理器进行了一些小小的总结，很多都是在网上查找资料是遇到的，我算是抛砖引玉了。当然，还有一些布局管理器没有说到，如：GridLayout，SpringLayout.等以后需要用到了再来查看吧。</p>
+<p>另外留下SpringLayout的一些资源已备参考：</p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-mer09173/index.html" target="_blank" rel="noopener">SpringLayout 管理器</a></p>
+<p><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/spring.html" target="_blank" rel="noopener">How to use SpringLayout</a></p>
+<p><a href="https://docs.oracle.com/javase/7/docs/api/javax/swing/SpringLayout.html" target="_blank" rel="noopener">SpringLayout API</a></p>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/hthuang/p/3460234.html" target="_blank" rel="noopener">Java-Swing常用布局管理器</a></p>
+<p><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/index.html" target="_blank" rel="noopener">官方使用文档</a></p>
 
       
     </div>
@@ -827,7 +1195,7 @@ public class GridBagLayoutTest {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BorderLayout"><span class="nav-number">2.</span> <span class="nav-text">BorderLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FlowLayout"><span class="nav-number">3.</span> <span class="nav-text">FlowLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GridLayout"><span class="nav-number">4.</span> <span class="nav-text">GridLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GridBagLayout"><span class="nav-number">5.</span> <span class="nav-text">GridBagLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CardLayout"><span class="nav-number">6.</span> <span class="nav-text">CardLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GridLayout-1"><span class="nav-number">7.</span> <span class="nav-text">GridLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BoxLayout"><span class="nav-number">8.</span> <span class="nav-text">BoxLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringLayout"><span class="nav-number">9.</span> <span class="nav-text">SpringLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TableLayout"><span class="nav-number">10.</span> <span class="nav-text">TableLayout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BorderLayout"><span class="nav-number">2.</span> <span class="nav-text">BorderLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FlowLayout"><span class="nav-number">3.</span> <span class="nav-text">FlowLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GridLayout"><span class="nav-number">4.</span> <span class="nav-text">GridLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GridBagLayout"><span class="nav-number">5.</span> <span class="nav-text">GridBagLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CardLayout"><span class="nav-number">6.</span> <span class="nav-text">CardLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GroupLayout"><span class="nav-number">7.</span> <span class="nav-text">GroupLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BoxLayout"><span class="nav-number">8.</span> <span class="nav-text">BoxLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TableLayout"><span class="nav-number">9.</span> <span class="nav-text">TableLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
