@@ -86,20 +86,20 @@
 
 
 
-<meta name="description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容 BorderLayout一种非常简单常用的布局策略, 也是某些容器">
+<meta name="description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容。以下,为swing中的关键,layout方面的内容。 Border">
 <meta name="keywords" content="JAVA,SWING">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swing布局">
 <meta property="og:url" content="http://yoursite.com/2018/09/13/swing布局/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容 BorderLayout一种非常简单常用的布局策略, 也是某些容器">
+<meta property="og:description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容。以下,为swing中的关键,layout方面的内容。 Border">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.imgur.com/CUsBZWk.png">
 <meta property="og:image" content="https://i.imgur.com/RLaXSX1.png">
-<meta property="og:updated_time" content="2018-09-15T13:31:45.128Z">
+<meta property="og:updated_time" content="2018-09-15T13:46:07.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swing布局">
-<meta name="twitter:description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容 BorderLayout一种非常简单常用的布局策略, 也是某些容器">
+<meta name="twitter:description" content="前言swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容。以下,为swing中的关键,layout方面的内容。 Border">
 <meta name="twitter:image" content="https://i.imgur.com/CUsBZWk.png">
 
 
@@ -396,7 +396,7 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>swing是Java中的一个gui库。现在已经很少看到有使用swing开发的项目了.我也一直没有真正的使用swing进行开发,只是在刚接触java时根据例子简单敲了一下。不过最近,公司正好有一个项目是以swing为基础进行二次开发的,作为一个几乎近似于刚接触swing的新手,在接下来的日子里简单记录一下学习swing的一些内容。以下,为swing中的关键,layout方面的内容。</p>
 <h1 id="BorderLayout"><a href="#BorderLayout" class="headerlink" title="BorderLayout"></a>BorderLayout</h1><p>一种非常简单常用的布局策略, 也是某些容器组件的默认布局管理器,即RootPaneContainer(JInternalFrame、JDialog、JFrame、JWindow),它将容器分为NORTH, SOUTH,CENTER，WEST，EAST五个区域, 每个区域最多只能有一个组件. East和West的组件在垂直方向上拉升，North和South的组件在水平方向上拉升,Center的组件可同时在水平和垂直方向上拉升，填满所有剩余空间.</p>
 <p>使用方式：</p>
 <pre><code>Container.add（component, BorderLayout.EAST）;
@@ -1032,6 +1032,10 @@ public class BoxLayoutTest {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/09/15/swing右键添加菜单/" rel="prev" title="一个swing中添加右键菜单选项的小例子">
+                一个swing中添加右键菜单选项的小例子 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -1118,7 +1122,7 @@ public class BoxLayoutTest {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
