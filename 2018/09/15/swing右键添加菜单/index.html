@@ -86,18 +86,20 @@
 
 
 
-<meta name="description" content="一个java右键添加菜单的小例子，乘着现在还有点印象，写下来以备以后需要。 import java.awt.datatransfer.Clipboard; import java.awt.datatransfer.DataFlavor; import java.awt.datatransfer.Transferable; import java.awt.event.ActionEvent; imp">
+<meta name="description" content="右键菜单是一直是一个非常实用的功能,在此，乘着现在还有一些印象做基础,存一个在swing中添加右键菜单功能的小例子，方便以后备用。 ps： 连Oracle官方都不推荐实用swing,而改用JavaFX了,基本上在官方的各种swing组件说明中都能看到一句  If you are interested in using JavaFX to create your GUI, see Working W">
 <meta name="keywords" content="JAVA,SWING">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个swing中添加右键菜单选项的小例子">
+<meta property="og:title" content="swing中添加右键菜单">
 <meta property="og:url" content="http://yoursite.com/2018/09/15/swing右键添加菜单/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="一个java右键添加菜单的小例子，乘着现在还有点印象，写下来以备以后需要。 import java.awt.datatransfer.Clipboard; import java.awt.datatransfer.DataFlavor; import java.awt.datatransfer.Transferable; import java.awt.event.ActionEvent; imp">
+<meta property="og:description" content="右键菜单是一直是一个非常实用的功能,在此，乘着现在还有一些印象做基础,存一个在swing中添加右键菜单功能的小例子，方便以后备用。 ps： 连Oracle官方都不推荐实用swing,而改用JavaFX了,基本上在官方的各种swing组件说明中都能看到一句  If you are interested in using JavaFX to create your GUI, see Working W">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-15T13:53:00.502Z">
+<meta property="og:image" content="https://i.imgur.com/bL7tnjp.png">
+<meta property="og:updated_time" content="2018-09-15T14:06:12.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个swing中添加右键菜单选项的小例子">
-<meta name="twitter:description" content="一个java右键添加菜单的小例子，乘着现在还有点印象，写下来以备以后需要。 import java.awt.datatransfer.Clipboard; import java.awt.datatransfer.DataFlavor; import java.awt.datatransfer.Transferable; import java.awt.event.ActionEvent; imp">
+<meta name="twitter:title" content="swing中添加右键菜单">
+<meta name="twitter:description" content="右键菜单是一直是一个非常实用的功能,在此，乘着现在还有一些印象做基础,存一个在swing中添加右键菜单功能的小例子，方便以后备用。 ps： 连Oracle官方都不推荐实用swing,而改用JavaFX了,基本上在官方的各种swing组件说明中都能看到一句  If you are interested in using JavaFX to create your GUI, see Working W">
+<meta name="twitter:image" content="https://i.imgur.com/bL7tnjp.png">
 
 
 
@@ -133,7 +135,7 @@
 
 
 
-  <title>一个swing中添加右键菜单选项的小例子 | 自言自语</title>
+  <title>swing中添加右键菜单 | 自言自语</title>
   
 
 
@@ -321,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">一个swing中添加右键菜单选项的小例子</h1>
+          <h1 class="post-title" itemprop="name headline">swing中添加右键菜单</h1>
         
 
         <div class="post-meta">
@@ -393,8 +395,13 @@
       
 
       
-        <p>一个java右键添加菜单的小例子，乘着现在还有点印象，写下来以备以后需要。</p>
-<pre><code>import java.awt.datatransfer.Clipboard;
+        <p>右键菜单是一直是一个非常实用的功能,在此，乘着现在还有一些印象做基础,存一个在swing中添加右键菜单功能的小例子，方便以后备用。</p>
+<p>ps： 连Oracle官方都不推荐实用swing,而改用JavaFX了,基本上在官方的各种swing组件说明中都能看到一句</p>
+<blockquote>
+<p>If you are interested in using JavaFX to create your GUI, see <a href="https://docs.oracle.com/javase/8/javafx/layout-tutorial/index.html" target="_blank" rel="noopener">Working With Layouts in JavaFX</a>.</p>
+</blockquote>
+<pre><code>import java.awt.Color;
+import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
@@ -403,6 +410,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -428,6 +436,9 @@ public class Test02 {
             copy.setAccelerator(KeyStroke.getKeyStroke(&apos;C&apos;, InputEvent.CTRL_MASK));
             paste.setAccelerator(KeyStroke.getKeyStroke(&apos;V&apos;, InputEvent.CTRL_MASK));
             cut.setAccelerator(KeyStroke.getKeyStroke(&apos;X&apos;, InputEvent.CTRL_MASK));
+
+            // 设置边框增强显示效果
+            this.setBorder(BorderFactory.createLineBorder(Color.red));
 
             this.addMouseListener(new MouseAdapter(){
                 // 当前组件的鼠标点击事件
@@ -526,7 +537,9 @@ public class Test02 {
         jf.setVisible(true);
     }
 }
-</code></pre>
+</code></pre><p>显示:</p>
+<p><img src="https://i.imgur.com/bL7tnjp.png" alt=""></p>
+
       
     </div>
     
