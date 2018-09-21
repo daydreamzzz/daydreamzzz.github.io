@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JAVA,JDBC," />
 
 
 
@@ -86,16 +86,20 @@
 
 
 
-<meta name="description" content="随便写写 记录生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="自言自语">
-<meta property="og:url" content="http://yoursite.com/archives/2018/07/index.html">
+<meta name="description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：1234567// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;">
+<meta name="keywords" content="JAVA,JDBC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用JAVA获取JDBC元数据对象">
+<meta property="og:url" content="http://yoursite.com/2018/09/21/JDBC获取元数据/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="随便写写 记录生活">
+<meta property="og:description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：1234567// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.imgur.com/A3XnH5i.png">
+<meta property="og:updated_time" content="2018-09-21T13:20:45.365Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自言自语">
-<meta name="twitter:description" content="随便写写 记录生活">
+<meta name="twitter:title" content="使用JAVA获取JDBC元数据对象">
+<meta name="twitter:description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：1234567// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;">
+<meta name="twitter:image" content="https://i.imgur.com/A3XnH5i.png">
 
 
 
@@ -125,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/07/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/21/JDBC获取元数据/"/>
 
 
 
 
 
-  <title>归档 | 自言自语</title>
+  <title>使用JAVA获取JDBC元数据对象 | 自言自语</title>
   
 
 
@@ -150,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -288,74 +292,201 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 10 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/JDBC获取元数据/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="满子z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自言自语">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/07/07/我不爱我家/" itemprop="url">
-              
-                <span itemprop="name">我不爱我家</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">使用JAVA获取JDBC元数据对象</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-07T03:35:47+08:00"
-              content="2018-07-07" >
-          07-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T21:20:10+08:00">
+                2018-09-21
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了</p>
+<p>如以下的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// SHOW TABLES： 显示当前数据库中所有表的名称</span><br><span class="line">// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名</span><br><span class="line">SHOW TABLES LIKE &apos;tablename&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 查询数据库所有表名： </span><br><span class="line">SELECT * FROM information_schema.tables WHERE table_schema =&apos;database_name&apos; AND table_name = &apos;tablename&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>然后发现了一个方法，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">Connection conn = DriverManager.getConnection(url, user, password);</span><br><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br><span class="line">ResultSet resultSet = databaseMetaData.getTables(null, null, &quot;tablename&quot;, null);</span><br><span class="line">if (resultSet.next()) &#123;</span><br><span class="line">	System.out.println(&quot;table exist!&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	System.out.println(&quot;table not exist&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不使用SQL就可以查询到，那不是更方便吗。于是我就去了解了一下DatabaseMetaData这个类。</p>
+<h1 id="DatabaseMetaData接口获取JDBC元数据"><a href="#DatabaseMetaData接口获取JDBC元数据" class="headerlink" title="DatabaseMetaData接口获取JDBC元数据"></a>DatabaseMetaData接口获取JDBC元数据</h1><h2 id="什么是元数据"><a href="#什么是元数据" class="headerlink" title="什么是元数据"></a>什么是元数据</h2><p>是描述存储在数据源中的数据的数据，是关于数据的数据，其中有两种类型的数据，关于<strong>数据结构的设计和规范的结构元数据</strong>以及<strong>关于资源和自身实例信息的识别的描述性元数据</strong></p>
+<p>元数据通常包括数据库中每个表的名称，大小和行数，以及每个表中的列，它们的数据类型，精度等。考虑到这一点，让我们从教程开始，了解如何从任何数据源获取元数据。</p>
+<h2 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h2><p>首先， 获取DatabaseMetaData的方法其实在上面的方法中已经给出了，一行代码即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br></pre></td></tr></table></figure></p>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">getTables()     	// 得到指定参数的表信息参数说明 </span><br><span class="line">getColumns() 	 	// 得到指定表的列信息</span><br><span class="line">getPrimaryKeys() 	// 获取表的主键信息</span><br><span class="line">getExportedKeys()   // 获取表的外键信息</span><br><span class="line">getTypeInfo()    	// 获取此数据库支持的所有数据类型的描述</span><br><span class="line">// 参数说明：</span><br><span class="line">catalog： 类别名称，一般为空</span><br><span class="line">   schema ： 数据库名</span><br><span class="line">   tableName ：表名</span><br><span class="line">columnName ：列名</span><br></pre></td></tr></table></figure>
+<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br><span class="line">System.out.println(&quot;数据库已知的用户: &quot; + databaseMetaData.getUserName());</span><br><span class="line">System.out.println(&quot;数据库URL: &quot; + databaseMetaData.getURL());</span><br><span class="line">System.out.println(&quot;是否允许只读:&quot; + databaseMetaData.isReadOnly());</span><br><span class="line">System.out.println(&quot;数据库的产品名称:&quot; + databaseMetaData.getDatabaseProductName());</span><br><span class="line">System.out.println(&quot;数据库的版本:&quot; + databaseMetaData.getDatabaseProductVersion());</span><br><span class="line">System.out.println(&quot;驱动程序的名称:&quot; + databaseMetaData.getDriverName());</span><br><span class="line">System.out.println(&quot;驱动程序的版本:&quot; + databaseMetaData.getDriverVersion());</span><br><span class="line">System.out.println(&quot;数据库的系统函数的逗号分隔列表: &quot; + databaseMetaData.getSystemFunctions());</span><br><span class="line">System.out.println(&quot;数据库的时间和日期函数的逗号分隔列表: &quot; + databaseMetaData.getTimeDateFunctions());</span><br><span class="line">System.out.println(&quot;数据库的字符串函数的逗号分隔列表: &quot; + databaseMetaData.getStringFunctions());</span><br><span class="line">System.out.println(&quot;数据库供应商用于 &apos;schema&apos; 的首选术语: &quot; + databaseMetaData.getSchemaTerm());</span><br></pre></td></tr></table></figure></p>
+<p>显示：</p>
+<p><img src="https://i.imgur.com/A3XnH5i.png" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>关于这个接口，我在开发过程中并没有真正用到过。不过这个接口的强大是毋庸置疑的，很多数据都可以通过其获取。但是据说对于JDBC元数据的操作非常消耗性能，应尽量避免使用。当然咯，具体的事情具体再看吧</p>
+<p>参考：</p>
+<p><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/DatabaseMetaData.html" target="_blank" rel="noopener">Interface DatabaseMetaData</a></p>
+<p><a href="https://www.progress.com/blogs/jdbc-tutorial-extracting-database-metadata-via-jdbc-driver" target="_blank" rel="noopener">JDBC Tutorial: Extracting Database Metadata via JDBC Driver</a></p>
+<p><a href="https://examples.javacodegeeks.com/core-java/sql/jdbc-databasemetadata-example/" target="_blank" rel="noopener">JDBC DatabaseMetaData Example</a></p>
+<p><a href="https://blog.csdn.net/chen_zw/article/details/18816599" target="_blank" rel="noopener">JDBC元数据操作（一）– DatabaseMetaData接口详解</a></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div>
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA/" rel="tag"><i class="fa fa-tag"></i> JAVA</a>
+          
+            <a href="/tags/JDBC/" rel="tag"><i class="fa fa-tag"></i> JDBC</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/15/swing右键添加菜单/" rel="next" title="swing中添加右键菜单">
+                <i class="fa fa-chevron-left"></i> swing中添加右键菜单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -363,6 +494,14 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDI4NC8xMDgyMQ=="></div>
+    </div>
+
+  
+
 
 
 
@@ -386,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -473,6 +621,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DatabaseMetaData接口获取JDBC元数据"><span class="nav-number">2.</span> <span class="nav-text">DatabaseMetaData接口获取JDBC元数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是元数据"><span class="nav-number">2.1.</span> <span class="nav-text">什么是元数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取方式"><span class="nav-number">2.2.</span> <span class="nav-text">获取方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法"><span class="nav-number">2.3.</span> <span class="nav-text">常用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他方法"><span class="nav-number">2.4.</span> <span class="nav-text">其他方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -607,6 +771,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -635,6 +803,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

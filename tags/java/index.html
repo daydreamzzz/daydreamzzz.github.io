@@ -89,7 +89,7 @@
 <meta name="description" content="随便写写 记录生活">
 <meta property="og:type" content="website">
 <meta property="og:title" content="自言自语">
-<meta property="og:url" content="http://yoursite.com/tags/JAVA/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/java/index.html">
 <meta property="og:site_name" content="自言自语">
 <meta property="og:description" content="随便写写 记录生活">
 <meta property="og:locale" content="zh-CN">
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/JAVA/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/java/"/>
 
 
 
 
 
-  <title>标签: JAVA | 自言自语</title>
+  <title>标签: java | 自言自语</title>
   
 
 
@@ -295,7 +295,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>JAVA<small>标签</small>
+        <h1>java<small>标签</small>
         </h1>
       </div>
 
@@ -307,9 +307,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/09/15/swing右键添加菜单/" itemprop="url">
+            <a class="post-title-link" href="/2018/08/28/dream/" itemprop="url">
               
-                <span itemprop="name">swing中添加右键菜单</span>
+                <span itemprop="name">Dream</span>
               
             </a>
         
@@ -317,9 +317,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-15T21:52:30+08:00"
-              content="2018-09-15" >
-          09-15
+              datetime="2018-08-28T22:43:35+08:00"
+              content="2018-08-28" >
+          08-28
         </time>
       </div>
 
@@ -335,9 +335,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/09/13/swing布局/" itemprop="url">
+            <a class="post-title-link" href="/2018/02/27/java8函数式编程/" itemprop="url">
               
-                <span itemprop="name">Swing布局</span>
+                <span itemprop="name">java8函数式编程</span>
               
             </a>
         
@@ -345,9 +345,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-13T22:41:50+08:00"
-              content="2018-09-13" >
-          09-13
+              datetime="2018-02-27T23:06:04+08:00"
+              content="2018-02-27" >
+          02-27
         </time>
       </div>
 
@@ -414,7 +414,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -436,7 +436,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -950,6 +950,53 @@
           proceedsearch();
         }
       });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+ });
     }
 
     // handle and trigger popup window;
