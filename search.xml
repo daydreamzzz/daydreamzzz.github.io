@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[使用JAVA获取JDBC元数据对象]]></title>
+    <title><![CDATA[使用Java获取JDBC元数据对象]]></title>
     <url>%2F2018%2F09%2F21%2FJDBC%E8%8E%B7%E5%8F%96%E5%85%83%E6%95%B0%E6%8D%AE%2F</url>
     <content type="text"><![CDATA[前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：1234567// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &apos;tablename&apos;;// 查询数据库所有表名： SELECT * FROM information_schema.tables WHERE table_schema =&apos;database_name&apos; AND table_name = &apos;tablename&apos;; 然后发现了一个方法，如下：123456789Class.forName(&quot;com.mysql.jdbc.Driver&quot;);Connection conn = DriverManager.getConnection(url, user, password);DatabaseMetaData databaseMetaData = conn.getMetaData();ResultSet resultSet = databaseMetaData.getTables(null, null, &quot;tablename&quot;, null);if (resultSet.next()) &#123; System.out.println(&quot;table exist!&quot;);&#125; else &#123; System.out.println(&quot;table not exist&quot;);&#125; 不使用SQL就可以查询到，那不是更方便吗。于是我就去了解了一下DatabaseMetaData这个类。 DatabaseMetaData接口获取JDBC元数据什么是元数据是描述存储在数据源中的数据的数据，是关于数据的数据，其中有两种类型的数据，关于数据结构的设计和规范的结构元数据以及关于资源和自身实例信息的识别的描述性元数据 元数据通常包括数据库中每个表的名称，大小和行数，以及每个表中的列，它们的数据类型，精度等。考虑到这一点，让我们从教程开始，了解如何从任何数据源获取元数据。 获取方式首先， 获取DatabaseMetaData的方法其实在上面的方法中已经给出了，一行代码即可1DatabaseMetaData databaseMetaData = conn.getMetaData(); 常用方法12345678910getTables() // 得到指定参数的表信息参数说明 getColumns() // 得到指定表的列信息getPrimaryKeys() // 获取表的主键信息getExportedKeys() // 获取表的外键信息getTypeInfo() // 获取此数据库支持的所有数据类型的描述// 参数说明：catalog： 类别名称，一般为空 schema ： 数据库名 tableName ：表名columnName ：列名 其他方法例：123456789101112DatabaseMetaData databaseMetaData = conn.getMetaData();System.out.println(&quot;数据库已知的用户: &quot; + databaseMetaData.getUserName());System.out.println(&quot;数据库URL: &quot; + databaseMetaData.getURL());System.out.println(&quot;是否允许只读:&quot; + databaseMetaData.isReadOnly());System.out.println(&quot;数据库的产品名称:&quot; + databaseMetaData.getDatabaseProductName());System.out.println(&quot;数据库的版本:&quot; + databaseMetaData.getDatabaseProductVersion());System.out.println(&quot;驱动程序的名称:&quot; + databaseMetaData.getDriverName());System.out.println(&quot;驱动程序的版本:&quot; + databaseMetaData.getDriverVersion());System.out.println(&quot;数据库的系统函数的逗号分隔列表: &quot; + databaseMetaData.getSystemFunctions());System.out.println(&quot;数据库的时间和日期函数的逗号分隔列表: &quot; + databaseMetaData.getTimeDateFunctions());System.out.println(&quot;数据库的字符串函数的逗号分隔列表: &quot; + databaseMetaData.getStringFunctions());System.out.println(&quot;数据库供应商用于 &apos;schema&apos; 的首选术语: &quot; + databaseMetaData.getSchemaTerm()); 显示： 总结关于这个接口，我在开发过程中并没有真正用到过。不过这个接口的强大是毋庸置疑的，很多数据都可以通过其获取。但是据说对于JDBC元数据的操作非常消耗性能，应尽量避免使用。当然咯，具体的事情具体再看吧 参考： Interface DatabaseMetaData JDBC Tutorial: Extracting Database Metadata via JDBC Driver JDBC DatabaseMetaData Example JDBC元数据操作（一）– DatabaseMetaData接口详解]]></content>
       <categories>
@@ -48,26 +48,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[我不爱我家]]></title>
-    <url>%2F2018%2F07%2F07%2F%E6%88%91%E4%B8%8D%E7%88%B1%E6%88%91%E5%AE%B6%2F</url>
-    <content type="text"><![CDATA[我不爱我家当我接到叔叔打过来的电话，说我爸中风了现在躺在医院里，我还有点迷，到底是个什么情况，是不是真的，现在在医院？还有，中风是什么，虽然听过很多新闻，说中风怎么样怎么样，不都是发生在老年人，七八十岁以上的人身上吗。然后我上网搜了一下，“中风的症状及后果”，影响智力，半身不遂，瘫痪?细想了一下，脑子有点蒙。马上买了一张车票回家。 在医院看到他那一刻，真的觉得有点不可思议，曾经那么健壮的一个人，躺在床上一动不动。上个月才回过家，他还好好的，还给我做了饭，前几天还通过电话，怎么一下子能让一个人变成这个模样。 其实我对我爸并没有什么感情，虽然看到他现在这个样子很难受的躺在床上，我只是机械的去做一些我觉得我该做的一些事情，比如在医院照顾他。只是尽一个人子做的简单的事情，心里并没有什么感觉。用我姑的话来说，我就是一个冷血动物，可能对待陌生人，朋友都比对我的家人好一些。 从小，我爸就一个人离家出去打工了，留下我妈和我两个人相依为命，然后我妈觉得在家也挣不到什么钱，呆在家跟我一起也没用，把我托付给外公外婆之后也出去打工了。所以我的童年对于父母是没什么感觉的。 打啊骂啊，在每年过年回来的那寥寥几天中发泄在我身上。可能别的小孩子在大人打的时候还会哭着跑开，我根本不会跑，也不会哭，因为我基本上一哭我妈会打我打的更凶。这也导致我现在从小到大基本上不会哭，哪怕眼泪一滴一滴的往下掉，也绝对不会发生一点声音。她打我的时候我就站在那里，随便她打。那时候还会想，你打吧打吧，你现在怎么样打我，以后我原原本本的还给你。 我爸是从我两岁的时候离家的，到我12岁左右的时候，才回来。期间，没有任何联系，没跟家人朋友有过任何联系。书信，电话，口信，什么都没有，然后，我妈经历了10年的等待之后，准备改嫁了。而正在筹备改嫁的事宜的时候，我爸突然回来了。真的感觉，人生好奇妙，我爸妈这事就像电影一样。不然怎么这么多事呢。然后，回来又怎么样呢，10年没见了哪还有什么感情，该改嫁还不是得嫁。 忘不了那天放学回家，院子里突然多了一个男人，然后身边的亲戚，都告诉我，那个是你爸，快叫爸爸，真的当时没有任何感觉。 我妈改嫁了，大人们问我愿意跟爸爸还是妈妈，虽然当时不太懂，但是只是觉得，我妈打了我这么多年，跟着她又能干什么呢，而且，跟着一个女人能成什么事，她都嫁人了，以后都不是一家人了，都不知道她以后会在那边过的怎么样，我还是不成她的拖油瓶了。所以我当时说我不跟我妈，其实我谁都不想跟，我觉得我一个人也能过的挺好，现在还有几年才到16，国家法定的，16岁以前都算童工，不能出去打工的。熬过这几年，等我16岁，我就出去打工，永远不再回来，我自己也能过好我自己。这个家本身没什么牵挂。可能唯一要报答的就是外公外婆的养育之恩了。以后出去工作了，努力一点，每年存点钱回来看望一下外公外婆，这是我当时心里的想法。 就这样，虽然我没选择跟我爸，但是还是把我给安排给了他。因为我如果继续跟着外公外婆的话，也还是会拖累他们,(当时外公外婆住在舅舅家里，舅舅舅妈说不同意老人家养我，说如果养我的话，他们也不会养外公外婆)。 就这样我跟接下来就属于跟着我爸了，读高中的时候虽然离家很近，但是我还是极力要求要去学校住宿，因为我不知道跟着一个陌生男人住一个家是什么感觉。 他负责我每年的学费及每个月的伙食费300块。在高中读了高二然后16岁了，期间虽然生活费本来就很少，但是还是省吃俭用，有时候不吃饭存点钱，当时一共存了400多块，然后就离家出走出去打工了，一直不回家，也不想跟他们有任何联系。所以算起来，我跟我爸在一起生活的时间寥寥无几，根本上谈不上什么感情。他其实对我并不好，喝酒，打牌，有几次直接把我踢倒在地上，最厉害的一次拿了把菜刀到我的面前，虽然起因是我到网吧上网被他抓到了。 回想这么些年，一个人在外面也习惯了，从来没什么跟家里联系一下的想法。一个人也挺好的，而且，回去也觉得有点尴尬，没什么感觉。虽然过了两三年后回去了一次，住了几天，但是心里没感觉。我从心里来说是有点讨厌我爸的，他跟我之间挂在嘴边最常说的一句话就是，等你到18岁我就不会管你了，随便你怎么样，是死是活都与我无关。呵呵，虽然都没那个必要让他养我到18岁。 当时心想的，我妈怎么打我我怎么还的想法现在早就没有了。从今年开始跟她又有一些联系了，不过毕竟不是一个家的人了，她也有自己的家庭，有自己的新的孩子，有自己的生活，我又能做什么呢，还是不要打扰她了。她能过好就过好，不能过好我也没什么办法。 写这篇日记的时候，我现在正在医院，刚给他换了裤子，他刚才又尿湿了。我已经几天几夜没好好休息过了，真的好累好难受。其实我心里来说是有点讨厌他的，为什么要出去打工，为什么那么多年为什么不跟家人联系，为什么要出这档子事，而且正在我正要开始发展的时候拖累我。冷静下来想一想，未来真的有点迷茫，虽然我觉得这些是我要做的，应该做的。但是心里竟然升不起一丝波澜。现在还是危险期，不管怎么样，希望他一切都好，尽快康复吧。不管他以后怎么样，做最坏的打算，以后就算瘫痪了，我也尽自己的一份力吧。细细想想，你可以对我不好，我还是得做我该做的，不然我和你有什么区别。一直陪在身边也是不现实的，没有收入，以后工作努力一点，每个月给他寄一点钱而已。 突然想起小时候老师布置的作文，题目“我爱我家”，“我的爸爸”，“我的妈妈”,到了我这里却从来不知道该写些什么。 生活总是充满波折，希望以后一切都好吧。]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[随便写写]]></title>
-    <url>%2F2018%2F04%2F10%2F%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99%2F</url>
-    <content type="text"><![CDATA[随便写写 又有很久没写日志了，感觉有点烦，最近人变的有点懒散。 清明假期 清明假期三天感觉过的飞快，就像小品里说的那样，一睁一闭，就有了，我好想这几天什么事情也没做。浑浑噩噩恍恍惚惚。 第一天小成同志在深圳，一起在欢乐谷逛了一下，虽然嘴上说不怕不怕，但是只要坐上那种在空中翻滚的项目都会有点心慌，说不出话来，强行抿嘴保持冷静；第二天，在家躺尸了一天；第三天睡了半天，然后去以前的钟柔印刷看了一下，请他们吃了个饭； 然后，又要上班了。。。 关于友情 小成同志这次来深圳，回去说瘦了3斤，有点感觉没招待好。这种他乡遇故知的感觉真的很好，可是我搞砸了。其实我一直把她当成我最好的几个朋友之一，我自己本身是个闷葫芦，对任何事都没什么兴趣，好像每天都活的很艰难，看不到乐趣的样子，不过她是个天生的乐天派，有时候她会无形的感染着我。当然，我并任何其他的想法。 想想现在，一起长大的小伙伴还有几个在联系呢，一起读书的同学，朋友，还有多少在联系呢？虽然话可能有点俗套，但是我确实经常还是会做白日梦，幻想这一切都是一个很遥远的梦，成长，工作都是浮云。我还是出现在那个朦胧的午后，在教室里，睡眼惺忪的睁开眼，周围都是熟悉的面孔，大家开开心心的。我也有机会改正自己，不再犯之后的一系列错误，好好读书，然后上大学，走上另一条道路。 加班无止境 最近做直饮水沁园项目，感觉很累，每天都在加班，看了一下自己的工作记录表，基本上工作日都在加班，周末也最起码加了一天，怕是要猝死了。其实如果大家一起加班的话，我觉得我都没什么，还是能坚持的，也不会有什么怨言，但是基本上是我一个人在加班，我觉得既然是一个团队的，要加班肯定是一起加班吧。而且最关键的一点，我加班改的bug还是由他们产生的，这就让我有点不爽了。不过想了一下，还是再坚持一下吧，做完这段时间反正也不想继续在这里呆着了。 关于离职 在过年的时候还没有任何离职的想法，可能对这个公司有一些看法和意见，但是并没有让我下定决心的地步。真正让我下定决心离职的一是听说老大也不想做了，项目组一个关系还不错的同事也不想做了，再一个有公司主动找上我了。综合在一起，加上最近加班，及其他一些心里积压已久的想法，还是决定要辞职了。虽然那边给我说的条件都还不错，但是从心里上来说还是不太想去的，现在的话，先忙过这一段时间，把工作交接好，以后就算不去那边继续面试找工作也可以的。不管怎么样，就算要走事情也还是得做好的。]]></content>
-      <tags>
-        <tag>生活</tag>
-        <tag>杂项</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[使用iframe下载文件]]></title>
     <url>%2F2018%2F03%2F08%2F%E4%BD%BF%E7%94%A8iframe%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[使用iframe下载文件 记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作 例： &lt;a href=&quot;/images/20180305.jpg&quot; download=&quot;1&quot;&gt; 其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称 但是download属性只支持 Firefox 和 Chrome，所以只能选择其他的方式解决。改成了使用iframe可以进行文件下载 例： // 定义html标签 &lt;a href=&quot;#&quot; onclick=&quot;downloadPicture(url)&quot;&gt;imageName&lt;/a&gt;&apos; // 在body中添加一个隐藏的iframe进行文件下载 &lt;script type=&quot;text/javascript&quot;&gt; function downloadPicture(url){ $(&quot;#temp_iframe&quot;).remove(); $(&quot;body&quot;).append(&quot;&lt;iframe id=&apos;temp_iframe&apos; style=&apos;display:none&apos;&gt;&lt;/iframe&gt;&quot;); document.getElementById(&apos;temp_iframe&apos;).src = contextPath+url); } &lt;/script&gt; 之前在这里还遇到了一个坑，项目使用的是struts2基于注解的方式进行下载的，页面写完js下载之后每次下载都是一个xxx.html的文件，后来发现原因，在struts注解下载中要特别注意指定filename，以下贴一大概的样例： /** * 文件下载 * * @return * @throws Exception */ @Action(value = &quot;showWaterPicture&quot;, results = { @Result(name = SUCCESS, type = &quot;stream&quot;, params = { &quot;contentType&quot;,&quot;application/image/jpeg&quot;, &quot;inputName&quot;, &quot;inputStream&quot;, &quot;bufferSize&quot;, &quot;4096&quot;, &quot;contentDisposition&quot;,&quot;attachment;filename=${fileName}&quot;, &quot;contentCharSet&quot;, &quot;utf-8&quot; }) }) public String showWaterPicture() throws IOException { // 相关业务逻辑... }]]></content>
@@ -87,26 +67,6 @@
       </categories>
       <tags>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[写在前面]]></title>
-    <url>%2F2018%2F02%2F21%2F%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2%2F</url>
-    <content type="text"><![CDATA[很久以前就有一个想法要写一个博客了，今天终于开始有了属于自己的地盘了。 这里以后就是我的秘密基地，不单是记录平常工作中遇到的问题与学习笔记，跟会成为自己一个人发牢骚的地方。 2017不易，2018继续努力，朝着自己的目标奔跑. 2018，给自己定了三个目标 英语：英语成绩从L4要升到L8，这个level分级是在英孚报名时，英孚的分级。 复习：把java从头到尾复习一遍，还有其他的如spring，jquery，springmvc等方面的内容。虽然这个已经有很多人在做了，但是自己复习的还是自己的，不过结果怎么样，自己还是会去做这件事情 减肥：很久没有称量自己的体重了，最近买了个称称了一下才知道自己已经快180斤了，每天上班坐在那里，一坐就是一天，随便走一点路，都感觉有点气喘吁吁了。这个趋势下去有点不对啊，今年的目标是到150斤吧，我一定要坚持完成。少吃多动少吃多动少吃多动。 Everything is gonna be ok]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[标签测试文章]]></title>
-    <url>%2F2018%2F02%2F20%2Farticle-title%2F</url>
-    <content type="text"><![CDATA[未命名 !!!欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123 欢迎来到我的博客，这是我第一次创建博客，请多多指教啊123]]></content>
-      <tags>
-        <tag>Testing</tag>
-        <tag>Another Tag</tag>
       </tags>
   </entry>
 </search>
