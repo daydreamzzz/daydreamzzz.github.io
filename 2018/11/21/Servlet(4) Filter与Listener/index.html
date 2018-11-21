@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="java," />
+  <meta name="keywords" content="前端,Java Web,servlet," />
 
 
 
@@ -86,18 +86,21 @@
 
 
 
-<meta name="description" content="I don’t know what that dream is that you have. I don’t care how disappointing it might have been, as you’ve been working toward that dream. That dream that you are holding in your mind that is possibl">
-<meta name="keywords" content="java">
+<meta name="description" content="Filter简介Filter过滤器，其作用是请求到达servlet之前对其进行过滤，对其进行预处理，在servlet对于请求处理完毕返回后对响应对象进行后处理。 Filter本身并不申请请求对象(Request)和响应对象(Response)， 只提供过滤功能。 Filter是Servlet三大组件(Servlet,Filter,Listener)之一,是设计模式中过滤器模式的体现 创建Filte">
+<meta name="keywords" content="前端,Java Web,servlet">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dream">
-<meta property="og:url" content="http://yoursite.com/2018/08/28/dream/index.html">
+<meta property="og:title" content="JavaWeb开发学习笔记之Servlet（四） Filter与Listener">
+<meta property="og:url" content="http://yoursite.com/2018/11/21/Servlet(4) Filter与Listener/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="I don’t know what that dream is that you have. I don’t care how disappointing it might have been, as you’ve been working toward that dream. That dream that you are holding in your mind that is possibl">
+<meta property="og:description" content="Filter简介Filter过滤器，其作用是请求到达servlet之前对其进行过滤，对其进行预处理，在servlet对于请求处理完毕返回后对响应对象进行后处理。 Filter本身并不申请请求对象(Request)和响应对象(Response)， 只提供过滤功能。 Filter是Servlet三大组件(Servlet,Filter,Listener)之一,是设计模式中过滤器模式的体现 创建Filte">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-28T14:44:19.036Z">
+<meta property="og:image" content="https://i.imgur.com/tuKnitQ.png">
+<meta property="og:image" content="https://i.imgur.com/iV3BIKm.png">
+<meta property="og:updated_time" content="2018-11-21T12:53:14.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dream">
-<meta name="twitter:description" content="I don’t know what that dream is that you have. I don’t care how disappointing it might have been, as you’ve been working toward that dream. That dream that you are holding in your mind that is possibl">
+<meta name="twitter:title" content="JavaWeb开发学习笔记之Servlet（四） Filter与Listener">
+<meta name="twitter:description" content="Filter简介Filter过滤器，其作用是请求到达servlet之前对其进行过滤，对其进行预处理，在servlet对于请求处理完毕返回后对响应对象进行后处理。 Filter本身并不申请请求对象(Request)和响应对象(Response)， 只提供过滤功能。 Filter是Servlet三大组件(Servlet,Filter,Listener)之一,是设计模式中过滤器模式的体现 创建Filte">
+<meta name="twitter:image" content="https://i.imgur.com/tuKnitQ.png">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/28/dream/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/21/Servlet(4) Filter与Listener/"/>
 
 
 
 
 
-  <title>Dream | 自言自语</title>
+  <title>JavaWeb开发学习笔记之Servlet（四） Filter与Listener | 自言自语</title>
   
 
 
@@ -304,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/28/dream/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/21/Servlet(4) Filter与Listener/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="满子z">
@@ -321,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Dream</h1>
+          <h1 class="post-title" itemprop="name headline">JavaWeb开发学习笔记之Servlet（四） Filter与Listener</h1>
         
 
         <div class="post-meta">
@@ -333,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T22:43:35+08:00">
-                2018-08-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-21T20:53:25+08:00">
+                2018-11-21
               </time>
             
 
@@ -356,8 +359,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -393,24 +407,56 @@
       
 
       
-        <p>I don’t know what that dream is that you have. I don’t care how disappointing it might have been, as you’ve been working toward that dream.</p>
-<p>That dream that you are holding in your mind that is possible. That some of you already know that is hard. It’s not easy.</p>
-<p>It’s hard changing your life. That in the process of working on your dreams, you’re going to encounter a lot of disappointment, a lot of failure, a lot of pain. The moments when you’re going to doubt yourselves,ask god“why, why this happening to me. I am just trying to take care of my children and my mother. Am I trying to steal or rob from anybody? How does this have happened to me?”</p>
-<p>For those of you that have experienced some hardships, don’t give up for your dream. There are right time on the way to have come, but they have not come to be seen, they have come to past.</p>
-<p>Uniqueness is not this wonderful as all tell it delusive. God like featuring in that. Only the special among us are will ever take in something that truly exists in all of us.</p>
-<p>It’s very important for you to believe that you are the one. Most people they raise their family, they earn their living and then they die.</p>
-<p>They stop growing. They stop working on themselves. They stop stretching. They stop pushing themselves. That a lot of people like to complain but they don’t want to do anything about their situation. And most people don’t work on their dreams.</p>
-<p>Why? One is because of the fear, the fear of failure. What if things don’t work out? And the fear of success, what if they do and I can’t handle it. These are not risk takers.    You spent so much time with other people. You spent so much time channel. You get other people to like you. You know other people more than you know yourselves. You study them. You know about them. You want to hang out like them. You want to be just like them. And you know what? Even better so much time and man, you don’t know who you are. I challenge you should spend time by yourselves.</p>
-<p>It’s necessary that you get the losers out of your life if you want to live your dream. But people who are running toward their dreams, life has a special kind of meaning.    When you become the right person, what you do is to start separating yourselves from other people. You begin to have your certain uniqueness.</p>
-<p>As long as you following other people, as long as you will be a copy cat. You will never ever be the best copy cat in the world. But you will be the best you could be. I challenge you could find your value. That everybody want to see it, that everybody want to join you, that everybody want to have a vision, it’s necessary to know that you are uncommon breed, it’s necessary you’re allowing yourselves with people who are trying to enter your business who are hungry, people who are unstoppable and unreasonable, people who are refusing to live life just as it is and who want more. The people who are living their dreams are fighting winners to attach themselves to .The people that are living their dreams are the people they know if it’s gonna happen, it’s up to them.</p>
-<p>If you want to be more successful, if you want to have and don’t stop and never to be bored, let them all to invest in you, to invest in you, to invest in you.  Someone has the opinion that you do not have to become your reality, that you don’t have to go through life being a victim. Even though you face disappointment, you have to know within yourselves. Can I do it? Even no one sees it from me, I am gonna see it from myself.</p>
-<p>This is what I believe and I am willing to die for, too. No matter how bad it is or how bad it gets, I am going to make it. I want to represent an ideal, I want to represent possibilities.  At some of you right now, you wanna be , you know I wanna go to the next level. I am gonna count so. I want to be an engineer, I want to be a doctor. Listen to me, you can get to that level, you can get to the level economically where you wanna be. And to use time you invest in mind, you are not reading books, I am telling you that all the books are the compasses.</p>
-<p>I am telling you to invest time. I am telling you to be alone. I am telling you to spend out and get to know yourselves. When you become who you are, when you become the person that you are created to be, design to be who you’re designed to be. When you become an individual, what you do is you to take yourselves and you start submarine yourselves underpinned. I am telling you to get to a place where people don’t like you or bother you anymore. Why? Cause you are not consort with people and make them happy. Because you try more, you try to invest your mind.</p>
-<p>But you still talk about your dream, you still talk about your goal, because we are not done that big, just taking footsteps. That you can make your parents proud, you can make your school proud, you can charge millions of people’s life. And the world will never be the same again, because you came this way. Don’t let anybody steal your dream. Have we face our rejections and we have a meeting and no one shows up? And somebody says you can count on me and they don’t come through. What if we have that kind of attitude we don’t possess. Nobody believes in you and you’ve lost again again and again. Your life has cut off, but you still looking at your grieve, revealing it every day and the singular step is not over.  </p>
-<p>I tell I aware, you can live your dream!</p>
-<blockquote>
-<p>转自 2014全球最佳演讲「梦想」演讲稿</p>
-</blockquote>
+        <h1 id="Filter简介"><a href="#Filter简介" class="headerlink" title="Filter简介"></a>Filter简介</h1><p>Filter过滤器，其作用是请求到达servlet之前对其进行过滤，对其进行预处理，在servlet对于请求处理完毕返回后对响应对象进行后处理。</p>
+<p>Filter本身并不申请请求对象(Request)和响应对象(Response)， 只提供过滤功能。</p>
+<p>Filter是Servlet三大组件(Servlet,Filter,Listener)之一,是设计模式中<strong>过滤器模式</strong>的体现</p>
+<h2 id="创建Filter"><a href="#创建Filter" class="headerlink" title="创建Filter"></a>创建Filter</h2><p>Filter的创建和Servlet的创建方式大同小异。创建Filter处理类，在web.xml中进行配置。 所有servlet filter过滤器都需要实现javax.servlet.Filter接口，并实现该接口中的三个方法</p>
+<ul>
+<li>init(FilterConfig filterConfig)</li>
+<li>doFilter(ServletRequest request, ServletResponse response, FilterChain chain)</li>
+<li>destroy()</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class LoginFilter implements Filter&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void init(FilterConfig filterConfig) throws ServletException &#123;</span><br><span class="line">		System.out.println(&quot;filter init...&quot;);</span><br><span class="line">		// Filter创建时调用此方法进行初始化, filterConfig的用法和ServletConfig类似</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)</span><br><span class="line">			throws IOException, ServletException &#123;</span><br><span class="line">		// 进入servlet之前调用</span><br><span class="line">		System.out.println(&quot;before enter servlet&quot;);</span><br><span class="line">		chain.doFilter(request, response);</span><br><span class="line">		System.out.println(&quot;after servlet&quot;);</span><br><span class="line">		// 处理之后调用</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void destroy() &#123;</span><br><span class="line">		// 当前Filter声明周期结束，调用此方法释放销毁</span><br><span class="line">		System.out.println(&quot;destroy...&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在web.xml中配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">	&lt;filter-name&gt;loginFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;filter-class&gt;cn.hel.util.LoginFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">	&lt;filter-name&gt;loginFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/login&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Filter的执行顺序"><a href="#Filter的执行顺序" class="headerlink" title="Filter的执行顺序"></a>Filter的执行顺序</h2><p>如果定义了多个Filter,且一个请求同事会被多个Filter进行拦截，那么Filter的执行顺序根据web.xml中配置的Filter信息中<strong>&lt;filter-mapping&gt;</strong>的顺序从上到下执行</p>
+<h2 id="Filter总结"><a href="#Filter总结" class="headerlink" title="Filter总结"></a>Filter总结</h2><p>Filter其实没有什么太多需要注意的地方，它和servlet非常相似，方法也大同小异。可以看成是servlet的变种,区别就是Filter不能直接对用户生成响应而</p>
+<p>实际上Filter里的doFilter()方法里的代码就是从多个servlet的service()方法抽取的通用代码，通过使用filter可以实现更好的复用</p>
+<p>利用Filetr我们可以用来做登录验证，关键字过滤，日志记录等模块的开发，但是现实常常使用Spring来进行开发，Spring有更加优秀的功能(Interceptor)来让我们进行处理，所以Filter的使用反而现在已经变少了,具体后面的spring笔记中会记录到</p>
+<h1 id="Listener简介"><a href="#Listener简介" class="headerlink" title="Listener简介"></a>Listener简介</h1><p>Listener是Servlet的监听器，它可以监听客户端的请求，服务端的操作。 我们平常做开发的使用通常会给按钮增加监听器，点击这个按钮，触发一项监听事件，如Java swing开发中的ActionListener.</p>
+<p>监听器Listener的内容就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。</p>
+<p>Listener是Servlet三大组件(Servlet,Filter,Listener)之一,是设计模式中<strong>观察者模式</strong>的体现</p>
+<h2 id="Listener监听类型"><a href="#Listener监听类型" class="headerlink" title="Listener监听类型"></a>Listener监听类型</h2><p>Listener监听器分为三种监听类型</p>
+<ul>
+<li>对Session的操作， HttpSessionListener</li>
+<li>对Request的操作， ServletReuqestListener</li>
+<li>对context的操作， ServletContextListener</li>
+</ul>
+<p><img src="https://i.imgur.com/tuKnitQ.png" alt=""></p>
+<p>创建Listener实例需要先创建Listener处理类，需要监控哪种类型就实现哪种类型的监听接口，由于JAVA接口可以多实现的特性，所以也可以将所有类型的监听都放在一个java类中，不过这样耦合性太高，不建议这样做</p>
+<h2 id="Listener的监听对象及方法"><a href="#Listener的监听对象及方法" class="headerlink" title="Listener的监听对象及方法"></a>Listener的监听对象及方法</h2><table border="1px" cellspacing="0"><br>    <thead><br>        <tr><br>            <th>监听类型</th><br>            <th>监听内容与接口</th><br>            <th>方法</th><br>            <th>说明</th><br>        </tr><br>    </thead><br>    <tbody><br>        <tr><br>            <td rowspan="5" style="border-bottom-color:red ">request</td><br>            <td rowspan="2">生命周期:ServletContextRequest接口<br>用于监听用户请求</td><br>            <td>requestInitialized()</td><br>            <td>创建request时</td><br>        </tr><br>        <tr><br>            <td>requestDestroyed()</td><br>            <td>销毁request时</td><br>        </tr><br>        <tr><br>            <td rowspan="3" style="border-bottom-color:red ">属性: ServletRequestAttributeListener接口<br>用于监听ServletRequest范围（Request）内属性的改变</td><br>            <td>attributeAdded()</td><br>            <td>增加request属性时</td><br>        </tr><br>        <tr><br>            <td>attributeRemoved</td><br>            <td>移除request属性时</td><br>        </tr><br>        <tr><br>            <td style="border-bottom-color:red">attributeReplaced()</td><br>            <td style="border-bottom-color:red">修改request属性时</td><br>        </tr><br>        <tr><br>            <td rowspan="5" style="border-bottom-color:red ">session</td><br>            <td rowspan="2">生命周期:HttpSessionListener接口<br>用于监听用户Session的开始和结束</td><br>            <td>sessionCreated()</td><br>            <td>创建session时</td><br>        </tr><br>        <tr><br>            <td>sessionDestroyed()</td><br>            <td>销毁session时</td><br>        </tr><br>        <tr><br>            <td rowspan="3" style="border-bottom-color:red">属性:HttpSessionAttributeListener接口<br>用于监听HttpSession范围（Session）内属性的改变</td><br>            <td>attributeAdded()</td><br>            <td>增加session属性时</td><br>        </tr><br>        <tr><br>            <td>attributeRemoved()</td><br>            <td>移除session属性时</td><br>        </tr><br>        <tr><br>            <td style="border-bottom-color:red">attributeReplaced()</td><br>            <td style="border-bottom-color:red">修改session属性时</td><br>        </tr><br>        <tr><br>            <td rowspan="5">context</td><br>            <td rowspan="2">生命周期:ServletContextListener接口<br>用于监听Web应用的启动和关闭</td><br>            <td>contextInitialized(ServletContextEvent sce)</td><br>            <td>创建context时</td><br>        </tr><br>        <tr><br>            <td>contextDestroyed(ServletContextEvent sce)</td><br>            <td>销毁context时</td><br>        </tr><br>        <tr><br>            <td rowspan="3">属性:ServletContextAttributeListener接口<br>用于监听ServletContext范围（Application）内属性的改变</td><br>            <td>attributeAdded()</td><br>            <td>新增context属性</td><br>        </tr><br>        <tr><br>            <td>attributeRemoved()</td><br>            <td>移除context属性</td><br>        </tr><br>        <tr><br>            <td>attributeReplaced()</td><br>            <td>修改context属性</td><br>        </tr><br>    </tbody><br></table>
+
+<h2 id="定义一个简单的Listener例子"><a href="#定义一个简单的Listener例子" class="headerlink" title="定义一个简单的Listener例子"></a>定义一个简单的Listener例子</h2><p>以MyServletContextListener为例</p>
+<p>配置Listener类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class MyServletContextListener implements ServletContextListener &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void contextInitialized(ServletContextEvent sce) &#123;</span><br><span class="line">		System.out.println(&quot;context was be created&quot;);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void contextDestroyed(ServletContextEvent sce) &#123;</span><br><span class="line">		System.out.println(&quot;context was be destroy...&quot;);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>web.xml中配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;listener&gt;</span><br><span class="line">	&lt;listener-class&gt;cn.hel.util.MyServletContextListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Listener的应用"><a href="#Listener的应用" class="headerlink" title="Listener的应用"></a>Listener的应用</h2><p>关于Servlet Listener的应用有很多，举几个常用的例子，如： 初始化整个网站所用的参数（ServletContextListener），日志记录，记录网站的在线人数等.</p>
+<p>在Spring中，最常见的就是使用ContextLoaderListener来获取Spring运行相关的配置信息，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;context-param&gt;</span><br><span class="line">	&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">	&lt;param-value&gt;classpath:spring/applicationContext-*.xml&lt;/param-value&gt;</span><br><span class="line">&lt;/context-param&gt;</span><br><span class="line">&lt;listener&gt;</span><br><span class="line">	&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure></p>
+<p>以及通过RequestContextListener扩展ServletRequestListener,用来配合DispatcherServlet的实现等.</p>
+<h1 id="Servlet-Filter-Listener的初始化顺序"><a href="#Servlet-Filter-Listener的初始化顺序" class="headerlink" title="Servlet,Filter,Listener的初始化顺序"></a>Servlet,Filter,Listener的初始化顺序</h1><p>以上已经将Servlet三大组件（servlet,filter,listener）已经记录完了，他们对应的初始化方法分别为</p>
+<ol>
+<li>init(ServletConfig config)</li>
+<li>init(FilterConfig filterConfig)</li>
+<li>contextInitialized(ServletContextEvent arg0)</li>
+</ol>
+<p>使用之前的例子来进行测试，完整web.xml配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">	&lt;servlet-name&gt;hello&lt;/servlet-name&gt;</span><br><span class="line">	&lt;servlet-class&gt;cn.hel.util.HelloServlet&lt;/servlet-class&gt;</span><br><span class="line">	&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">&lt;/servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">	&lt;servlet-name&gt;hello&lt;/servlet-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/hello&lt;/url-pattern&gt;</span><br><span class="line">&lt;/servlet-mapping&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;filter&gt;</span><br><span class="line">	&lt;filter-name&gt;loginFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;filter-class&gt;cn.hel.util.LoginFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">	&lt;filter-name&gt;loginFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/hello&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br><span class="line"></span><br><span class="line">&lt;listener&gt;</span><br><span class="line">	&lt;listener-class&gt;cn.hel.util.MyServletContextListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure></p>
+<p>此处因为需要注意的是Servlet需要加<strong>&lt;load-on-startup&gt;</strong>进行测试，否则servlet只在请求到达时才会初始化，无法验证效果</p>
+<p>输出结果：</p>
+<p><img src="https://i.imgur.com/iV3BIKm.png" alt=""></p>
+<p>他们三者的默认运行顺序为 Listener &gt; Filter &gt; Servlet，销毁顺序为： servlet &gt; filter &gt; listener 如果在web.xml中配置了&lt;context-param&gt;，则初始化顺序为<strong>context-param &gt; Listener &gt; Filter &gt; Servlet</strong></p>
+<p>参考： </p>
+<p><a href="https://blog.csdn.net/u012228718/article/details/41730799" target="_blank" rel="noopener">CSDN: Servlet学习笔记（九）：监听器Listener详解</a></p>
+<p><a href="https://tianweili.github.io/2015/01/27/Java%E4%B8%AD%E7%9A%84Listener-%E7%9B%91%E5%90%AC%E5%99%A8/" target="_blank" rel="noopener">Java中的Listener 监听器</a></p>
+<p><a href="http://zhxing.iteye.com/blog/399668" target="_blank" rel="noopener">Iteye: web.xml 中的listener、 filter、servlet 加载顺序及其详解</a></p>
 
       
     </div>
@@ -442,7 +488,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+          
+            <a href="/tags/Java-Web/" rel="tag"><i class="fa fa-tag"></i> Java Web</a>
+          
+            <a href="/tags/servlet/" rel="tag"><i class="fa fa-tag"></i> servlet</a>
           
         </div>
       
@@ -455,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/08/使用iframe下载文件/" rel="next" title="使用iframe下载文件">
-                <i class="fa fa-chevron-left"></i> 使用iframe下载文件
+              <a href="/2018/11/21/Servlet(3) Cookie与Session, 及Servlet线程安全问题/" rel="next" title="JavaWeb开发学习笔记之Servlet（三） Cookie与Session, 及Servlet线程安全问题">
+                <i class="fa fa-chevron-left"></i> JavaWeb开发学习笔记之Servlet（三） Cookie与Session, 及Servlet线程安全问题
               </a>
             
           </div>
@@ -464,10 +514,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/13/swing布局/" rel="prev" title="Swing布局">
-                Swing布局 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -526,8 +572,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -613,6 +668,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter简介"><span class="nav-number">1.</span> <span class="nav-text">Filter简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Filter"><span class="nav-number">1.1.</span> <span class="nav-text">创建Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter的执行顺序"><span class="nav-number">1.2.</span> <span class="nav-text">Filter的执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter总结"><span class="nav-number">1.3.</span> <span class="nav-text">Filter总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Listener简介"><span class="nav-number">2.</span> <span class="nav-text">Listener简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Listener监听类型"><span class="nav-number">2.1.</span> <span class="nav-text">Listener监听类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Listener的监听对象及方法"><span class="nav-number">2.2.</span> <span class="nav-text">Listener的监听对象及方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义一个简单的Listener例子"><span class="nav-number">2.3.</span> <span class="nav-text">定义一个简单的Listener例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Listener的应用"><span class="nav-number">2.4.</span> <span class="nav-text">Listener的应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet-Filter-Listener的初始化顺序"><span class="nav-number">3.</span> <span class="nav-text">Servlet,Filter,Listener的初始化顺序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
