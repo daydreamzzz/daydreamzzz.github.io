@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;apos;;/">
+<meta name="description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：1234567// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;">
 <meta name="keywords" content="JAVA,JDBC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Java获取JDBC元数据对象">
 <meta property="og:url" content="http://yoursite.com/2018/09/21/JDBC获取元数据/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;apos;;/">
+<meta property="og:description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：1234567// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.imgur.com/A3XnH5i.png">
 <meta property="og:updated_time" content="2018-11-12T13:52:13.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Java获取JDBC元数据对象">
-<meta name="twitter:description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;apos;;/">
+<meta name="twitter:description" content="前言今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了 如以下的：1234567// SHOW TABLES： 显示当前数据库中所有表的名称// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名SHOW TABLES LIKE &amp;apos;tablename&amp;">
 <meta name="twitter:image" content="https://i.imgur.com/A3XnH5i.png">
 
 
@@ -396,14 +396,14 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天遇到一个问题，有一个需求，需要先判断数据库表是否存在，不存在则创建。按照我的第一思路，写一个SQL语句查询数据库表是否存在，不存在就创建好了</p>
-<p>如以下的：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// SHOW TABLES： 显示当前数据库中所有表的名称</span><br><span class="line">// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名</span><br><span class="line">SHOW TABLES LIKE &apos;tablename&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 查询数据库所有表名： </span><br><span class="line">SELECT * FROM information_schema.tables WHERE table_schema =&apos;database_name&apos; AND table_name = &apos;tablename&apos;;</span><br></pre></td></tr></table></figure></p>
-<p>然后发现了一个方法，如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">Connection conn = DriverManager.getConnection(url, user, password);</span><br><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br><span class="line">ResultSet resultSet = databaseMetaData.getTables(null, null, &quot;tablename&quot;, null);</span><br><span class="line">if (resultSet.next()) &#123;</span><br><span class="line">	System.out.println(&quot;table exist!&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	System.out.println(&quot;table not exist&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如以下的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// SHOW TABLES： 显示当前数据库中所有表的名称</span><br><span class="line">// SHOW TABLES FROM database_name; // 查询xx数据库下所有表名</span><br><span class="line">SHOW TABLES LIKE &apos;tablename&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 查询数据库所有表名： </span><br><span class="line">SELECT * FROM information_schema.tables WHERE table_schema =&apos;database_name&apos; AND table_name = &apos;tablename&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>然后发现了一个方法，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">Connection conn = DriverManager.getConnection(url, user, password);</span><br><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br><span class="line">ResultSet resultSet = databaseMetaData.getTables(null, null, &quot;tablename&quot;, null);</span><br><span class="line">if (resultSet.next()) &#123;</span><br><span class="line">	System.out.println(&quot;table exist!&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	System.out.println(&quot;table not exist&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>不使用SQL就可以查询到，那不是更方便吗。于是我就去了解了一下DatabaseMetaData这个类。</p>
 <h1 id="DatabaseMetaData接口获取JDBC元数据"><a href="#DatabaseMetaData接口获取JDBC元数据" class="headerlink" title="DatabaseMetaData接口获取JDBC元数据"></a>DatabaseMetaData接口获取JDBC元数据</h1><h2 id="什么是元数据"><a href="#什么是元数据" class="headerlink" title="什么是元数据"></a>什么是元数据</h2><p>是描述存储在数据源中的数据的数据，是关于数据的数据，其中有两种类型的数据，关于<strong>数据结构的设计和规范的结构元数据</strong>以及<strong>关于资源和自身实例信息的识别的描述性元数据</strong></p>
 <p>元数据通常包括数据库中每个表的名称，大小和行数，以及每个表中的列，它们的数据类型，精度等。考虑到这一点，让我们从教程开始，了解如何从任何数据源获取元数据。</p>
-<h2 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h2><p>首先， 获取DatabaseMetaData的方法其实在上面的方法中已经给出了，一行代码即可<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br></pre></td></tr></table></figure></p>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">getTables()     	// 得到指定参数的表信息参数说明 </span><br><span class="line">getColumns() 	 	// 得到指定表的列信息</span><br><span class="line">getPrimaryKeys() 	// 获取表的主键信息</span><br><span class="line">getExportedKeys()   // 获取表的外键信息</span><br><span class="line">getTypeInfo()    	// 获取此数据库支持的所有数据类型的描述</span><br><span class="line">// 参数说明：</span><br><span class="line">catalog： 类别名称，一般为空</span><br><span class="line">   schema ： 数据库名</span><br><span class="line">   tableName ：表名</span><br><span class="line">columnName ：列名</span><br></pre></td></tr></table></figure>
-<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><p>例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br><span class="line">System.out.println(&quot;数据库已知的用户: &quot; + databaseMetaData.getUserName());</span><br><span class="line">System.out.println(&quot;数据库URL: &quot; + databaseMetaData.getURL());</span><br><span class="line">System.out.println(&quot;是否允许只读:&quot; + databaseMetaData.isReadOnly());</span><br><span class="line">System.out.println(&quot;数据库的产品名称:&quot; + databaseMetaData.getDatabaseProductName());</span><br><span class="line">System.out.println(&quot;数据库的版本:&quot; + databaseMetaData.getDatabaseProductVersion());</span><br><span class="line">System.out.println(&quot;驱动程序的名称:&quot; + databaseMetaData.getDriverName());</span><br><span class="line">System.out.println(&quot;驱动程序的版本:&quot; + databaseMetaData.getDriverVersion());</span><br><span class="line">System.out.println(&quot;数据库的系统函数的逗号分隔列表: &quot; + databaseMetaData.getSystemFunctions());</span><br><span class="line">System.out.println(&quot;数据库的时间和日期函数的逗号分隔列表: &quot; + databaseMetaData.getTimeDateFunctions());</span><br><span class="line">System.out.println(&quot;数据库的字符串函数的逗号分隔列表: &quot; + databaseMetaData.getStringFunctions());</span><br><span class="line">System.out.println(&quot;数据库供应商用于 &apos;schema&apos; 的首选术语: &quot; + databaseMetaData.getSchemaTerm());</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h2><p>首先， 获取DatabaseMetaData的方法其实在上面的方法中已经给出了，一行代码即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br></pre></td></tr></table></figure></p>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">getTables()     	// 得到指定参数的表信息参数说明 </span><br><span class="line">getColumns() 	 	// 得到指定表的列信息</span><br><span class="line">getPrimaryKeys() 	// 获取表的主键信息</span><br><span class="line">getExportedKeys()   // 获取表的外键信息</span><br><span class="line">getTypeInfo()    	// 获取此数据库支持的所有数据类型的描述</span><br><span class="line">// 参数说明：</span><br><span class="line">catalog： 类别名称，一般为空</span><br><span class="line">   schema ： 数据库名</span><br><span class="line">   tableName ：表名</span><br><span class="line">columnName ：列名</span><br></pre></td></tr></table></figure>
+<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DatabaseMetaData databaseMetaData = conn.getMetaData();</span><br><span class="line">System.out.println(&quot;数据库已知的用户: &quot; + databaseMetaData.getUserName());</span><br><span class="line">System.out.println(&quot;数据库URL: &quot; + databaseMetaData.getURL());</span><br><span class="line">System.out.println(&quot;是否允许只读:&quot; + databaseMetaData.isReadOnly());</span><br><span class="line">System.out.println(&quot;数据库的产品名称:&quot; + databaseMetaData.getDatabaseProductName());</span><br><span class="line">System.out.println(&quot;数据库的版本:&quot; + databaseMetaData.getDatabaseProductVersion());</span><br><span class="line">System.out.println(&quot;驱动程序的名称:&quot; + databaseMetaData.getDriverName());</span><br><span class="line">System.out.println(&quot;驱动程序的版本:&quot; + databaseMetaData.getDriverVersion());</span><br><span class="line">System.out.println(&quot;数据库的系统函数的逗号分隔列表: &quot; + databaseMetaData.getSystemFunctions());</span><br><span class="line">System.out.println(&quot;数据库的时间和日期函数的逗号分隔列表: &quot; + databaseMetaData.getTimeDateFunctions());</span><br><span class="line">System.out.println(&quot;数据库的字符串函数的逗号分隔列表: &quot; + databaseMetaData.getStringFunctions());</span><br><span class="line">System.out.println(&quot;数据库供应商用于 &apos;schema&apos; 的首选术语: &quot; + databaseMetaData.getSchemaTerm());</span><br></pre></td></tr></table></figure></p>
 <p>显示：</p>
 <p><img src="https://i.imgur.com/A3XnH5i.png" alt=""></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>关于这个接口，我在开发过程中并没有真正用到过。不过这个接口的强大是毋庸置疑的，很多数据都可以通过其获取。但是据说对于JDBC元数据的操作非常消耗性能，应尽量避免使用。当然咯，具体的事情具体再看吧</p>
@@ -558,7 +558,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -569,7 +569,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -580,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

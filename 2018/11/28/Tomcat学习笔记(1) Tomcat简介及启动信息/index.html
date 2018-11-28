@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Tomcat,服务器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言Tomcat是一个开源的Servlet容器,属于Apache软件基金会旗下的项目。Tomcat由Java实现，所以其运行依赖于Java环境，运行Tomcat前需要正确安装JRE.  官方网站： http://tomcat.apache.org/ 之前在servlet笔记中说到Tomcat作为一个Servlet容器，最主要的功能就是监听端口，接收用户请求，然后解析请求，生成request和res">
+<meta name="keywords" content="Tomcat,服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat学习笔记(1) Tomcat简介及启动信息">
+<meta property="og:url" content="http://yoursite.com/2018/11/28/Tomcat学习笔记(1) Tomcat简介及启动信息/index.html">
+<meta property="og:site_name" content="自言自语">
+<meta property="og:description" content="前言Tomcat是一个开源的Servlet容器,属于Apache软件基金会旗下的项目。Tomcat由Java实现，所以其运行依赖于Java环境，运行Tomcat前需要正确安装JRE.  官方网站： http://tomcat.apache.org/ 之前在servlet笔记中说到Tomcat作为一个Servlet容器，最主要的功能就是监听端口，接收用户请求，然后解析请求，生成request和res">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-28T12:37:14.475Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tomcat学习笔记(1) Tomcat简介及启动信息">
+<meta name="twitter:description" content="前言Tomcat是一个开源的Servlet容器,属于Apache软件基金会旗下的项目。Tomcat由Java实现，所以其运行依赖于Java环境，运行Tomcat前需要正确安装JRE.  官方网站： http://tomcat.apache.org/ 之前在servlet笔记中说到Tomcat作为一个Servlet容器，最主要的功能就是监听端口，接收用户请求，然后解析请求，生成request和res">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/28/Tomcat学习笔记(1) Tomcat简介及启动信息/"/>
+
+
+
+
+
+  <title>Tomcat学习笔记(1) Tomcat简介及启动信息 | 自言自语</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">自言自语</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-日志">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            日志
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/28/Tomcat学习笔记(1) Tomcat简介及启动信息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="满子z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自言自语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Tomcat学习笔记(1) Tomcat简介及启动信息</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-28T20:36:17+08:00">
+                2018-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/技术/Tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">Tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Tomcat是一个开源的Servlet容器,属于Apache软件基金会旗下的项目。Tomcat由Java实现，所以其运行依赖于Java环境，运行Tomcat前需要正确安装JRE. </p>
+<p>官方网站： <a href="http://tomcat.apache.org/" target="_blank" rel="noopener">http://tomcat.apache.org/</a></p>
+<p>之前在servlet笔记中说到Tomcat作为一个Servlet容器，最主要的功能就是监听端口，接收用户请求，然后解析请求，生成request和response对象，再传递给servlet进行处理，等servlet处理完毕后返回response,再讲返回的response返回给客户端。</p>
+<p>那么Tomcat到底是怎样完成这样一个过程呢？它又由哪些组件组成，每一个组件都负责干什么呢?这就是接下来Tomcat系列笔记索要探讨的内容。</p>
+<p>ps: 虽然网上各种大大小小的博客与分析代码层出不穷，但是自己却从来没有深入的去研究过，别人写的再好，也只能作为参考，自己真正去用了，去实践了，才能让自己深入的理解！</p>
+<h2 id="Tomcat与Servlet-JSP之间的对应关系"><a href="#Tomcat与Servlet-JSP之间的对应关系" class="headerlink" title="Tomcat与Servlet,JSP之间的对应关系"></a>Tomcat与Servlet,JSP之间的对应关系</h2><p>不同的tomcat版本对应不同的servlet和jsp版本，版本之间的对应关系如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Servlet版本</th>
+<th style="text-align:center">JSP版本</th>
+<th style="text-align:center">Tomcat版本</th>
+<th style="text-align:center">WebSocket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">4.0</td>
+<td style="text-align:center">2.3</td>
+<td style="text-align:center">9.0.x</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:center">3.1</td>
+<td style="text-align:center">2.3</td>
+<td style="text-align:center">8.5.x</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:center">3.1</td>
+<td style="text-align:center">2.3</td>
+<td style="text-align:center">8.0.x</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:center">3.0</td>
+<td style="text-align:center">2.2</td>
+<td style="text-align:center">7.0.x</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:center">2.5</td>
+<td style="text-align:center">2.1</td>
+<td style="text-align:center">6.0.x(archived)</td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td style="text-align:center">2.4</td>
+<td style="text-align:center">2.0</td>
+<td style="text-align:center">5.5.x(archived)</td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td style="text-align:center">2.3</td>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">4.1.x(archived)</td>
+<td style="text-align:center">N/A</td>
+</tr>
+</tbody>
+</table>
+<p>数据来源： <a href="http://tomcat.apache.org/whichversion.html" target="_blank" rel="noopener">http://tomcat.apache.org/whichversion.html</a></p>
+<p>此份笔记记录时使用的是Tomcat8.5.35，windows10平台。</p>
+<h2 id="主要目录"><a href="#主要目录" class="headerlink" title="主要目录"></a>主要目录</h2><p>从Tomcat官网下载完tomcat之后，解压tomcat可以看到tomcat的目录结构，其中一些关键的文件夹为</p>
+<ul>
+<li>/bin 启动与关闭其一些其他脚本存在的地方，其中<code>.sh</code>后缀的文件用于linux环境，<code>.bat</code>后缀的文件用于windows环境</li>
+<li>/conf 系统配置文件所在，其中最重要的文件是server.xml</li>
+<li>/logs 默认的日志文件存在此处</li>
+<li>/webapps web应用存在的地方</li>
+</ul>
+<h2 id="CATALINA-HOME-and-CATALINA-BASE"><a href="#CATALINA-HOME-and-CATALINA-BASE" class="headerlink" title="CATALINA_HOME and CATALINA_BASE"></a>CATALINA_HOME and CATALINA_BASE</h2><p>在整个Tomcat文档中，引入了以下两个属性</p>
+<ul>
+<li><strong>CATALINA_HOME</strong>： 表示Tomcat安装的根目录，如<strong>/home/tomcat/apache-tomcat-9.0.10</strong>或<strong>C:\Program Files\apache-tomcat-9.0.10</strong></li>
+<li><strong>CATALINA_BASE</strong>： 表示特定Tomcat实例的运行时配置的根。如果要在一台计算机上拥有多个Tomcat实例，就需要使用<strong>CATALINA_BASE</strong>属性。</li>
+</ul>
+<h1 id="从启动说起"><a href="#从启动说起" class="headerlink" title="从启动说起"></a>从启动说起</h1><h3 id="startup-bat"><a href="#startup-bat" class="headerlink" title="startup.bat"></a>startup.bat</h3><p>Tomcat的启动文件是bin目录下的<strong>startup.bat</strong>文件，linux为<strong>startup.sh</strong>。这个文件的功能主要是设置<code>CATALINA_HOME</code>的值，然后执行其下的<code>catalina.bat</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="line">rem contributor license agreements.  See the NOTICE file distributed with</span><br><span class="line">rem this work for additional information regarding copyright ownership.</span><br><span class="line">rem The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="line">rem (the &quot;License&quot;); you may not use this file except in compliance with</span><br><span class="line">rem the License.  You may obtain a copy of the License at</span><br><span class="line">rem</span><br><span class="line">rem     http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line">rem</span><br><span class="line">rem Unless required by applicable law or agreed to in writing, software</span><br><span class="line">rem distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="line">rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line">rem See the License for the specific language governing permissions and</span><br><span class="line">rem limitations under the License.</span><br><span class="line"></span><br><span class="line">rem ---------------------------------------------------------------------------</span><br><span class="line">rem Start script for the CATALINA Server</span><br><span class="line">rem ---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">setlocal</span><br><span class="line"></span><br><span class="line">rem Guess CATALINA_HOME if not defined</span><br><span class="line">set &quot;CURRENT_DIR=%cd%&quot;</span><br><span class="line">if not &quot;%CATALINA_HOME%&quot; == &quot;&quot; goto gotHome</span><br><span class="line">set &quot;CATALINA_HOME=%CURRENT_DIR%&quot;</span><br><span class="line">if exist &quot;%CATALINA_HOME%\bin\catalina.bat&quot; goto okHome</span><br><span class="line">cd ..</span><br><span class="line">set &quot;CATALINA_HOME=%cd%&quot;</span><br><span class="line">cd &quot;%CURRENT_DIR%&quot;</span><br><span class="line">:gotHome</span><br><span class="line">if exist &quot;%CATALINA_HOME%\bin\catalina.bat&quot; goto okHome</span><br><span class="line">echo The CATALINA_HOME environment variable is not defined correctly</span><br><span class="line">echo This environment variable is needed to run this program</span><br><span class="line">goto end</span><br><span class="line">:okHome</span><br><span class="line"></span><br><span class="line">set &quot;EXECUTABLE=%CATALINA_HOME%\bin\catalina.bat&quot;</span><br><span class="line"></span><br><span class="line">rem Check that target executable exists</span><br><span class="line">if exist &quot;%EXECUTABLE%&quot; goto okExec</span><br><span class="line">echo Cannot find &quot;%EXECUTABLE%&quot;</span><br><span class="line">echo This file is needed to run this program</span><br><span class="line">goto end</span><br><span class="line">:okExec</span><br><span class="line"></span><br><span class="line">rem Get remaining unshifted command line arguments and save them in the</span><br><span class="line">set CMD_LINE_ARGS=</span><br><span class="line">:setArgs</span><br><span class="line">if &quot;&quot;%1&quot;&quot;==&quot;&quot;&quot;&quot; goto doneSetArgs</span><br><span class="line">set CMD_LINE_ARGS=%CMD_LINE_ARGS% %1</span><br><span class="line">shift</span><br><span class="line">goto setArgs</span><br><span class="line">:doneSetArgs</span><br><span class="line"></span><br><span class="line">call &quot;%EXECUTABLE%&quot; start %CMD_LINE_ARGS%</span><br><span class="line"></span><br><span class="line">:end</span><br></pre></td></tr></table></figure>
+<p>解释： </p>
+<p>第1行echo为打印命令，此处为关闭打印信息</p>
+<p>接下来的rem为注释语法，主要是一些许可证（License）信息</p>
+<p>第21行，设置环境变量,关于setLocal命令参照 <a href="https://www.jb51.net/article/36043.htm" target="_blank" rel="noopener">https://www.jb51.net/article/36043.htm</a></p>
+<p>第24行需要注意，在Dos命令中，%cd%为当前路径，比如我的startup.bat文件在D:\develop_software\apache-tomcat-8.0.53\bin之下，那么此处的%cd%就为这个路径</p>
+<p>第25-35行为设置<code>CATALINA_HOME</code>的路径，因为在28行中有一个<code>cd..</code>返回了上一层，那么此处设置的 <code>CATALINA_HOME</code>就为D:\develop_software\apache-tomcat-8.0.53</p>
+<p>第38-45行，验证%CATALINA_HOME%\bin\catalina.bat是否存在，不存在则输出错误信息，存在则进入下一层，跳转到48行</p>
+<p>第48-55行，设置<code>CMD_LINE_ARGS</code>的值</p>
+<p>第56行，调用%EXECUTABLE%， 也就是%CATALINA_HOME%\bin\catalina.bat， 传递两个参数：start, %CMD_LINE_ARGS%</p>
+<h3 id="catalina-bat"><a href="#catalina-bat" class="headerlink" title="catalina.bat"></a>catalina.bat</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="line">rem contributor license agreements.  See the NOTICE file distributed with</span><br><span class="line">rem this work for additional information regarding copyright ownership.</span><br><span class="line">rem The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="line">rem (the &quot;License&quot;); you may not use this file except in compliance with</span><br><span class="line">rem the License.  You may obtain a copy of the License at</span><br><span class="line">rem</span><br><span class="line">rem     http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line">rem</span><br><span class="line">rem Unless required by applicable law or agreed to in writing, software</span><br><span class="line">rem distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="line">rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line">rem See the License for the specific language governing permissions and</span><br><span class="line">rem limitations under the License.</span><br><span class="line"></span><br><span class="line">rem ---------------------------------------------------------------------------</span><br><span class="line">rem Start/Stop Script for the CATALINA Server</span><br><span class="line">rem</span><br><span class="line">rem Environment Variable Prerequisites</span><br><span class="line">rem</span><br><span class="line">rem   Do not set the variables in this script. Instead put them into a script</span><br><span class="line">rem   setenv.bat in CATALINA_BASE/bin to keep your customizations separate.</span><br><span class="line">rem</span><br><span class="line">rem   WHEN RUNNING TOMCAT AS A WINDOWS SERVICE:</span><br><span class="line">rem   Note that the environment variables that affect the behavior of this</span><br><span class="line">rem   script will have no effect at all on Windows Services. As such, any</span><br><span class="line">rem   local customizations made in a CATALINA_BASE/bin/setenv.bat script</span><br><span class="line">rem   will also have no effect on Tomcat when launched as a Windows Service.</span><br><span class="line">rem   The configuration that controls Windows Services is stored in the Windows</span><br><span class="line">rem   Registry, and is most conveniently maintained using the &quot;tomcatXw.exe&quot;</span><br><span class="line">rem   maintenance utility, where &quot;X&quot; is the major version of Tomcat you are</span><br><span class="line">rem   running.</span><br><span class="line">rem</span><br><span class="line">rem   CATALINA_HOME   May point at your Catalina &quot;build&quot; directory.</span><br><span class="line">rem</span><br><span class="line">rem   CATALINA_BASE   (Optional) Base directory for resolving dynamic portions</span><br><span class="line">rem                   of a Catalina installation.  If not present, resolves to</span><br><span class="line">rem                   the same directory that CATALINA_HOME points to.</span><br><span class="line">rem</span><br><span class="line">rem   CATALINA_OPTS   (Optional) Java runtime options used when the &quot;start&quot;,</span><br><span class="line">rem                   &quot;run&quot; or &quot;debug&quot; command is executed.</span><br><span class="line">rem                   Include here and not in JAVA_OPTS all options, that should</span><br><span class="line">rem                   only be used by Tomcat itself, not by the stop process,</span><br><span class="line">rem                   the version command etc.</span><br><span class="line">rem                   Examples are heap size, GC logging, JMX ports etc.</span><br><span class="line">rem</span><br><span class="line">rem   CATALINA_TMPDIR (Optional) Directory path location of temporary directory</span><br><span class="line">rem                   the JVM should use (java.io.tmpdir).  Defaults to</span><br><span class="line">rem                   %CATALINA_BASE%\temp.</span><br><span class="line">rem</span><br><span class="line">rem   JAVA_HOME       Must point at your Java Development Kit installation.</span><br><span class="line">rem                   Required to run the with the &quot;debug&quot; argument.</span><br><span class="line">rem</span><br><span class="line">rem   JRE_HOME        Must point at your Java Runtime installation.</span><br><span class="line">rem                   Defaults to JAVA_HOME if empty. If JRE_HOME and JAVA_HOME</span><br><span class="line">rem                   are both set, JRE_HOME is used.</span><br><span class="line">rem</span><br><span class="line">rem   JAVA_OPTS       (Optional) Java runtime options used when any command</span><br><span class="line">rem                   is executed.</span><br><span class="line">rem                   Include here and not in CATALINA_OPTS all options, that</span><br><span class="line">rem                   should be used by Tomcat and also by the stop process,</span><br><span class="line">rem                   the version command etc.</span><br><span class="line">rem                   Most options should go into CATALINA_OPTS.</span><br><span class="line">rem</span><br><span class="line">rem   JAVA_ENDORSED_DIRS (Optional) Lists of of semi-colon separated directories</span><br><span class="line">rem                   containing some jars in order to allow replacement of APIs</span><br><span class="line">rem                   created outside of the JCP (i.e. DOM and SAX from W3C).</span><br><span class="line">rem                   It can also be used to update the XML parser implementation.</span><br><span class="line">rem                   Note that Java 9 no longer supports this feature.</span><br><span class="line">rem                   Defaults to $CATALINA_HOME/endorsed.</span><br><span class="line">rem</span><br><span class="line">rem   JPDA_TRANSPORT  (Optional) JPDA transport used when the &quot;jpda start&quot;</span><br><span class="line">rem                   command is executed. The default is &quot;dt_socket&quot;.</span><br><span class="line">rem</span><br><span class="line">rem   JPDA_ADDRESS    (Optional) Java runtime options used when the &quot;jpda start&quot;</span><br><span class="line">rem                   command is executed. The default is localhost:8000.</span><br><span class="line">rem</span><br><span class="line">rem   JPDA_SUSPEND    (Optional) Java runtime options used when the &quot;jpda start&quot;</span><br><span class="line">rem                   command is executed. Specifies whether JVM should suspend</span><br><span class="line">rem                   execution immediately after startup. Default is &quot;n&quot;.</span><br><span class="line">rem</span><br><span class="line">rem   JPDA_OPTS       (Optional) Java runtime options used when the &quot;jpda start&quot;</span><br><span class="line">rem                   command is executed. If used, JPDA_TRANSPORT, JPDA_ADDRESS,</span><br><span class="line">rem                   and JPDA_SUSPEND are ignored. Thus, all required jpda</span><br><span class="line">rem                   options MUST be specified. The default is:</span><br><span class="line">rem</span><br><span class="line">rem                   -agentlib:jdwp=transport=%JPDA_TRANSPORT%,</span><br><span class="line">rem                       address=%JPDA_ADDRESS%,server=y,suspend=%JPDA_SUSPEND%</span><br><span class="line">rem</span><br><span class="line">rem   JSSE_OPTS       (Optional) Java runtime options used to control the TLS</span><br><span class="line">rem                   implementation when JSSE is used. Default is:</span><br><span class="line">rem                   &quot;-Djdk.tls.ephemeralDHKeySize=2048&quot;</span><br><span class="line">rem</span><br><span class="line">rem   LOGGING_CONFIG  (Optional) Override Tomcat&apos;s logging config file</span><br><span class="line">rem                   Example (all one line)</span><br><span class="line">rem                   set LOGGING_CONFIG=&quot;-Djava.util.logging.config.file=%CATALINA_BASE%\conf\logging.properties&quot;</span><br><span class="line">rem</span><br><span class="line">rem   LOGGING_MANAGER (Optional) Override Tomcat&apos;s logging manager</span><br><span class="line">rem                   Example (all one line)</span><br><span class="line">rem                   set LOGGING_MANAGER=&quot;-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager&quot;</span><br><span class="line">rem</span><br><span class="line">rem   TITLE           (Optional) Specify the title of Tomcat window. The default</span><br><span class="line">rem                   TITLE is Tomcat if it&apos;s not specified.</span><br><span class="line">rem                   Example (all one line)</span><br><span class="line">rem                   set TITLE=Tomcat.Cluster#1.Server#1 [%DATE% %TIME%]</span><br><span class="line">rem ---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">setlocal</span><br><span class="line"></span><br><span class="line">rem Suppress Terminate batch job on CTRL+C</span><br><span class="line">if not &quot;&quot;%1&quot;&quot; == &quot;&quot;run&quot;&quot; goto mainEntry</span><br><span class="line">if &quot;%TEMP%&quot; == &quot;&quot; goto mainEntry</span><br><span class="line">if exist &quot;%TEMP%\%~nx0.run&quot; goto mainEntry</span><br><span class="line">echo Y&gt;&quot;%TEMP%\%~nx0.run&quot;</span><br><span class="line">if not exist &quot;%TEMP%\%~nx0.run&quot; goto mainEntry</span><br><span class="line">echo Y&gt;&quot;%TEMP%\%~nx0.Y&quot;</span><br><span class="line">call &quot;%~f0&quot; %* &lt;&quot;%TEMP%\%~nx0.Y&quot;</span><br><span class="line">rem Use provided errorlevel</span><br><span class="line">set RETVAL=%ERRORLEVEL%</span><br><span class="line">del /Q &quot;%TEMP%\%~nx0.Y&quot; &gt;NUL 2&gt;&amp;1</span><br><span class="line">exit /B %RETVAL%</span><br><span class="line">:mainEntry</span><br><span class="line">del /Q &quot;%TEMP%\%~nx0.run&quot; &gt;NUL 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">rem Guess CATALINA_HOME if not defined</span><br><span class="line">set &quot;CURRENT_DIR=%cd%&quot;</span><br><span class="line">if not &quot;%CATALINA_HOME%&quot; == &quot;&quot; goto gotHome</span><br><span class="line">set &quot;CATALINA_HOME=%CURRENT_DIR%&quot;</span><br><span class="line">if exist &quot;%CATALINA_HOME%\bin\catalina.bat&quot; goto okHome</span><br><span class="line">cd ..</span><br><span class="line">set &quot;CATALINA_HOME=%cd%&quot;</span><br><span class="line">cd &quot;%CURRENT_DIR%&quot;</span><br><span class="line">:gotHome</span><br><span class="line"></span><br><span class="line">if exist &quot;%CATALINA_HOME%\bin\catalina.bat&quot; goto okHome</span><br><span class="line">echo The CATALINA_HOME environment variable is not defined correctly</span><br><span class="line">echo This environment variable is needed to run this program</span><br><span class="line">goto end</span><br><span class="line">:okHome</span><br><span class="line"></span><br><span class="line">rem Copy CATALINA_BASE from CATALINA_HOME if not defined</span><br><span class="line">if not &quot;%CATALINA_BASE%&quot; == &quot;&quot; goto gotBase</span><br><span class="line">set &quot;CATALINA_BASE=%CATALINA_HOME%&quot;</span><br><span class="line">:gotBase</span><br><span class="line"></span><br><span class="line">rem Ensure that neither CATALINA_HOME nor CATALINA_BASE contains a semi-colon</span><br><span class="line">rem as this is used as the separator in the classpath and Java provides no</span><br><span class="line">rem mechanism for escaping if the same character appears in the path. Check this</span><br><span class="line">rem by replacing all occurrences of &apos;;&apos; with &apos;&apos; and checking that neither</span><br><span class="line">rem CATALINA_HOME nor CATALINA_BASE have changed</span><br><span class="line">if &quot;%CATALINA_HOME%&quot; == &quot;%CATALINA_HOME:;=%&quot; goto homeNoSemicolon</span><br><span class="line">echo Using CATALINA_HOME:   &quot;%CATALINA_HOME%&quot;</span><br><span class="line">echo Unable to start as CATALINA_HOME contains a semicolon (;) character</span><br><span class="line">goto end</span><br><span class="line">:homeNoSemicolon</span><br><span class="line"></span><br><span class="line">if &quot;%CATALINA_BASE%&quot; == &quot;%CATALINA_BASE:;=%&quot; goto baseNoSemicolon</span><br><span class="line">echo Using CATALINA_BASE:   &quot;%CATALINA_BASE%&quot;</span><br><span class="line">echo Unable to start as CATALINA_BASE contains a semicolon (;) character</span><br><span class="line">goto end</span><br><span class="line">:baseNoSemicolon</span><br><span class="line"></span><br><span class="line">rem Ensure that any user defined CLASSPATH variables are not used on startup,</span><br><span class="line">rem but allow them to be specified in setenv.bat, in rare case when it is needed.</span><br><span class="line">set CLASSPATH=</span><br><span class="line"></span><br><span class="line">rem Get standard environment variables</span><br><span class="line">if not exist &quot;%CATALINA_BASE%\bin\setenv.bat&quot; goto checkSetenvHome</span><br><span class="line">call &quot;%CATALINA_BASE%\bin\setenv.bat&quot;</span><br><span class="line">goto setenvDone</span><br><span class="line">:checkSetenvHome</span><br><span class="line">if exist &quot;%CATALINA_HOME%\bin\setenv.bat&quot; call &quot;%CATALINA_HOME%\bin\setenv.bat&quot;</span><br><span class="line">:setenvDone</span><br><span class="line"></span><br><span class="line">rem Get standard Java environment variables</span><br><span class="line">if exist &quot;%CATALINA_HOME%\bin\setclasspath.bat&quot; goto okSetclasspath</span><br><span class="line">echo Cannot find &quot;%CATALINA_HOME%\bin\setclasspath.bat&quot;</span><br><span class="line">echo This file is needed to run this program</span><br><span class="line">goto end</span><br><span class="line">:okSetclasspath</span><br><span class="line">call &quot;%CATALINA_HOME%\bin\setclasspath.bat&quot; %1</span><br><span class="line">if errorlevel 1 goto end</span><br><span class="line"></span><br><span class="line">rem Add on extra jar file to CLASSPATH</span><br><span class="line">rem Note that there are no quotes as we do not want to introduce random</span><br><span class="line">rem quotes into the CLASSPATH</span><br><span class="line">if &quot;%CLASSPATH%&quot; == &quot;&quot; goto emptyClasspath</span><br><span class="line">set &quot;CLASSPATH=%CLASSPATH%;&quot;</span><br><span class="line">:emptyClasspath</span><br><span class="line">set &quot;CLASSPATH=%CLASSPATH%%CATALINA_HOME%\bin\bootstrap.jar&quot;</span><br><span class="line"></span><br><span class="line">if not &quot;%CATALINA_TMPDIR%&quot; == &quot;&quot; goto gotTmpdir</span><br><span class="line">set &quot;CATALINA_TMPDIR=%CATALINA_BASE%\temp&quot;</span><br><span class="line">:gotTmpdir</span><br><span class="line"></span><br><span class="line">rem Add tomcat-juli.jar to classpath</span><br><span class="line">rem tomcat-juli.jar can be over-ridden per instance</span><br><span class="line">if not exist &quot;%CATALINA_BASE%\bin\tomcat-juli.jar&quot; goto juliClasspathHome</span><br><span class="line">set &quot;CLASSPATH=%CLASSPATH%;%CATALINA_BASE%\bin\tomcat-juli.jar&quot;</span><br><span class="line">goto juliClasspathDone</span><br><span class="line">:juliClasspathHome</span><br><span class="line">set &quot;CLASSPATH=%CLASSPATH%;%CATALINA_HOME%\bin\tomcat-juli.jar&quot;</span><br><span class="line">:juliClasspathDone</span><br><span class="line"></span><br><span class="line">if not &quot;%JSSE_OPTS%&quot; == &quot;&quot; goto gotJsseOpts</span><br><span class="line">set JSSE_OPTS=&quot;-Djdk.tls.ephemeralDHKeySize=2048&quot;</span><br><span class="line">:gotJsseOpts</span><br><span class="line">set &quot;JAVA_OPTS=%JAVA_OPTS% %JSSE_OPTS%&quot;</span><br><span class="line"></span><br><span class="line">rem Register custom URL handlers</span><br><span class="line">rem Do this here so custom URL handles (specifically &apos;war:...&apos;) can be used in the security policy</span><br><span class="line">set &quot;JAVA_OPTS=%JAVA_OPTS% -Djava.protocol.handler.pkgs=org.apache.catalina.webresources&quot;</span><br><span class="line"></span><br><span class="line">if not &quot;%LOGGING_CONFIG%&quot; == &quot;&quot; goto noJuliConfig</span><br><span class="line">set LOGGING_CONFIG=-Dnop</span><br><span class="line">if not exist &quot;%CATALINA_BASE%\conf\logging.properties&quot; goto noJuliConfig</span><br><span class="line">set LOGGING_CONFIG=-Djava.util.logging.config.file=&quot;%CATALINA_BASE%\conf\logging.properties&quot;</span><br><span class="line">:noJuliConfig</span><br><span class="line"></span><br><span class="line">if not &quot;%LOGGING_MANAGER%&quot; == &quot;&quot; goto noJuliManager</span><br><span class="line">set LOGGING_MANAGER=-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager</span><br><span class="line">:noJuliManager</span><br><span class="line"></span><br><span class="line">rem Configure JAVA 9 specific start-up parameters</span><br><span class="line">set &quot;JDK_JAVA_OPTIONS=%JDK_JAVA_OPTIONS% --add-opens=java.base/java.lang=ALL-UNNAMED&quot;</span><br><span class="line">set &quot;JDK_JAVA_OPTIONS=%JDK_JAVA_OPTIONS% --add-opens=java.base/java.io=ALL-UNNAMED&quot;</span><br><span class="line">set &quot;JDK_JAVA_OPTIONS=%JDK_JAVA_OPTIONS% --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED&quot;</span><br><span class="line"></span><br><span class="line">rem Java 9 no longer supports the java.endorsed.dirs</span><br><span class="line">rem system property. Only try to use it if</span><br><span class="line">rem JAVA_ENDORSED_DIRS was explicitly set</span><br><span class="line">rem or CATALINA_HOME/endorsed exists.</span><br><span class="line">set ENDORSED_PROP=ignore.endorsed.dirs</span><br><span class="line">if &quot;%JAVA_ENDORSED_DIRS%&quot; == &quot;&quot; goto noEndorsedVar</span><br><span class="line">set ENDORSED_PROP=java.endorsed.dirs</span><br><span class="line">goto doneEndorsed</span><br><span class="line">:noEndorsedVar</span><br><span class="line">if not exist &quot;%CATALINA_HOME%\endorsed&quot; goto doneEndorsed</span><br><span class="line">set ENDORSED_PROP=java.endorsed.dirs</span><br><span class="line">:doneEndorsed</span><br><span class="line"></span><br><span class="line">rem ----- Execute The Requested Command ---------------------------------------</span><br><span class="line"></span><br><span class="line">echo Using CATALINA_BASE:   &quot;%CATALINA_BASE%&quot;</span><br><span class="line">echo Using CATALINA_HOME:   &quot;%CATALINA_HOME%&quot;</span><br><span class="line">echo Using CATALINA_TMPDIR: &quot;%CATALINA_TMPDIR%&quot;</span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;debug&quot;&quot; goto use_jdk</span><br><span class="line">echo Using JRE_HOME:        &quot;%JRE_HOME%&quot;</span><br><span class="line">goto java_dir_displayed</span><br><span class="line">:use_jdk</span><br><span class="line">echo Using JAVA_HOME:       &quot;%JAVA_HOME%&quot;</span><br><span class="line">:java_dir_displayed</span><br><span class="line">echo Using CLASSPATH:       &quot;%CLASSPATH%&quot;</span><br><span class="line"></span><br><span class="line">set _EXECJAVA=%_RUNJAVA%</span><br><span class="line">set MAINCLASS=org.apache.catalina.startup.Bootstrap</span><br><span class="line">set ACTION=start</span><br><span class="line">set SECURITY_POLICY_FILE=</span><br><span class="line">set DEBUG_OPTS=</span><br><span class="line">set JPDA=</span><br><span class="line"></span><br><span class="line">if not &quot;&quot;%1&quot;&quot; == &quot;&quot;jpda&quot;&quot; goto noJpda</span><br><span class="line">set JPDA=jpda</span><br><span class="line">if not &quot;%JPDA_TRANSPORT%&quot; == &quot;&quot; goto gotJpdaTransport</span><br><span class="line">set JPDA_TRANSPORT=dt_socket</span><br><span class="line">:gotJpdaTransport</span><br><span class="line">if not &quot;%JPDA_ADDRESS%&quot; == &quot;&quot; goto gotJpdaAddress</span><br><span class="line">set JPDA_ADDRESS=localhost:8000</span><br><span class="line">:gotJpdaAddress</span><br><span class="line">if not &quot;%JPDA_SUSPEND%&quot; == &quot;&quot; goto gotJpdaSuspend</span><br><span class="line">set JPDA_SUSPEND=n</span><br><span class="line">:gotJpdaSuspend</span><br><span class="line">if not &quot;%JPDA_OPTS%&quot; == &quot;&quot; goto gotJpdaOpts</span><br><span class="line">set JPDA_OPTS=-agentlib:jdwp=transport=%JPDA_TRANSPORT%,address=%JPDA_ADDRESS%,server=y,suspend=%JPDA_SUSPEND%</span><br><span class="line">:gotJpdaOpts</span><br><span class="line">shift</span><br><span class="line">:noJpda</span><br><span class="line"></span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;debug&quot;&quot; goto doDebug</span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;run&quot;&quot; goto doRun</span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;start&quot;&quot; goto doStart</span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;stop&quot;&quot; goto doStop</span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;configtest&quot;&quot; goto doConfigTest</span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;version&quot;&quot; goto doVersion</span><br><span class="line"></span><br><span class="line">echo Usage:  catalina ( commands ... )</span><br><span class="line">echo commands:</span><br><span class="line">echo   debug             Start Catalina in a debugger</span><br><span class="line">echo   debug -security   Debug Catalina with a security manager</span><br><span class="line">echo   jpda start        Start Catalina under JPDA debugger</span><br><span class="line">echo   run               Start Catalina in the current window</span><br><span class="line">echo   run -security     Start in the current window with security manager</span><br><span class="line">echo   start             Start Catalina in a separate window</span><br><span class="line">echo   start -security   Start in a separate window with security manager</span><br><span class="line">echo   stop              Stop Catalina</span><br><span class="line">echo   configtest        Run a basic syntax check on server.xml</span><br><span class="line">echo   version           What version of tomcat are you running?</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:doDebug</span><br><span class="line">shift</span><br><span class="line">set _EXECJAVA=%_RUNJDB%</span><br><span class="line">set DEBUG_OPTS=-sourcepath &quot;%CATALINA_HOME%\..\..\java&quot;</span><br><span class="line">if not &quot;&quot;%1&quot;&quot; == &quot;&quot;-security&quot;&quot; goto execCmd</span><br><span class="line">shift</span><br><span class="line">echo Using Security Manager</span><br><span class="line">set &quot;SECURITY_POLICY_FILE=%CATALINA_BASE%\conf\catalina.policy&quot;</span><br><span class="line">goto execCmd</span><br><span class="line"></span><br><span class="line">:doRun</span><br><span class="line">shift</span><br><span class="line">if not &quot;&quot;%1&quot;&quot; == &quot;&quot;-security&quot;&quot; goto execCmd</span><br><span class="line">shift</span><br><span class="line">echo Using Security Manager</span><br><span class="line">set &quot;SECURITY_POLICY_FILE=%CATALINA_BASE%\conf\catalina.policy&quot;</span><br><span class="line">goto execCmd</span><br><span class="line"></span><br><span class="line">:doStart</span><br><span class="line">shift</span><br><span class="line">if &quot;%TITLE%&quot; == &quot;&quot; set TITLE=Tomcat</span><br><span class="line">set _EXECJAVA=start &quot;%TITLE%&quot; %_RUNJAVA%</span><br><span class="line">if not &quot;&quot;%1&quot;&quot; == &quot;&quot;-security&quot;&quot; goto execCmd</span><br><span class="line">shift</span><br><span class="line">echo Using Security Manager</span><br><span class="line">set &quot;SECURITY_POLICY_FILE=%CATALINA_BASE%\conf\catalina.policy&quot;</span><br><span class="line">goto execCmd</span><br><span class="line"></span><br><span class="line">:doStop</span><br><span class="line">shift</span><br><span class="line">set ACTION=stop</span><br><span class="line">set CATALINA_OPTS=</span><br><span class="line">goto execCmd</span><br><span class="line"></span><br><span class="line">:doConfigTest</span><br><span class="line">shift</span><br><span class="line">set ACTION=configtest</span><br><span class="line">set CATALINA_OPTS=</span><br><span class="line">goto execCmd</span><br><span class="line"></span><br><span class="line">:doVersion</span><br><span class="line">%_EXECJAVA% -classpath &quot;%CATALINA_HOME%\lib\catalina.jar&quot; org.apache.catalina.util.ServerInfo</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:execCmd</span><br><span class="line">rem Get remaining unshifted command line arguments and save them in the</span><br><span class="line">set CMD_LINE_ARGS=</span><br><span class="line">:setArgs</span><br><span class="line">if &quot;&quot;%1&quot;&quot;==&quot;&quot;&quot;&quot; goto doneSetArgs</span><br><span class="line">set CMD_LINE_ARGS=%CMD_LINE_ARGS% %1</span><br><span class="line">shift</span><br><span class="line">goto setArgs</span><br><span class="line">:doneSetArgs</span><br><span class="line"></span><br><span class="line">rem Execute Java with the applicable properties</span><br><span class="line">if not &quot;%JPDA%&quot; == &quot;&quot; goto doJpda</span><br><span class="line">if not &quot;%SECURITY_POLICY_FILE%&quot; == &quot;&quot; goto doSecurity</span><br><span class="line">%_EXECJAVA% %LOGGING_CONFIG% %LOGGING_MANAGER% %JAVA_OPTS% %CATALINA_OPTS% %DEBUG_OPTS% -D%ENDORSED_PROP%=&quot;%JAVA_ENDORSED_DIRS%&quot; -classpath &quot;%CLASSPATH%&quot; -Dcatalina.base=&quot;%CATALINA_BASE%&quot; -Dcatalina.home=&quot;%CATALINA_HOME%&quot; -Djava.io.tmpdir=&quot;%CATALINA_TMPDIR%&quot; %MAINCLASS% %CMD_LINE_ARGS% %ACTION%</span><br><span class="line">goto end</span><br><span class="line">:doSecurity</span><br><span class="line">%_EXECJAVA% %LOGGING_CONFIG% %LOGGING_MANAGER% %JAVA_OPTS% %CATALINA_OPTS% %DEBUG_OPTS% -D%ENDORSED_PROP%=&quot;%JAVA_ENDORSED_DIRS%&quot; -classpath &quot;%CLASSPATH%&quot; -Djava.security.manager -Djava.security.policy==&quot;%SECURITY_POLICY_FILE%&quot; -Dcatalina.base=&quot;%CATALINA_BASE%&quot; -Dcatalina.home=&quot;%CATALINA_HOME%&quot; -Djava.io.tmpdir=&quot;%CATALINA_TMPDIR%&quot; %MAINCLASS% %CMD_LINE_ARGS% %ACTION%</span><br><span class="line">goto end</span><br><span class="line">:doJpda</span><br><span class="line">if not &quot;%SECURITY_POLICY_FILE%&quot; == &quot;&quot; goto doSecurityJpda</span><br><span class="line">%_EXECJAVA% %LOGGING_CONFIG% %LOGGING_MANAGER% %JAVA_OPTS% %JPDA_OPTS% %CATALINA_OPTS% %DEBUG_OPTS% -D%ENDORSED_PROP%=&quot;%JAVA_ENDORSED_DIRS%&quot; -classpath &quot;%CLASSPATH%&quot; -Dcatalina.base=&quot;%CATALINA_BASE%&quot; -Dcatalina.home=&quot;%CATALINA_HOME%&quot; -Djava.io.tmpdir=&quot;%CATALINA_TMPDIR%&quot; %MAINCLASS% %CMD_LINE_ARGS% %ACTION%</span><br><span class="line">goto end</span><br><span class="line">:doSecurityJpda</span><br><span class="line">%_EXECJAVA% %LOGGING_CONFIG% %LOGGING_MANAGER% %JAVA_OPTS% %JPDA_OPTS% %CATALINA_OPTS% %DEBUG_OPTS% -D%ENDORSED_PROP%=&quot;%JAVA_ENDORSED_DIRS%&quot; -classpath &quot;%CLASSPATH%&quot; -Djava.security.manager -Djava.security.policy==&quot;%SECURITY_POLICY_FILE%&quot; -Dcatalina.base=&quot;%CATALINA_BASE%&quot; -Dcatalina.home=&quot;%CATALINA_HOME%&quot; -Djava.io.tmpdir=&quot;%CATALINA_TMPDIR%&quot; %MAINCLASS% %CMD_LINE_ARGS% %ACTION%</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:end</span><br></pre></td></tr></table></figure>
+<p>第1行与第109行不用细看，从第112行开始</p>
+<p>第112行到122： 这之间的代码都为参数校验，具体的参数详情我也并没有详细了解过</p>
+<p>第123-139： 校验<code>CATALINA_HOME</code>和<code>%CATALINA_HOME%\bin\catalina.bat</code>, 由于我们已经在<code>startup.bat</code>中确认了这两个参数的存在，所以会直接从136行的判断中跳转到140行的okHome</p>
+<p>第140-144： 设置<code>CATALINA_BASE</code>这个变量的值，因为本身不存在，所以143行的判断为false,在144行设置其值为<code>%CATALINA_HOME%</code>, 然后代码接着往下走，进入第152行</p>
+<p>第152-161行： 这里我并不知道152和158中的<code>%CATALINA_BASE:;=%</code>的值是什么，但是猜想一下：已知条件<code>CATALINA_BASE</code>和<code>CATALINA_HOME</code>目前是同一个值，如果152行if判断为false, 不进行跳转，那么会接着执行，在155会结束这个文件，那么接下来的所有代码都没什么意义了，所以这里的if判断应该是true,相应的在158行也为true, 进入162行</p>
+<p>第162-174： 这里定义了一个变量<code>CLASSPATH</code>，然后判断<code>CATALINA_BASE%\bin\setenv.bat</code>这个文件是否存在，如果存在，执行它。这次因为我们下载下来并没有这个文件，接着往下再看.</p>
+<p>第175-182： 判断<code>%CATALINA_HOME%\bin\setclasspath.bat</code>这个文件是否存在，存在则执行，不存在直接退出。 因为当前系统中有这个文件，所以并不会在此退出，关于<code>setclasspath.bat</code>这个文件，后面会详细说明，下面先继续往下执行. 这个文件的主要作用是验证Java环境变量，即<code>JAVA_HOME</code>的值，并定义了<code>_RUNJAVA</code>的值</p>
+<p>第183-262：设置了一堆变量，这里183的判断errorLevel是什么意思，我并不清楚，但是如果为true,直接结束了这个文件，所以应该会继续往下走。此处需要注意，在这里面有一处设置变量的地方有一些问题，即第256行处</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set _EXECJAVA=%_RUNJAVA%</span><br></pre></td></tr></table></figure>
+<p>这个地方<code>_RUNJAVA</code>并没有值，这里先跳过，后面再说。</p>
+<p>第263-345： 这一段前面也是设置值，然后进行判断，中间有一段打印信息。这些都不用追究太深，需要注意的是在这一段代码最终会进入到346行这个标记execCmd，在这里第322行也可以看到这个变量<code>_RUNJAVA</code>,依然没有值。在这处对于<code>_RUNJAVA</code>这个值进行了更改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set _EXECJAVA=start &quot;%TITLE%&quot; %_RUNJAVA%</span><br></pre></td></tr></table></figure>
+<p>需要注意： start是一个dos命令，可参考：<a href="https://blog.csdn.net/mydriverc/article/details/2049347。" target="_blank" rel="noopener">https://blog.csdn.net/mydriverc/article/details/2049347。</a> 这里把<code>_EXECJAVA</code>这个变量设置成了一个dos命令，并为它传递了第一个参数<code>%TITLE%</code>, 那么既然是个命令，必然有其存在的作用，我们后面再说。</p>
+<p>第346-354：设置变量<code>CMD_LINE_ARGS</code>的值，然后继续往下。</p>
+<p>第355-372：这一块的代码就主要围绕<code>_RUNJAVA</code>这个参数来进行了，前面将这个参数设置成了一个命令<strong>start</strong>，那么在这一块就是调用它的时候， 而后面所接的内容，都是这个命令所传的参数。 而这一块正常执行的代码在第359行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%_EXECJAVA% %LOGGING_CONFIG% %LOGGING_MANAGER% %JAVA_OPTS% %CATALINA_OPTS% %DEBUG_OPTS% -D%ENDORSED_PROP%=&quot;%JAVA_ENDORSED_DIRS%&quot; -classpath &quot;%CLASSPATH%&quot; -Dcatalina.base=&quot;%CATALINA_BASE%&quot; -Dcatalina.home=&quot;%CATALINA_HOME%&quot; -Djava.io.tmpdir=&quot;%CATALINA_TMPDIR%&quot; %MAINCLASS% %CMD_LINE_ARGS% %ACTION%</span><br></pre></td></tr></table></figure>
+<p>start命令传递的第一个参数为新打开窗口的标题参数，这个已经在322行设置过了，后面所有一长串参数一直到倒数第三个参数，为这个命令所携带的参数。 在这里我们需要注意的是末尾的参数<code>%MAINCLASS%</code>和<code>%CMD_LINE_ARGS% %ACTION%</code>。</p>
+<p>在<code>%MAINCLASS%</code>这个变量是在257行定义的，值为<code>org.apache.catalina.startup.Bootstrap</code>, 所以我们最后页说<strong>Tomcat的启动最终是启动<code>org.apache.catalina.startup.Bootstrap</code>这个类中的方法</strong>。</p>
+<h3 id="setclasspath-bat"><a href="#setclasspath-bat" class="headerlink" title="setclasspath.bat"></a>setclasspath.bat</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="line">rem contributor license agreements.  See the NOTICE file distributed with</span><br><span class="line">rem this work for additional information regarding copyright ownership.</span><br><span class="line">rem The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="line">rem (the &quot;License&quot;); you may not use this file except in compliance with</span><br><span class="line">rem the License.  You may obtain a copy of the License at</span><br><span class="line">rem</span><br><span class="line">rem     http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line">rem</span><br><span class="line">rem Unless required by applicable law or agreed to in writing, software</span><br><span class="line">rem distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="line">rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line">rem See the License for the specific language governing permissions and</span><br><span class="line">rem limitations under the License.</span><br><span class="line"></span><br><span class="line">rem ---------------------------------------------------------------------------</span><br><span class="line">rem Set JAVA_HOME or JRE_HOME if not already set, ensure any provided settings</span><br><span class="line">rem are valid and consistent with the selected start-up options and set up the</span><br><span class="line">rem endorsed directory.</span><br><span class="line">rem ---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">rem Make sure prerequisite environment variables are set</span><br><span class="line"></span><br><span class="line">rem In debug mode we need a real JDK (JAVA_HOME)</span><br><span class="line">if &quot;&quot;%1&quot;&quot; == &quot;&quot;debug&quot;&quot; goto needJavaHome</span><br><span class="line"></span><br><span class="line">rem Otherwise either JRE or JDK are fine</span><br><span class="line">if not &quot;%JRE_HOME%&quot; == &quot;&quot; goto gotJreHome</span><br><span class="line">if not &quot;%JAVA_HOME%&quot; == &quot;&quot; goto gotJavaHome</span><br><span class="line">echo Neither the JAVA_HOME nor the JRE_HOME environment variable is defined</span><br><span class="line">echo At least one of these environment variable is needed to run this program</span><br><span class="line">goto exit</span><br><span class="line"></span><br><span class="line">:needJavaHome</span><br><span class="line">rem Check if we have a usable JDK</span><br><span class="line">if &quot;%JAVA_HOME%&quot; == &quot;&quot; goto noJavaHome</span><br><span class="line">if not exist &quot;%JAVA_HOME%\bin\java.exe&quot; goto noJavaHome</span><br><span class="line">if not exist &quot;%JAVA_HOME%\bin\jdb.exe&quot; goto noJavaHome</span><br><span class="line">if not exist &quot;%JAVA_HOME%\bin\javac.exe&quot; goto noJavaHome</span><br><span class="line">set &quot;JRE_HOME=%JAVA_HOME%&quot;</span><br><span class="line">goto okJava</span><br><span class="line"></span><br><span class="line">:noJavaHome</span><br><span class="line">echo The JAVA_HOME environment variable is not defined correctly.</span><br><span class="line">echo It is needed to run this program in debug mode.</span><br><span class="line">echo NB: JAVA_HOME should point to a JDK not a JRE.</span><br><span class="line">goto exit</span><br><span class="line"></span><br><span class="line">:gotJavaHome</span><br><span class="line">rem No JRE given, use JAVA_HOME as JRE_HOME</span><br><span class="line">set &quot;JRE_HOME=%JAVA_HOME%&quot;</span><br><span class="line"></span><br><span class="line">:gotJreHome</span><br><span class="line">rem Check if we have a usable JRE</span><br><span class="line">if not exist &quot;%JRE_HOME%\bin\java.exe&quot; goto noJreHome</span><br><span class="line">goto okJava</span><br><span class="line"></span><br><span class="line">:noJreHome</span><br><span class="line">rem Needed at least a JRE</span><br><span class="line">echo The JRE_HOME environment variable is not defined correctly</span><br><span class="line">echo This environment variable is needed to run this program</span><br><span class="line">goto exit</span><br><span class="line"></span><br><span class="line">:okJava</span><br><span class="line">rem Don&apos;t override the endorsed dir if the user has set it previously</span><br><span class="line">if not &quot;%JAVA_ENDORSED_DIRS%&quot; == &quot;&quot; goto gotEndorseddir</span><br><span class="line">rem Java 9 no longer supports the java.endorsed.dirs</span><br><span class="line">rem system property. Only try to use it if</span><br><span class="line">rem CATALINA_HOME/endorsed exists.</span><br><span class="line">if not exist &quot;%CATALINA_HOME%\endorsed&quot; goto gotEndorseddir</span><br><span class="line">set &quot;JAVA_ENDORSED_DIRS=%CATALINA_HOME%\endorsed&quot;</span><br><span class="line">:gotEndorseddir</span><br><span class="line"></span><br><span class="line">rem Don&apos;t override _RUNJAVA if the user has set it previously</span><br><span class="line">if not &quot;%_RUNJAVA%&quot; == &quot;&quot; goto gotRunJava</span><br><span class="line">rem Set standard command for invoking Java.</span><br><span class="line">rem Also note the quoting as JRE_HOME may contain spaces.</span><br><span class="line">set _RUNJAVA=&quot;%JRE_HOME%\bin\java.exe&quot;</span><br><span class="line">:gotRunJava</span><br><span class="line"></span><br><span class="line">rem Don&apos;t override _RUNJDB if the user has set it previously</span><br><span class="line">rem Also note the quoting as JAVA_HOME may contain spaces.</span><br><span class="line">if not &quot;%_RUNJDB%&quot; == &quot;&quot; goto gotRunJdb</span><br><span class="line">set _RUNJDB=&quot;%JAVA_HOME%\bin\jdb.exe&quot;</span><br><span class="line">:gotRunJdb</span><br><span class="line"></span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:exit</span><br><span class="line">exit /b 1</span><br><span class="line"></span><br><span class="line">:end</span><br><span class="line">exit /b 0</span><br></pre></td></tr></table></figure>
+<p>第1-63行： 判断Java环境变量是否存在，即验证<code>%JAVA_HOME%</code>的值，如果不存在直接退出。</p>
+<p>第64-86行： 验证一些文件是否存在，最后设置<code>_RUNJDB</code>的值，在第85行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set _RUNJDB=&quot;%JAVA_HOME%\bin\jdb.exe&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由于本人对于dos命令的理解也并不深刻，上面对于Tomcat的启动文件分析可能会有一定的错误，但是大致流程应该是对的，如果有什么错误的地方，请为我指出，谢谢。</p>
+<p>既然已经知道Tomcat启动最终会执行<code>org.apache.catalina.startup.Bootstrap</code>，下一篇再来详细看一看这个类中的方法。</p>
+<p>### </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div>
+	  
+	</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tomcat/" rel="tag"><i class="fa fa-tag"></i> Tomcat</a>
+          
+            <a href="/tags/服务器/" rel="tag"><i class="fa fa-tag"></i> 服务器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/21/Servlet(4)Filter与Listener/" rel="next" title="JavaWeb开发学习笔记之Servlet（四） Filter与Listener">
+                <i class="fa fa-chevron-left"></i> JavaWeb开发学习笔记之Servlet（四） Filter与Listener
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDI4NC8xMDgyMQ=="></div>
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/head.jpg"
+                alt="满子z" />
+            
+              <p class="site-author-name" itemprop="name">满子z</p>
+              <p class="site-description motion-element" itemprop="description">随便写写 记录生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/daydreamzzz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/daydreamzzz0301" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:helei2827603@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat与Servlet-JSP之间的对应关系"><span class="nav-number">1.1.</span> <span class="nav-text">Tomcat与Servlet,JSP之间的对应关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要目录"><span class="nav-number">1.2.</span> <span class="nav-text">主要目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CATALINA-HOME-and-CATALINA-BASE"><span class="nav-number">1.3.</span> <span class="nav-text">CATALINA_HOME and CATALINA_BASE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从启动说起"><span class="nav-number">2.</span> <span class="nav-text">从启动说起</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#startup-bat"><span class="nav-number">2.0.1.</span> <span class="nav-text">startup.bat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#catalina-bat"><span class="nav-number">2.0.2.</span> <span class="nav-text">catalina.bat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setclasspath-bat"><span class="nav-number">2.0.3.</span> <span class="nav-text">setclasspath.bat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.0.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">满子z</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
