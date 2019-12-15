@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>自言自语</title>
+    <url>/2019/12/15/index/</url>
+    <content><![CDATA[<p>又又又一次下定决心要好好写博客了，每次折腾半天，更换新主题，研究配置。最后都是坚持不了几天就放弃了。</p>
+<p>这一次就不给自己立Flag了，随缘记录吧。</p>
+<p>这个博客，以后会承载我大部分的生活，情感，记录。 主要内容还是工作，编程学习方面的。偶尔会更新一些自己生活中的经历与感想。</p>
+<p>之所以起名叫<strong>自言自语</strong>，主要还是自己本身还是一个不善言辞的人，超级死宅，这个博客估计也不会有其他人看到， 所以，不小心进来看到这些的你，谢谢你的光临。</p>
+<p>之前使用过各种其他的笔记工具，bitbucket,  oneNote, github, 为知笔记，有道云笔记，Notion.  也在博客园，CSDN写过一些， 最后还是感觉自己喜欢折腾， 还是希望能拥有一个属于自己的博客啊。</p>
+<p>后续会慢慢将其他地方记录的日志，博文迁移到这里汇总， 也会继续好好更新这里， 努力加油吧。</p>
+<p>最后，这个博客主题，使用的是<a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">hexo-theme-Wikitten</a>  真的很好看啊，感谢原作者的创作。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Tomcat学习笔记(1) Tomcat简介及启动信息</title>
     <url>/2018/11/28/Tomcat%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)%20Tomcat%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%90%AF%E5%8A%A8%E4%BF%A1%E6%81%AF/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Tomcat是一个开源的Servlet容器,属于Apache软件基金会旗下的项目。Tomcat由Java实现，所以其运行依赖于Java环境，运行Tomcat前需要正确安装JRE. </p>
@@ -1415,7 +1427,7 @@ public class BoxLayoutTest {
   </entry>
   <entry>
     <title>Dream</title>
-    <url>/2018/08/28/dream/</url>
+    <url>/2018/08/28/Dream/</url>
     <content><![CDATA[<p>I don’t know what that dream is that you have. I don’t care how disappointing it might have been, as you’ve been working toward that dream.</p>
 <p>That dream that you are holding in your mind that is possible. That some of you already know that is hard. It’s not easy.</p>
 <p>It’s hard changing your life. That in the process of working on your dreams, you’re going to encounter a lot of disappointment, a lot of failure, a lot of pain. The moments when you’re going to doubt yourselves,ask god“why, why this happening to me. I am just trying to take care of my children and my mother. Am I trying to steal or rob from anybody? How does this have happened to me?”</p>
@@ -1494,7 +1506,7 @@ public String showWaterPicture() throws IOException {
   </entry>
   <entry>
     <title>java8函数式编程</title>
-    <url>/2018/02/27/java8%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
+    <url>/2018/02/27/Java8%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<ol>
 <li>FunctionalInterface注解</li>
 <li>接口默认方法</li>
