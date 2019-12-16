@@ -18,7 +18,7 @@
 <meta property="og:description" content="右键菜单是一直是一个非常实用的功能,在此，乘着现在还有一些印象做基础,存一个在swing中添加右键菜单功能的小例子，方便以后备用。 ps： 连Oracle官方都不推荐实用swing,而改用JavaFX了,基本上在官方的各种swing组件说明中都能看到一句  If you are interested in using JavaFX to create your GUI, see Working W">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/bL7tnjp.png">
-<meta property="og:updated_time" content="2019-12-15T14:14:23.774Z">
+<meta property="og:updated_time" content="2019-12-16T13:49:43.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swing中添加右键菜单">
 <meta name="twitter:description" content="右键菜单是一直是一个非常实用的功能,在此，乘着现在还有一些印象做基础,存一个在swing中添加右键菜单功能的小例子，方便以后备用。 ps： 连Oracle官方都不推荐实用swing,而改用JavaFX了,基本上在官方的各种swing组件说明中都能看到一句  If you are interested in using JavaFX to create your GUI, see Working W">
@@ -407,144 +407,8 @@
 <blockquote>
 <p>If you are interested in using JavaFX to create your GUI, see <a href="https://docs.oracle.com/javase/8/javafx/layout-tutorial/index.html" target="_blank" rel="noopener">Working With Layouts in JavaFX</a>.</p>
 </blockquote>
-<pre><code>import java.awt.Color;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-import javax.swing.WindowConstants;
-
-public class Test02 {
-
-    @SuppressWarnings(&quot;serial&quot;)
-    class TextAreaMenu extends JTextArea{
-        // 菜单增加选项,复制,粘贴,剪切
-        JMenuItem copy = null, paste = null, cut = null; 
-
-        public TextAreaMenu(){
-            // 给当前组件添加右键菜单组件
-            JPopupMenu menu = new JPopupMenu();
-            menu.add(copy = new JMenuItem(&quot;复制&quot;));
-            menu.add(paste = new JMenuItem(&quot;粘贴&quot;));
-            menu.add(cut = new JMenuItem(&quot;剪切&quot;));
-
-            // 设置键盘操作
-            copy.setAccelerator(KeyStroke.getKeyStroke(&apos;C&apos;, InputEvent.CTRL_MASK));
-            paste.setAccelerator(KeyStroke.getKeyStroke(&apos;V&apos;, InputEvent.CTRL_MASK));
-            cut.setAccelerator(KeyStroke.getKeyStroke(&apos;X&apos;, InputEvent.CTRL_MASK));
-
-            // 设置边框增强显示效果
-            this.setBorder(BorderFactory.createLineBorder(Color.red));
-
-            this.addMouseListener(new MouseAdapter(){
-                // 当前组件的鼠标点击事件
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    // MouseEvent.BUTTON1:  左键点击
-                    // MouseEvent.BUTTON2:  中间点击(滑轮)
-                    if(e.getButton() == MouseEvent.BUTTON3){
-                        // 设置右键点击事件,打开邮件菜单
-                        menu.show(TextAreaMenu.this,e.getX(),e.getY());
-
-                        // 设置选项是否可用
-                        boolean isCanCopy = isCanCopy();
-                        copy.setEnabled(isCanCopy);
-                        cut.setEnabled(isCanCopy);
-                        // 剪贴板是否存在数据
-                        paste.setEnabled(isClipboardString());
-                    }
-                }
-            });
-
-            // 初始化选项事件
-            initEvent();
-        }
-
-        private void initEvent(){
-            copy.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println(&quot;点击了复制按钮&quot;);
-                    TextAreaMenu.this.copy();
-                }
-            });
-
-            paste.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println(&quot;点击了粘贴按钮&quot;);
-                    TextAreaMenu.this.paste();
-                }
-            });
-
-            cut.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println(&quot;点击了剪切按钮&quot;);
-                    TextAreaMenu.this.cut();
-                }
-            });
-        }
-
-        /**
-         * 当前文本组件是否可以复制
-         * true 具备
-         * false 不具备
-         * @return 
-         */
-        public boolean isCanCopy() {
-            // getSelectionStart() 返回选定文本的起始位置。如果是空文档，则返回 0；如果没有选定，则返回点值。
-            int start = this.getSelectionStart();
-            // getSelectionEnd() 返回选定文本的结束位置。如果文本为空，则返回 0；如果没有选择，则返回点值。
-            int end = this.getSelectionEnd();
-            return start != end;
-        }
-
-        /**
-         * 剪切板中是否有文本数据可供粘贴
-         * true 有文本数据
-         * false 无
-         * @return true为有文本数据
-         */
-        public boolean isClipboardString() {
-            boolean b = false;
-            // 获取剪贴板对象
-            Clipboard clipboard = this.getToolkit().getSystemClipboard();
-            try {
-                // getContents(), 获取剪贴板对象中的数据对象,无则返回null
-                Transferable content = clipboard.getContents(this);
-                // getTransferData(), 获取数据对象中的值
-                if (content.getTransferData(DataFlavor.stringFlavor) instanceof String) {
-                    b = true;
-                }
-            } catch (Exception e) {
-                return false;
-            }
-            return b;
-        }
-    }
-
-    public static void main(String[] args) {
-        JFrame jf = new JFrame(&quot;测试窗口&quot;);
-        jf.setSize(600, 600);
-        TextAreaMenu textAreaMenu = new Test02().new TextAreaMenu();
-        jf.setContentPane(textAreaMenu);
-        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jf.setVisible(true);
-    }
-}
-</code></pre><p>显示:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.Color;</span><br><span class="line"><span class="keyword">import</span> java.awt.datatransfer.Clipboard;</span><br><span class="line"><span class="keyword">import</span> java.awt.datatransfer.DataFlavor;</span><br><span class="line"><span class="keyword">import</span> java.awt.datatransfer.Transferable;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.InputEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.MouseAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.MouseEvent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.swing.BorderFactory;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JFrame;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JMenuItem;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JPopupMenu;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JTextArea;</span><br><span class="line"><span class="keyword">import</span> javax.swing.KeyStroke;</span><br><span class="line"><span class="keyword">import</span> javax.swing.WindowConstants;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@SuppressWarnings</span>(<span class="string">"serial"</span>)</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">TextAreaMenu</span> <span class="keyword">extends</span> <span class="title">JTextArea</span></span>&#123;</span><br><span class="line">		<span class="comment">// 菜单增加选项,复制,粘贴,剪切</span></span><br><span class="line">		JMenuItem copy = <span class="keyword">null</span>, paste = <span class="keyword">null</span>, cut = <span class="keyword">null</span>; </span><br><span class="line">		</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TextAreaMenu</span><span class="params">()</span></span>&#123;</span><br><span class="line">			<span class="comment">// 给当前组件添加右键菜单组件</span></span><br><span class="line">			JPopupMenu menu = <span class="keyword">new</span> JPopupMenu();</span><br><span class="line">			menu.add(copy = <span class="keyword">new</span> JMenuItem(<span class="string">"复制"</span>));</span><br><span class="line">			menu.add(paste = <span class="keyword">new</span> JMenuItem(<span class="string">"粘贴"</span>));</span><br><span class="line">			menu.add(cut = <span class="keyword">new</span> JMenuItem(<span class="string">"剪切"</span>));</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 设置键盘操作</span></span><br><span class="line">			copy.setAccelerator(KeyStroke.getKeyStroke(<span class="string">'C'</span>, InputEvent.CTRL_MASK));</span><br><span class="line">			paste.setAccelerator(KeyStroke.getKeyStroke(<span class="string">'V'</span>, InputEvent.CTRL_MASK));</span><br><span class="line">			cut.setAccelerator(KeyStroke.getKeyStroke(<span class="string">'X'</span>, InputEvent.CTRL_MASK));</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置边框增强显示效果</span></span><br><span class="line">        	<span class="keyword">this</span>.setBorder(BorderFactory.createLineBorder(Color.red));</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">this</span>.addMouseListener(<span class="keyword">new</span> MouseAdapter()&#123;</span><br><span class="line">				<span class="comment">// 当前组件的鼠标点击事件</span></span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mouseClicked</span><span class="params">(MouseEvent e)</span> </span>&#123;</span><br><span class="line">					<span class="comment">// MouseEvent.BUTTON1:  左键点击</span></span><br><span class="line">					<span class="comment">// MouseEvent.BUTTON2:  中间点击(滑轮)</span></span><br><span class="line">					<span class="keyword">if</span>(e.getButton() == MouseEvent.BUTTON3)&#123;</span><br><span class="line">						<span class="comment">// 设置右键点击事件,打开邮件菜单</span></span><br><span class="line">						menu.show(TextAreaMenu.<span class="keyword">this</span>,e.getX(),e.getY());</span><br><span class="line">						</span><br><span class="line">						<span class="comment">// 设置选项是否可用</span></span><br><span class="line">						<span class="keyword">boolean</span> isCanCopy = isCanCopy();</span><br><span class="line">						copy.setEnabled(isCanCopy);</span><br><span class="line">						cut.setEnabled(isCanCopy);</span><br><span class="line">						<span class="comment">// 剪贴板是否存在数据</span></span><br><span class="line">						paste.setEnabled(isClipboardString());</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 初始化选项事件</span></span><br><span class="line">			initEvent();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initEvent</span><span class="params">()</span></span>&#123;</span><br><span class="line">			copy.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">					System.out.println(<span class="string">"点击了复制按钮"</span>);</span><br><span class="line">					TextAreaMenu.<span class="keyword">this</span>.copy();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">			</span><br><span class="line">			paste.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">					System.out.println(<span class="string">"点击了粘贴按钮"</span>);</span><br><span class="line">					TextAreaMenu.<span class="keyword">this</span>.paste();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">			</span><br><span class="line">			cut.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">					System.out.println(<span class="string">"点击了剪切按钮"</span>);</span><br><span class="line">					TextAreaMenu.<span class="keyword">this</span>.cut();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 当前文本组件是否可以复制</span></span><br><span class="line"><span class="comment">		 * true 具备</span></span><br><span class="line"><span class="comment">		 * false 不具备</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@return</span> </span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCanCopy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="comment">// getSelectionStart() 返回选定文本的起始位置。如果是空文档，则返回 0；如果没有选定，则返回点值。</span></span><br><span class="line">			<span class="keyword">int</span> start = <span class="keyword">this</span>.getSelectionStart();</span><br><span class="line">			<span class="comment">// getSelectionEnd() 返回选定文本的结束位置。如果文本为空，则返回 0；如果没有选择，则返回点值。</span></span><br><span class="line">			<span class="keyword">int</span> end = <span class="keyword">this</span>.getSelectionEnd();</span><br><span class="line">			<span class="keyword">return</span> start != end;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 剪切板中是否有文本数据可供粘贴</span></span><br><span class="line"><span class="comment">		 * true 有文本数据</span></span><br><span class="line"><span class="comment">		 * false 无</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@return</span> true为有文本数据</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isClipboardString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">boolean</span> b = <span class="keyword">false</span>;</span><br><span class="line">			<span class="comment">// 获取剪贴板对象</span></span><br><span class="line">			Clipboard clipboard = <span class="keyword">this</span>.getToolkit().getSystemClipboard();</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="comment">// getContents(), 获取剪贴板对象中的数据对象,无则返回null</span></span><br><span class="line">				Transferable content = clipboard.getContents(<span class="keyword">this</span>);</span><br><span class="line">				<span class="comment">// getTransferData(), 获取数据对象中的值</span></span><br><span class="line">				<span class="keyword">if</span> (content.getTransferData(DataFlavor.stringFlavor) <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">					b = <span class="keyword">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> b;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		JFrame jf = <span class="keyword">new</span> JFrame(<span class="string">"测试窗口"</span>);</span><br><span class="line">		jf.setSize(<span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">		TextAreaMenu textAreaMenu = <span class="keyword">new</span> Test02().new TextAreaMenu();</span><br><span class="line">		jf.setContentPane(textAreaMenu);</span><br><span class="line">		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">		jf.setVisible(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显示:</p>
 <p><img src="https://i.imgur.com/bL7tnjp.png" alt></p>
 
             </div>

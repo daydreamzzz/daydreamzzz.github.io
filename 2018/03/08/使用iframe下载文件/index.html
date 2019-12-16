@@ -9,18 +9,18 @@
         <meta name="keywords" content="前端">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="使用iframe下载文件   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作    例： &amp;lt;a href=&amp;quot;/images/20180305.jpg&amp;quot; download=&amp;quot;1&amp;quot;&amp;gt;    其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称    但是download属性只支持 F">
+    <meta name="description" content="使用iframe下载文件   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作    例： 1&amp;lt;a href=&quot;/images/20180305.jpg&quot; download=&quot;1&quot;&amp;gt;    其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称    但是download属性只支持 Firefox 和 Chrome，所以只">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用iframe下载文件">
 <meta property="og:url" content="http://yoursite.com/2018/03/08/使用iframe下载文件/index.html">
 <meta property="og:site_name" content="自言自语">
-<meta property="og:description" content="使用iframe下载文件   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作    例： &amp;lt;a href=&amp;quot;/images/20180305.jpg&amp;quot; download=&amp;quot;1&amp;quot;&amp;gt;    其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称    但是download属性只支持 F">
+<meta property="og:description" content="使用iframe下载文件   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作    例： 1&amp;lt;a href=&quot;/images/20180305.jpg&quot; download=&quot;1&quot;&amp;gt;    其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称    但是download属性只支持 Firefox 和 Chrome，所以只">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-12-15T14:14:16.648Z">
+<meta property="og:updated_time" content="2019-12-16T13:46:21.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用iframe下载文件">
-<meta name="twitter:description" content="使用iframe下载文件   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作    例： &amp;lt;a href=&amp;quot;/images/20180305.jpg&amp;quot; download=&amp;quot;1&amp;quot;&amp;gt;    其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称    但是download属性只支持 F">
+<meta name="twitter:description" content="使用iframe下载文件   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作    例： 1&amp;lt;a href=&quot;/images/20180305.jpg&quot; download=&quot;1&quot;&amp;gt;    其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称    但是download属性只支持 Firefox 和 Chrome，所以只">
     
 
     
@@ -402,40 +402,13 @@
         
             <h1 id="使用iframe下载文件"><a href="#使用iframe下载文件" class="headerlink" title="使用iframe下载文件"></a>使用iframe下载文件</h1><p>   记录在工作中遇到的一个文件下载问题，之前使用的是a标签的download属性进行操作</p>
 <p>   例：</p>
-<pre><code>&lt;a href=&quot;/images/20180305.jpg&quot; download=&quot;1&quot;&gt;
-</code></pre><p>   其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/images/20180305.jpg"</span> <span class="attr">download</span>=<span class="string">"1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>   其中a标签的href对应下载文件的路径，download对应的是下载下来的文件名称</p>
 <p>   但是download属性只支持 Firefox 和 Chrome，所以只能选择其他的方式解决。改成了使用iframe可以进行文件下载</p>
 <p>   例：</p>
-<pre><code>// 定义html标签
-&lt;a href=&quot;#&quot; onclick=&quot;downloadPicture(url)&quot;&gt;imageName&lt;/a&gt;&apos;
-
-// 在body中添加一个隐藏的iframe进行文件下载
-&lt;script type=&quot;text/javascript&quot;&gt;
-    function downloadPicture(url){
-        $(&quot;#temp_iframe&quot;).remove();
-        $(&quot;body&quot;).append(&quot;&lt;iframe id=&apos;temp_iframe&apos; style=&apos;display:none&apos;&gt;&lt;/iframe&gt;&quot;);
-        document.getElementById(&apos;temp_iframe&apos;).src = contextPath+url);
-    }
-&lt;/script&gt;
-</code></pre><p>   之前在这里还遇到了一个坑，项目使用的是struts2基于注解的方式进行下载的，页面写完js下载之后每次下载都是一个xxx.html的文件，后来发现原因，在struts注解下载中要特别注意指定filename，以下贴一大概的样例：</p>
-<pre><code> /**
-  * 文件下载
-  *
-  * @return
-  * @throws Exception
-  */
-@Action(value = &quot;showWaterPicture&quot;,
-    results = { @Result(name = SUCCESS, type = &quot;stream&quot;, params = {
-        &quot;contentType&quot;,&quot;application/image/jpeg&quot;,
-        &quot;inputName&quot;, &quot;inputStream&quot;,
-        &quot;bufferSize&quot;, &quot;4096&quot;,
-        &quot;contentDisposition&quot;,&quot;attachment;filename=${fileName}&quot;,
-        &quot;contentCharSet&quot;, &quot;utf-8&quot; }) })
-public String showWaterPicture() throws IOException {
-
-     // 相关业务逻辑...
-}
-</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义html标签</span></span><br><span class="line">&lt;a href="#" onclick="downloadPicture(url)"&gt;imageName&lt;/a&gt;'</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 在body中添加一个隐藏的iframe进行文件下载</span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    <span class="function">function <span class="title">downloadPicture</span><span class="params">(url)</span></span>&#123;</span><br><span class="line">        $(<span class="string">"#temp_iframe"</span>).remove();</span><br><span class="line">        $(<span class="string">"body"</span>).append(<span class="string">"&lt;iframe id='temp_iframe' style='display:none'&gt;&lt;/iframe&gt;"</span>);</span><br><span class="line">        document.getElementById(<span class="string">'temp_iframe'</span>).src = contextPath+url);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>   之前在这里还遇到了一个坑，项目使用的是struts2基于注解的方式进行下载的，页面写完js下载之后每次下载都是一个xxx.html的文件，后来发现原因，在struts注解下载中要特别注意指定filename，以下贴一大概的样例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 文件下载</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">  * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="meta">@Action</span>(value = <span class="string">"showWaterPicture"</span>,</span><br><span class="line">    results = &#123; <span class="meta">@Result</span>(name = SUCCESS, type = <span class="string">"stream"</span>, params = &#123;</span><br><span class="line">        <span class="string">"contentType"</span>,<span class="string">"application/image/jpeg"</span>,</span><br><span class="line">        <span class="string">"inputName"</span>, <span class="string">"inputStream"</span>,</span><br><span class="line">        <span class="string">"bufferSize"</span>, <span class="string">"4096"</span>,</span><br><span class="line">        <span class="string">"contentDisposition"</span>,<span class="string">"attachment;filename=$&#123;fileName&#125;"</span>,</span><br><span class="line">        <span class="string">"contentCharSet"</span>, <span class="string">"utf-8"</span> &#125;) &#125;)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">showWaterPicture</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"> </span><br><span class="line">     <span class="comment">// 相关业务逻辑...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             </div>
         
         <footer class="article-footer">
