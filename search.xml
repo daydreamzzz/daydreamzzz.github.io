@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hibernate学习（一）</title>
+    <url>/2020/01/17/Hibernate%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h3 id="什么是Hibernate"><a href="#什么是Hibernate" class="headerlink" title="什么是Hibernate?"></a>什么是Hibernate?</h3><blockquote>
+<p>Hibernate is an Object/Relational Mapping (ORM) solution for Java environments.</p>
+</blockquote>
+<p>Hibernate是一个用于Java环境的ORM映射框架， 基于<strong>ORM</strong>（Object Relation Mapping）思想设计，称之为<strong>对象关系映射</strong>。负责Java对象和数据库表数据之间的映射.  ORM简单来说就是将数据库与实体类相互映射.</p>
+<p>类似的ORM框架系统目前常见的如： Mybatis(以前叫iBatis)， JPA等</p>
+<p>官方网站： <a href="https://hibernate.org/" target="_blank" rel="noopener">https://hibernate.org/</a></p>
+<h3 id="为什么要用ORM框架？"><a href="#为什么要用ORM框架？" class="headerlink" title="为什么要用ORM框架？"></a>为什么要用ORM框架？</h3><p><strong>ORM主要是解决面向对象的设计方式和关系型数据库之间的关联， Java主要面向对象设计，因此在分析业务的时候会以对象的角度来看待问题。然而数据库是关系型的，对于Java程序员而言是不符合面向对象设计的，因此才会出现ORM这种东西。有了ORM，Java开发人员在整个代码设计都将遵循对象的思维模式，这就是使用ORM最大的优势所在.</strong></p>
+<p>配置了ORM映射之后，查询时，ORM工具可以自动将查询结果转化为对象，增删改时，也可以直接传入对象作为参数，而不需要从对象中获取数据再使用. </p>
+<h3 id="为什么选择Hibernate？"><a href="#为什么选择Hibernate？" class="headerlink" title="为什么选择Hibernate？"></a>为什么选择Hibernate？</h3><p>JDBC是Java访问数据库最基础的方式，Hibernate是基于ORM的思想，对JDBC进行了封装，它的主要优点如下：</p>
+<ul>
+<li><p>可以将数据库查询结果ResultSet与实体类相互映射(转化)</p>
+</li>
+<li><p>隐藏了具体的SQL+JDBC细节，封装在工具底层， 不需要程序员参与</p>
+</li>
+<li>不与数据库直接关联，Hibernate是一种通用的数据库框架, 支持超过30种以上的数据库，可以方便数据库移植。 基本上任何数据库都可以执行它的API， 因为Hibernate的API种是不涉及SQL语句的， 它会根据配置文件自动生成对应的数据库的SQL</li>
+</ul>
+<h3 id="Hibernate与Mybatis的比较？"><a href="#Hibernate与Mybatis的比较？" class="headerlink" title="Hibernate与Mybatis的比较？"></a>Hibernate与Mybatis的比较？</h3><p>市面上的ORM框架有很多， 我在工作中接触最多的还是hibernate和mybatis两种，这两种也是被讨论最多的两种ORM框架，当然Spring JPA目前也越来越流行了，不过我目前还没有具体的了解过。到底选择Hibernate还是选择mybatis，也一直吵的不可开交，各有各的说法。可以看一下知乎上的讨论</p>
+<p><a href="https://www.zhihu.com/question/309662829/answer/578534919" target="_blank" rel="noopener">为什么国内流行mybatis，国外反而多用hibernate？</a></p>
+<p><a href="https://www.zhihu.com/question/21853542/answer/757446693" target="_blank" rel="noopener">Hibernate好点还是MyBatis好点？</a></p>
+<p>hibernate和mybatis总的来说是ORM框架的这两个实现方向， hibernate更强调于面向对象(Object-oriented programming， 简称OOP)，这样，移植性扩展性更强。 mybatis更强调于面向sql， 复用程度没有面向对象要求高，但是更利于定制，对于SQL的优化更好.</p>
+<h3 id="我的看法："><a href="#我的看法：" class="headerlink" title="我的看法："></a>我的看法：</h3><p>hibernate的面向对象思想更完善，此外，Oracle对于ORM有专门的标准-JPA， JPA也是以面向对象的思想进行设计的，可见，官方也是更加认同这样的设计思路。当然，Mybatis对于目前大部分公司的业务现状来说，使用效果更好，这也是不可忽视的。对于各种不同的ORM框架，如果只是用起来，其实还是非常简单的一件事情，看一文档，写几个Demo，就能进行最初级的使用，如果真的要深入研究，那就需要以后多花时间再慢慢研究了.</p>
+]]></content>
+      <categories>
+        <category>技术开发</category>
+        <category>ORM</category>
+        <category>Hibernate</category>
+      </categories>
+      <tags>
+        <tag>Hibernate</tag>
+        <tag>ORM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>自言自语</title>
     <url>/2019/12/15/index/</url>
     <content><![CDATA[<p>又又又一次下定决心要好好写博客了，每次折腾半天，更换新主题，研究配置。最后都是坚持不了几天就放弃了。</p>
